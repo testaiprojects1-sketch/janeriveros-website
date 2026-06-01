@@ -1,0 +1,65 @@
+---
+// src/pages/index.astro — the single route.
+// The whole app is one React island (client:only) because it shares a live
+// LanguageContext and is driven by scroll + interaction throughout.
+import App from '../components/App.tsx';
+import '../styles/global.css';
+
+const title = 'Jane Riveros — Built Without a Blueprint';
+const description =
+  'Enterprise transformation executive turned agentic-AI builder. AI agents with the controls baked in — governance, audit trails, compliance.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Fonts: Playfair Display (display) + IBM Plex Sans (body) + IBM Plex Mono (system layer) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-ink">
+    <!-- client:only — no SSR; avoids localStorage/hydration mismatch for the
+         EN/ES language toggle and all scroll-driven state. -->
+    <App client:only="react" />
+
+    <!-- ============================================================= -->
+    <!-- MAVIS voice agent — ElevenLabs Conversational AI.             -->
+    <!-- TO GO LIVE: set MAVIS_AGENT_ID to your real agent id          -->
+    <!--   (ElevenLabs dashboard → Conversational AI → Agents).        -->
+    <!-- Until then the widget stays dormant (no console errors).      -->
+    <!-- ============================================================= -->
+    <script is:inline>
+      window.MAVIS_AGENT_ID = 'REPLACE_WITH_MAVIS_AGENT_ID'; // <-- paste real agent id here
+      (function () {
+        var id = window.MAVIS_AGENT_ID;
+        if (!id || id.indexOf('REPLACE_') === 0) {
+          window.MAVIS_READY = false;
+          console.info('[MAVIS] Voice agent not configured — set window.MAVIS_AGENT_ID to your ElevenLabs agent id to enable it.');
+          return;
+        }
+        window.MAVIS_READY = true;
+        var el = document.createElement('elevenlabs-convai');
+        el.setAttribute('agent-id', id);
+        el.setAttribute('action-text', 'Talk to MAVIS');
+        el.setAttribute('start-call-text', 'Start conversation');
+        el.setAttribute('end-call-text', 'End');
+        el.setAttribute('listening-text', 'MAVIS is listening…');
+        el.setAttribute('speaking-text', 'MAVIS is speaking…');
+        document.body.appendChild(el);
+        var s = document.createElement('script');
+        s.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+        s.async = true;
+        document.body.appendChild(s);
+      })();
+    </script>
+  </body>
+</html>
