@@ -4,12 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jane Riveros · Built Without a Blueprint</title>
-  <meta name="description" content="Enterprise transformation executive turned agentic-AI builder. AI agents with the controls baked in: governance, audit trails, compliance." />
+  <meta name="description" content="Jane Riveros — AI program manager who builds her own agents. 15+ years leading enterprise transformation, risk, and resilience programs in financial services (Wells Fargo, Bank of America, EY, Accenture). Now building governed agentic AI: MAVIS and a multi-agent fleet with audit trails and compliance baked in." />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Jane Riveros — AI Program Manager Who Builds Her Own Agents" />
+  <meta property="og:description" content="15+ years of enterprise program leadership in regulated financial services, now applied to building governed agentic AI systems. MAVIS, ATLAS, VICTORIA — live agents, documented in public." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="es_CL" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jane Riveros",
+    "honorificSuffix": "MBA, PMP, CSM",
+    "gender": "Female",
+    "jobTitle": "AI Program Manager & Enterprise Transformation Leader",
+    "description": "Senior program and transformation leader with 15+ years delivering enterprise-scale initiatives across financial services and regulated environments, now building governed agentic AI systems (MAVIS operations agent, multi-agent fleet) with audit trails, controls, and compliance baked in.",
+    "address": { "@type": "PostalAddress", "addressLocality": "Santiago", "addressCountry": "CL" },
+    "nationality": ["US", "CL"],
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Florida International University" },
+      { "@type": "CollegeOrUniversity", "name": "Capella University" }
+    ],
+    "hasCredential": [
+      { "@type": "EducationalOccupationalCredential", "name": "Doctor of Business Administration (DBA), Strategy and Innovation — in progress" },
+      { "@type": "EducationalOccupationalCredential", "name": "Master of Business Administration (MBA)" },
+      { "@type": "EducationalOccupationalCredential", "name": "Project Management Professional (PMP)" },
+      { "@type": "EducationalOccupationalCredential", "name": "Certified ScrumMaster (CSM)" },
+      { "@type": "EducationalOccupationalCredential", "name": "Lean Six Sigma Black Belt" }
+    ],
+    "knowsAbout": [
+      "AI program management", "Agentic AI", "AI agents", "Multi-agent systems", "AI governance",
+      "Enterprise program management", "Operational resilience", "Regulatory transformation",
+      "Risk management", "Change management", "Workflow automation", "Financial services",
+      "PMO leadership", "n8n", "Make", "LLM operations"
+    ],
+    "knowsLanguage": ["en", "es"],
+    "sameAs": [
+      "https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7/"
+    ]
+  }
+  </script>
 
   <!-- Fonts: Space Grotesk (editorial display) + IBM Plex Sans (body) + IBM Plex Mono (system layer) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Tailwind Play CDN. In the Cursor handoff these tokens live in tailwind.config.ts -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,13 +65,13 @@
             line:   "rgba(255,255,255,0.08)",
             // type
             fg:     { DEFAULT: "#EBEEF2", muted: "#9BA3AD", dim: "#5B6470", faint: "#3A4048" },
-            // ONE signal accent — gold
-            signal: { DEFAULT: "#D4AF37", deep: "#B8960F", dim: "#7A621E" },
-            // ONE warm secondary — amber, live/active states ONLY
-            live:   { DEFAULT: "#D4AF37", deep: "#B8960F" },
+            // ONE signal accent — aviation orange
+            signal: { DEFAULT: "#FF4D00", deep: "#CC3D00", dim: "#8A2E0C" },
+            // live/active states share the signal orange
+            live:   { DEFAULT: "#FF4D00", deep: "#CC3D00" },
           },
           fontFamily: {
-            display: ['"Playfair Display"', "Georgia", "serif"],
+            display: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
             sans:    ['"IBM Plex Sans"', "system-ui", "sans-serif"],
             mono:    ['"IBM Plex Mono"', "ui-monospace", "monospace"],
           },
@@ -51,7 +93,7 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-    ::selection { background: #D4AF37; color: #08090B; }
+    ::selection { background: #FF4D00; color: #08090B; }
 
     /* faint instrument grid behind the whole page */
     .bg-grid {
@@ -107,10 +149,10 @@
     [hidden] { display: none !important; }
 
     /* autonomy dial */
-    .dial-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 999px; background: #2a2418; outline: none; }
-    .dial-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; height: 18px; width: 18px; border-radius: 999px; background: #D4AF37; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #D4AF37, 0 0 16px -2px rgba(212,175,55,0.7); cursor: pointer; }
-    .dial-range::-moz-range-thumb { height: 14px; width: 14px; border-radius: 999px; background: #D4AF37; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #D4AF37; cursor: pointer; }
-    .dial-range:focus-visible { box-shadow: 0 0 0 2px rgba(212,175,55,0.5); }
+    .dial-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 999px; background: #2A150A; outline: none; }
+    .dial-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; height: 18px; width: 18px; border-radius: 999px; background: #FF4D00; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #FF4D00, 0 0 16px -2px rgba(255,77,0,0.7); cursor: pointer; }
+    .dial-range::-moz-range-thumb { height: 14px; width: 14px; border-radius: 999px; background: #FF4D00; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #FF4D00; cursor: pointer; }
+    .dial-range:focus-visible { box-shadow: 0 0 0 2px rgba(255,77,0,0.5); }
 
     /* MAVIS dock — fixed companion that tracks scroll context */
     .mavis-dock {
@@ -128,7 +170,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(10,12,15,0.94);
       backdrop-filter: blur(14px);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.08);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,77,0,0.08);
     }
     .mavis-convai-mount {
       min-height: 14rem;
@@ -141,6 +183,15 @@
   </style>
 </head>
 <body class="bg-ink">
+  <noscript>
+    <div style="max-width:760px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;color:#EBEEF2;">
+      <h1>Jane Riveros — AI Program Manager Who Builds Her Own Agents</h1>
+      <p>Senior program and transformation leader with 15+ years delivering enterprise-scale initiatives across financial services, consulting, and highly regulated environments — Wells Fargo (VP, Change Delivery / Corporate Risk / CIB Strategic Execution), Bank of America (Business Resiliency, Global Technology), EY (Technology Transformation), Accenture (Digital Strategy), and the U.S. Army (two deployments to Iraq).</p>
+      <p>Today she builds governed agentic AI systems: MAVIS, a production operations agent on Telegram with persistent memory, email, calendar, file, and vision capabilities, plus a multi-agent research and testing fleet (ATLAS, VICTORIA). Her differentiator: agents designed with the discipline of regulated delivery — governance gates, audit trails, and compliance baked in.</p>
+      <p>Credentials: MBA (Florida International University) · DBA in Strategy and Innovation, in progress (Capella University) · PMP · CSM · Lean Six Sigma Black Belt. Based in Santiago, Chile (U.S. and Chilean citizen). Open to U.S.-based and international remote engagements in AI program management, enterprise transformation, and operational resilience.</p>
+      <p><a href="https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7/" style="color:#FF4D00;">LinkedIn</a> · <a href="/flywheel" style="color:#FF4D00;">The Fly Wheel — building in public</a></p>
+    </div>
+  </noscript>
   <div id="root"></div>
 
   <!-- React 18 + Babel (pinned) -->
@@ -356,8 +407,8 @@ window.CONTENT = {
       links: [
         { id: "home", label: "Home", href: "#top" },
         { id: "work", label: "Work", href: "#arch" },
-        { id: "flywheel", label: "Fly Wheel", href: "#flywheel" },
-        { id: "book", label: "Book a call", href: "#contact" },
+        { id: "flywheel", label: "Fly Wheel", href: "/flywheel" },
+        { id: "book", label: "Talk to MAVIS · Book a call", href: "#contact" },
       ],
     },
 
@@ -586,8 +637,8 @@ window.CONTENT = {
       links: [
         { id: "home", label: "Inicio", href: "#top" },
         { id: "work", label: "Proyectos", href: "#arch" },
-        { id: "flywheel", label: "Fly Wheel", href: "#flywheel" },
-        { id: "book", label: "Agendar llamada", href: "#contact" },
+        { id: "flywheel", label: "Fly Wheel", href: "/flywheel" },
+        { id: "book", label: "Habla con MAVIS · Agendar llamada", href: "#contact" },
       ],
     },
 
@@ -814,8 +865,8 @@ window.CONTENT = {
       links: [
         { id: "home", label: "\u9996\u9875", href: "#top" },
         { id: "work", label: "\u4f5c\u54c1", href: "#arch" },
-        { id: "flywheel", label: "Fly Wheel", href: "#flywheel" },
-        { id: "book", label: "\u9884\u7ea6\u901a\u8bdd", href: "#contact" },
+        { id: "flywheel", label: "Fly Wheel", href: "/flywheel" },
+        { id: "book", label: "与 MAVIS 对话 · 预约通话", href: "#contact" },
       ],
     },
     hero: {
@@ -996,7 +1047,7 @@ window.CONTENT = {
       links: [
         { id: "home", label: "होम", href: "#top" },
         { id: "work", label: "कार्य", href: "#arch" },
-        { id: "book", label: "कॉल बुक करें", href: "#contact" },
+        { id: "book", label: "MAVIS से बात करें · कॉल बुक करें", href: "#contact" },
       ],
     },
     hero: {
@@ -1176,8 +1227,8 @@ title: "एक जीवित प्रणाली।\nउपकरणों �
       links: [
         { id: "home", label: "Accueil", href: "#top" },
         { id: "work", label: "Réalisations", href: "#arch" },
-        { id: "flywheel", label: "Fly Wheel", href: "#flywheel" },
-        { id: "book", label: "Réserver un appel", href: "#contact" },
+        { id: "flywheel", label: "Fly Wheel", href: "/flywheel" },
+        { id: "book", label: "Parler à MAVIS · Réserver un appel", href: "#contact" },
       ],
     },
     hero: {
@@ -1433,8 +1484,8 @@ const STATE_BY_ID = { JANE: "core", MAVIS: "live", ATLAS: "build", VICTORIA: "tr
 
 function pillStyles(state) {
   switch (state) {
-    case "live":     return { dot: "#D4AF37", text: "text-live",   ring: "border-live/40",   glow: "bg-live/10" };
-    case "build":    return { dot: "#D4AF37", text: "text-signal", ring: "border-signal/40", glow: "bg-signal/10" };
+    case "live":     return { dot: "#FF4D00", text: "text-live",   ring: "border-live/40",   glow: "bg-live/10" };
+    case "build":    return { dot: "#FF4D00", text: "text-signal", ring: "border-signal/40", glow: "bg-signal/10" };
     case "training": return { dot: "#9BA3AD", text: "text-fg-muted", ring: "border-fg-dim/40", glow: "bg-white/5" };
     default:         return { dot: "#EBEEF2", text: "text-fg",     ring: "border-line",      glow: "bg-white/5" };
   }
@@ -1550,6 +1601,7 @@ function Nav() {
             <a
               key={l.id}
               href={l.href}
+              onClick={l.id === "book" ? (e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent("mavis:open")); } : undefined}
               className={`font-mono text-[12px] tracking-mono uppercase transition-colors ${
                 l.id === "book" ? "text-signal hover:text-fg" : "text-fg-muted hover:text-fg"
               }`}
@@ -1583,7 +1635,7 @@ function Nav() {
             <a
               key={l.id}
               href={l.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => { if (l.id === "book") { e.preventDefault(); window.dispatchEvent(new CustomEvent("mavis:open")); } setOpen(false); }}
               className={`py-2 font-mono text-[13px] tracking-mono uppercase ${l.id === "book" ? "text-signal" : "text-fg-muted"}`}
             >
               {l.label}
@@ -1734,7 +1786,7 @@ function Hero() {
               return (
                 <>
                   <Scramble as="span" text={parts[0]} duration={1.4} speed={0.085} delay={120} />
-                  {rest && (<> <em className="italic text-signal" style={{ fontWeight: 500 }}><Scramble as="span" text={rest} duration={1.7} speed={0.085} delay={120} /></em></>)}
+                  {rest && (<> <em className="not-italic text-signal" style={{ fontWeight: 600 }}><Scramble as="span" text={rest} duration={1.7} speed={0.085} delay={120} /></em></>)}
                 </>
               );
             })()}
@@ -1761,10 +1813,6 @@ function Hero() {
              className="group inline-flex items-center gap-2.5 rounded-md bg-signal px-6 py-3.5 font-mono text-[13px] tracking-mono uppercase text-ink font-600 transition-transform hover:-translate-y-0.5">
             {t.hero.ctaPrimary}
             <I.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
-          <a href="#contact"
-             className="group inline-flex items-center gap-2.5 rounded-md border border-fg-dim/50 bg-ink-900/40 px-6 py-3.5 font-mono text-[13px] tracking-mono uppercase text-fg backdrop-blur-sm transition-colors hover:border-signal hover:text-signal">
-            {t.hero.ctaSecondary}
           </a>
           <button
             type="button"
@@ -1866,21 +1914,21 @@ function BusBranch({ slot, hot, reduce }) {
       <span
         className="relative z-10 grid h-4 w-4 place-items-center rounded-[3px] border"
         style={{
-          borderColor: hot ? "#D4AF37" : "rgba(212,175,55,0.35)",
+          borderColor: hot ? "#FF4D00" : "rgba(255,77,0,0.35)",
           background: "#0A0C0F",
-          boxShadow: hot ? "0 0 16px -2px rgba(212,175,55,0.7)" : "none",
+          boxShadow: hot ? "0 0 16px -2px rgba(255,77,0,0.7)" : "none",
           transform: "rotate(45deg)",
           transition: "all .3s",
         }}
       >
-        <span className="h-1 w-1 rounded-[1px]" style={{ background: hot ? "#D4AF37" : "rgba(212,175,55,0.45)" }}></span>
+        <span className="h-1 w-1 rounded-[1px]" style={{ background: hot ? "#FF4D00" : "rgba(255,77,0,0.45)" }}></span>
       </span>
       {/* vertical drop into the bay */}
       <span
         className="block w-px"
         style={{
           height: "28px",
-          backgroundImage: "linear-gradient(180deg, #D4AF37 0 7px, transparent 7px 13px)",
+          backgroundImage: "linear-gradient(180deg, #FF4D00 0 7px, transparent 7px 13px)",
           backgroundSize: "1px 13px",
           opacity: hot ? 0.95 : 0.4,
           animation: reduce ? "none" : `pipe-flow-v ${hot ? 0.7 : 1.1}s linear infinite`,
@@ -1902,15 +1950,15 @@ function AgentBay({ node, hot, onHover, reduce }) {
       aria-label={`${node.id}, ${node.role}`}
       className="group relative flex w-full flex-col rounded-xl border p-5 text-left outline-none transition-all duration-300"
       style={{
-        borderColor: hot ? "rgba(212,175,55,0.55)" : "rgba(255,255,255,0.08)",
-        background: hot ? "rgba(212,175,55,0.05)" : "rgba(14,17,21,0.85)",
-        boxShadow: hot ? "0 0 40px -14px rgba(212,175,55,0.6)" : "none",
+        borderColor: hot ? "rgba(255,77,0,0.55)" : "rgba(255,255,255,0.08)",
+        background: hot ? "rgba(255,77,0,0.05)" : "rgba(14,17,21,0.85)",
+        boxShadow: hot ? "0 0 40px -14px rgba(255,77,0,0.6)" : "none",
         transform: hot ? "translateY(-2px)" : "none",
       }}
     >
       {/* registration corner brackets */}
       {["left-2 top-2 border-l border-t", "right-2 top-2 border-r border-t"].map((c, i) => (
-        <span key={i} className={`pointer-events-none absolute h-3 w-3 ${c}`} style={{ borderColor: hot ? "rgba(212,175,55,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }} aria-hidden="true"></span>
+        <span key={i} className={`pointer-events-none absolute h-3 w-3 ${c}`} style={{ borderColor: hot ? "rgba(255,77,0,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }} aria-hidden="true"></span>
       ))}
 
       <div className="flex items-start justify-between gap-3">
@@ -1924,7 +1972,7 @@ function AgentBay({ node, hot, onHover, reduce }) {
       <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
         {node.capabilities.map((c, i) => (
           <li key={i} className="flex items-start gap-2.5 text-fg-muted leading-[1.5]" style={{ fontSize: "13px" }}>
-            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full" style={{ background: hot ? "#D4AF37" : "#5B6470", transition: "background .3s" }} aria-hidden="true"></span>
+            <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full" style={{ background: hot ? "#FF4D00" : "#5B6470", transition: "background .3s" }} aria-hidden="true"></span>
             <span>{c}</span>
           </li>
         ))}
@@ -1969,15 +2017,15 @@ function SystemArchitecture() {
         <div
           className="relative rounded-xl border p-5 md:p-6"
           style={{
-            borderColor: "rgba(212,175,55,0.4)",
-            background: "linear-gradient(180deg, rgba(212,175,55,0.07), rgba(212,175,55,0.02))",
-            boxShadow: "inset 0 1px 0 rgba(212,175,55,0.18)",
+            borderColor: "rgba(255,77,0,0.4)",
+            background: "linear-gradient(180deg, rgba(255,77,0,0.07), rgba(255,77,0,0.02))",
+            boxShadow: "inset 0 1px 0 rgba(255,77,0,0.18)",
           }}
         >
-          <span className="pointer-events-none absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, #D4AF37, transparent)" }} aria-hidden="true"></span>
+          <span className="pointer-events-none absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, #FF4D00, transparent)" }} aria-hidden="true"></span>
           <div className="grid gap-5 md:grid-cols-[minmax(220px,300px)_1fr] md:items-center">
             <div className="flex items-center gap-4">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-signal/50" style={{ background: "rgba(212,175,55,0.08)" }}>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-signal/50" style={{ background: "rgba(255,77,0,0.08)" }}>
                 <span className="h-2 w-2 rounded-full bg-signal" style={reduce ? {} : { animation: "node-breathe 3s ease-in-out infinite" }}></span>
               </span>
               <div>
@@ -2008,7 +2056,7 @@ function SystemArchitecture() {
               className="block w-px"
               style={{
                 height: "22px",
-                backgroundImage: "linear-gradient(180deg, #D4AF37 0 7px, transparent 7px 13px)",
+                backgroundImage: "linear-gradient(180deg, #FF4D00 0 7px, transparent 7px 13px)",
                 backgroundSize: "1px 13px",
                 opacity: 0.55,
                 animation: reduce ? "none" : "pipe-flow-v 1.1s linear infinite",
@@ -2017,7 +2065,7 @@ function SystemArchitecture() {
           </div>
           {/* horizontal trunk + three branch gates aligned to the columns below */}
           <div className="relative">
-            <span className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-[8px] h-px" style={{ background: "linear-gradient(90deg, rgba(212,175,55,0.45), rgba(212,175,55,0.25), rgba(212,175,55,0.45))" }}></span>
+            <span className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-[8px] h-px" style={{ background: "linear-gradient(90deg, rgba(255,77,0,0.45), rgba(255,77,0,0.25), rgba(255,77,0,0.45))" }}></span>
             <div className="relative grid grid-cols-3">
               {[0, 1, 2].map((s) => (
                 <BusBranch key={s} slot={s} hot={hot === a.nodes[s].id} reduce={reduce} />
@@ -2028,7 +2076,7 @@ function SystemArchitecture() {
 
         {/* mobile connector */}
         <div className="my-4 flex justify-center md:hidden" aria-hidden="true">
-          <span className="block h-6 w-px" style={{ background: "linear-gradient(180deg, rgba(212,175,55,0.5), transparent)" }}></span>
+          <span className="block h-6 w-px" style={{ background: "linear-gradient(180deg, rgba(255,77,0,0.5), transparent)" }}></span>
         </div>
 
         {/* ===== agent bays ===== */}
@@ -2053,9 +2101,9 @@ function MethodConnector({ active, reduce, vertical }) {
   if (vertical) {
     return (
       <div className="flex flex-col items-center py-1 md:hidden" aria-hidden="true">
-        <span className="block w-px h-4" style={{ background: active ? "#D4AF37" : "rgba(212,175,55,0.25)" }}></span>
-        <span className="font-mono text-[11px]" style={{ color: active ? "#D4AF37" : "rgba(212,175,55,0.45)" }}>↓</span>
-        <span className="block w-px h-4" style={{ background: active ? "#D4AF37" : "rgba(212,175,55,0.25)" }}></span>
+        <span className="block w-px h-4" style={{ background: active ? "#FF4D00" : "rgba(255,77,0,0.25)" }}></span>
+        <span className="font-mono text-[11px]" style={{ color: active ? "#FF4D00" : "rgba(255,77,0,0.45)" }}>↓</span>
+        <span className="block w-px h-4" style={{ background: active ? "#FF4D00" : "rgba(255,77,0,0.25)" }}></span>
       </div>
     );
   }
@@ -2065,18 +2113,18 @@ function MethodConnector({ active, reduce, vertical }) {
         className="block h-px w-6 lg:w-10"
         style={{
           background: active
-            ? "linear-gradient(90deg, rgba(212,175,55,0.45), rgba(212,175,55,0.25))"
-            : "rgba(212,175,55,0.2)",
+            ? "linear-gradient(90deg, rgba(255,77,0,0.45), rgba(255,77,0,0.25))"
+            : "rgba(255,77,0,0.2)",
           animation: reduce ? "none" : active ? "pipe-flow 0.7s linear infinite" : "none",
         }}
       ></span>
-      <span className="mx-0.5 font-mono text-[12px]" style={{ color: active ? "#D4AF37" : "rgba(212,175,55,0.45)" }}>→</span>
+      <span className="mx-0.5 font-mono text-[12px]" style={{ color: active ? "#FF4D00" : "rgba(255,77,0,0.45)" }}>→</span>
       <span
         className="block h-px w-6 lg:w-10"
         style={{
           background: active
-            ? "linear-gradient(90deg, rgba(212,175,55,0.25), rgba(212,175,55,0.45))"
-            : "rgba(212,175,55,0.2)",
+            ? "linear-gradient(90deg, rgba(255,77,0,0.25), rgba(255,77,0,0.45))"
+            : "rgba(255,77,0,0.2)",
           animation: reduce ? "none" : active ? "pipe-flow 0.7s linear infinite" : "none",
         }}
       ></span>
@@ -2097,14 +2145,14 @@ function MethodStep({ step, index, hot, onHover }) {
       aria-label={`${step.label}: ${step.body}`}
       className="group relative flex w-full flex-col rounded-lg border p-5 text-left outline-none transition-all duration-300 h-full"
       style={{
-        borderColor: hot ? "rgba(212,175,55,0.55)" : "rgba(255,255,255,0.08)",
-        background: hot ? "rgba(212,175,55,0.05)" : "rgba(14,17,21,0.85)",
-        boxShadow: hot ? "0 0 40px -14px rgba(212,175,55,0.6)" : "none",
+        borderColor: hot ? "rgba(255,77,0,0.55)" : "rgba(255,255,255,0.08)",
+        background: hot ? "rgba(255,77,0,0.05)" : "rgba(14,17,21,0.85)",
+        boxShadow: hot ? "0 0 40px -14px rgba(255,77,0,0.6)" : "none",
         transform: hot ? "translateY(-2px)" : "none",
       }}
     >
       {["left-2 top-2 border-l border-t", "right-2 top-2 border-r border-t"].map((c, i) => (
-        <span key={i} className={`pointer-events-none absolute h-3 w-3 ${c}`} style={{ borderColor: hot ? "rgba(212,175,55,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }} aria-hidden="true"></span>
+        <span key={i} className={`pointer-events-none absolute h-3 w-3 ${c}`} style={{ borderColor: hot ? "rgba(255,77,0,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }} aria-hidden="true"></span>
       ))}
       <span className="font-mono text-[10px] tracking-mono text-signal/70 mb-3">{String(index + 1).padStart(2, "0")}</span>
       <span className="font-mono text-[11px] tracking-mono uppercase text-fg-muted mb-2">{step.label}</span>
@@ -2404,14 +2452,14 @@ function Journey() {
             <path
               d={routeD}
               fill="none"
-              stroke="#D4AF37"
+              stroke="#FF4D00"
               strokeWidth="2"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
               pathLength="1"
               strokeDasharray="1"
               strokeDashoffset={1 - progress}
-              style={{ filter: "drop-shadow(0 0 6px rgba(212,175,55,0.6))" }}
+              style={{ filter: "drop-shadow(0 0 6px rgba(255,77,0,0.6))" }}
             />
           </svg>
 
@@ -2427,9 +2475,9 @@ function Journey() {
               >
                 <span className="grid h-4 w-4 place-items-center rounded-full border-2 transition-all duration-500"
                   style={{
-                    background: on ? "#D4AF37" : "#0A0C0F",
-                    borderColor: on ? "#D4AF37" : "#2a323a",
-                    boxShadow: on ? "0 0 0 6px rgba(212,175,55,0.14), 0 0 22px -2px rgba(212,175,55,0.7)" : "none",
+                    background: on ? "#FF4D00" : "#0A0C0F",
+                    borderColor: on ? "#FF4D00" : "#2a323a",
+                    boxShadow: on ? "0 0 0 6px rgba(255,77,0,0.14), 0 0 22px -2px rgba(255,77,0,0.7)" : "none",
                   }}>
                 </span>
               </span>
@@ -2454,7 +2502,7 @@ function Journey() {
                   opacity: on ? 1 : 0.32,
                 }}
               >
-                <div className="font-mono text-[28px] tracking-tight transition-colors duration-500" style={{ color: on ? "#D4AF37" : "#5B6470" }}>
+                <div className="font-mono text-[28px] tracking-tight transition-colors duration-500" style={{ color: on ? "#FF4D00" : "#5B6470" }}>
                   {m.year}
                 </div>
                 <div className="mt-1 font-mono text-[10.5px] tracking-mono uppercase text-fg-dim">{m.tag}</div>
@@ -2467,15 +2515,15 @@ function Journey() {
         {/* ============ MOBILE: vertical lit path ============ */}
         <div className="relative md:hidden pl-8">
           <div className="absolute top-1 bottom-1 left-[5px] w-[2px] bg-line" aria-hidden="true"></div>
-          <div className="absolute top-1 left-[5px] w-[2px] bg-signal" style={{ height: `${progress * 100}%`, boxShadow: "0 0 10px rgba(212,175,55,0.6)" }} aria-hidden="true"></div>
+          <div className="absolute top-1 left-[5px] w-[2px] bg-signal" style={{ height: `${progress * 100}%`, boxShadow: "0 0 10px rgba(255,77,0,0.6)" }} aria-hidden="true"></div>
           <ol className="space-y-11">
             {ms.map((m, i) => {
               const on = lit(i);
               return (
                 <li key={m.year} className="relative">
                   <span className="absolute -left-[27px] top-1.5 z-10 grid h-3.5 w-3.5 place-items-center rounded-full border-2 transition-all duration-500"
-                    style={{ background: on ? "#D4AF37" : "#0A0C0F", borderColor: on ? "#D4AF37" : "#2a323a", boxShadow: on ? "0 0 0 4px rgba(212,175,55,0.14)" : "none" }} aria-hidden="true"></span>
-                  <div className="font-mono text-[22px] tracking-tight transition-colors duration-500" style={{ color: on ? "#D4AF37" : "#5B6470" }}>{m.year}</div>
+                    style={{ background: on ? "#FF4D00" : "#0A0C0F", borderColor: on ? "#FF4D00" : "#2a323a", boxShadow: on ? "0 0 0 4px rgba(255,77,0,0.14)" : "none" }} aria-hidden="true"></span>
+                  <div className="font-mono text-[22px] tracking-tight transition-colors duration-500" style={{ color: on ? "#FF4D00" : "#5B6470" }}>{m.year}</div>
                   <div className="mt-1 font-mono text-[10px] tracking-mono uppercase text-fg-dim">{m.tag}</div>
                   <p className="mt-2 text-fg leading-[1.5]" style={{ fontSize: "1.05rem", opacity: on ? 1 : 0.4, transition: "opacity .5s" }}>{m.body}</p>
                 </li>
@@ -2558,7 +2606,7 @@ function Principles() {
             </div>
             <div className="flex gap-2 flex-1 max-w-[280px]">
               {p.items.map((_, i) => (
-                <span key={i} className="h-[3px] flex-1 rounded-full transition-all duration-500" style={{ background: i <= idx ? "#D4AF37" : "#2a2418" }}></span>
+                <span key={i} className="h-[3px] flex-1 rounded-full transition-all duration-500" style={{ background: i <= idx ? "#FF4D00" : "#2A150A" }}></span>
               ))}
             </div>
           </div>
@@ -2717,7 +2765,7 @@ function BuildingInPublic() {
 
           <div className="relative">
             <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden opacity-[0.5]" aria-hidden="true">
-              <div className="absolute inset-x-0 h-24 -top-24" style={{ background: "linear-gradient(180deg, transparent, rgba(212,175,55,0.05), transparent)", animation: "scanline 7s linear infinite" }}></div>
+              <div className="absolute inset-x-0 h-24 -top-24" style={{ background: "linear-gradient(180deg, transparent, rgba(255,77,0,0.05), transparent)", animation: "scanline 7s linear infinite" }}></div>
             </div>
             <div className="pointer-events-none absolute inset-0 z-10 opacity-[0.04]" aria-hidden="true"
               style={{ backgroundImage: "repeating-linear-gradient(180deg, #fff 0 1px, transparent 1px 3px)" }}></div>
@@ -2786,8 +2834,8 @@ Object.assign(window, { BuildingInPublic });
   <script type="text/babel" data-src="components/Closing.jsx">
 // src/components/Closing.jsx
 const KANBAN_BADGE = {
-  live: { color: "#D4AF37", border: "rgba(212,175,55,0.4)", bg: "rgba(212,175,55,0.08)" },
-  terracotta: { color: "#C9821C", border: "rgba(201,130,28,0.45)", bg: "rgba(201,130,28,0.1)" },
+  live: { color: "#FF4D00", border: "rgba(255,77,0,0.4)", bg: "rgba(255,77,0,0.08)" },
+  terracotta: { color: "#7FA6C2", border: "rgba(127,166,194,0.45)", bg: "rgba(127,166,194,0.1)" },
   training: { color: "#8A929E", border: "rgba(138,146,158,0.35)", bg: "rgba(138,146,158,0.08)" },
 };
 
@@ -2808,15 +2856,15 @@ function KanbanDiamond({ hot }) {
     <span
       className="relative z-10 grid h-4 w-4 shrink-0 place-items-center rounded-[3px] border"
       style={{
-        borderColor: hot ? "#D4AF37" : "rgba(212,175,55,0.35)",
+        borderColor: hot ? "#FF4D00" : "rgba(255,77,0,0.35)",
         background: "#0A0C0F",
-        boxShadow: hot ? "0 0 16px -2px rgba(212,175,55,0.7)" : "none",
+        boxShadow: hot ? "0 0 16px -2px rgba(255,77,0,0.7)" : "none",
         transform: "rotate(45deg)",
         transition: "all .3s",
       }}
       aria-hidden="true"
     >
-      <span className="h-1 w-1 rounded-[1px]" style={{ background: hot ? "#D4AF37" : "rgba(212,175,55,0.45)" }}></span>
+      <span className="h-1 w-1 rounded-[1px]" style={{ background: hot ? "#FF4D00" : "rgba(255,77,0,0.45)" }}></span>
     </span>
   );
 }
@@ -2825,9 +2873,9 @@ function KanbanCard({ card, cardKey, hot, onHover, expanded, onToggle, columnId,
   return (
     <div className="group relative flex w-full flex-col rounded-lg border p-4 text-left outline-none transition-all duration-300 cursor-pointer"
       style={{
-        borderColor: hot ? "rgba(212,175,55,0.55)" : "rgba(255,255,255,0.08)",
-        background: hot ? "rgba(212,175,55,0.05)" : "rgba(14,17,21,0.85)",
-        boxShadow: hot ? "0 0 40px -14px rgba(212,175,55,0.6)" : "none",
+        borderColor: hot ? "rgba(255,77,0,0.55)" : "rgba(255,255,255,0.08)",
+        background: hot ? "rgba(255,77,0,0.05)" : "rgba(14,17,21,0.85)",
+        boxShadow: hot ? "0 0 40px -14px rgba(255,77,0,0.6)" : "none",
         transform: hot ? "translateY(-2px)" : "none",
       }}
       onMouseEnter={() => onHover(cardKey)}
@@ -2847,7 +2895,7 @@ function KanbanCard({ card, cardKey, hot, onHover, expanded, onToggle, columnId,
         <span
           key={i}
           className={`pointer-events-none absolute h-3 w-3 ${corner}`}
-          style={{ borderColor: hot ? "rgba(212,175,55,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }}
+          style={{ borderColor: hot ? "rgba(255,77,0,0.5)" : "rgba(91,100,112,0.3)", transition: "border-color .3s" }}
           aria-hidden="true"
         ></span>
       ))}
@@ -2859,9 +2907,9 @@ function KanbanCard({ card, cardKey, hot, onHover, expanded, onToggle, columnId,
           {card.detail && (
             <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border transition-colors"
               style={{
-                borderColor: expanded ? "rgba(212,175,55,0.5)" : "rgba(255,255,255,0.15)",
-                color: expanded ? "#D4AF37" : "#9BA3AD",
-                background: expanded ? "rgba(212,175,55,0.1)" : "transparent",
+                borderColor: expanded ? "rgba(255,77,0,0.5)" : "rgba(255,255,255,0.15)",
+                color: expanded ? "#FF4D00" : "#9BA3AD",
+                background: expanded ? "rgba(255,77,0,0.1)" : "transparent",
               }}
               aria-hidden="true"
             >
@@ -2924,12 +2972,12 @@ function KanbanColumn({ column, hotKey, onHover, expanded, onToggle, demoLabel }
 
 function GovernanceGate({ label }) {
   const pipeV = {
-    backgroundImage: "linear-gradient(180deg, #D4AF37 0 7px, transparent 7px 13px)",
+    backgroundImage: "linear-gradient(180deg, #FF4D00 0 7px, transparent 7px 13px)",
     backgroundSize: "1px 13px",
     opacity: 0.4,
   };
   const pipeH = {
-    backgroundImage: "linear-gradient(90deg, #D4AF37 0 7px, transparent 7px 13px)",
+    backgroundImage: "linear-gradient(90deg, #FF4D00 0 7px, transparent 7px 13px)",
     backgroundSize: "13px 1px",
     opacity: 0.4,
   };
@@ -3001,12 +3049,6 @@ function Closing() {
           </Reveal>
         )}
 
-        <Reveal delay={280}>
-          <a href="#" className="group mt-12 inline-flex items-center gap-3 rounded-md bg-signal px-8 py-4 font-mono text-[13px] tracking-mono uppercase text-ink font-600 transition-transform hover:-translate-y-0.5">
-            {c.cta}
-            <I.ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </Reveal>
         <Reveal delay={360}>
           <p className="mt-10 font-mono text-[11px] tracking-mono uppercase text-fg-dim">{c.note}</p>
         </Reveal>
@@ -3065,6 +3107,10 @@ function FlyWheel() {
           <h2 className="font-display font-600 tracking-tight text-fg" style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}>
             {f.message}
           </h2>
+          <a href="/flywheel" className="group mt-10 inline-flex items-center gap-2.5 rounded-md border border-signal/50 px-6 py-3.5 font-mono text-[12px] tracking-mono uppercase text-signal transition-colors hover:bg-signal hover:text-ink">
+            ENTER THE FLY WHEEL
+            <I.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
         </Reveal>
       </div>
     </Section>
@@ -3102,8 +3148,8 @@ function mavisApplyConvai(el, lang, sectionKey, sectionId, m) {
   el.setAttribute("end-call-text", m.close);
   el.setAttribute("listening-text", m.name + " · " + m.following.toLowerCase() + "…");
   el.setAttribute("speaking-text", m.name + "…");
-  el.setAttribute("avatar-orb-color-1", "#7A621E");
-  el.setAttribute("avatar-orb-color-2", "#D4AF37");
+  el.setAttribute("avatar-orb-color-1", "#8A2E0C");
+  el.setAttribute("avatar-orb-color-2", "#FF4D00");
   el.setAttribute("dismissible", "true");
   el.setAttribute("markdown-link-allowed-hosts", "*");
 }

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Fly Wheel — Jane Riveros</title>
+  <meta name="description" content="The Fly Wheel: how Jane Riveros builds in public — YouTube walkthroughs, essays, podcast appearances, and live client builds, all feeding one engine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: "#08090B", 900: "#0A0C0F", 800: "#0E1115", 700: "#13171C", 600: "#191E24" },
+            line:   "rgba(255,255,255,0.08)",
+            fg:     { DEFAULT: "#EBEEF2", muted: "#9BA3AD", dim: "#5B6470", faint: "#3A4048" },
+            signal: { DEFAULT: "#FF4D00", deep: "#CC3D00", dim: "#8A2E0C" },
+          },
+          fontFamily: {
+            display: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+            sans:    ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+            mono:    ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+          },
+          letterSpacing: { mono: "0.14em" },
+          maxWidth: { shell: "1180px" },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body { background: #08090B; color: #EBEEF2; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #FF4D00; color: #08090B; }
+    .bg-grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
+  </style>
+  <script>
+    // Paste real URLs here as channels go live. Empty string = card shows "COMING ONLINE".
+    window.FLYWHEEL_LINKS = {
+      youtube:  "",
+      blog:     "",
+      podcast:  "",
+      clients:  "",
+      linkedin: "https://www.linkedin.com/",  // ← replace with your profile URL
+    };
+  </script>
+</head>
+<body class="bg-grid min-h-screen flex flex-col">
+
+  <header class="border-b border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="/" class="font-display text-[17px] font-semibold tracking-tight text-fg hover:text-signal transition-colors">Jane Riveros.</a>
+      <a href="/" class="font-mono text-[12px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; Mission control</a>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <section class="mx-auto max-w-shell px-6 md:px-10 pt-20 md:pt-28 pb-14">
+      <p class="reveal font-mono text-[11px] tracking-mono uppercase text-signal">// THE FLY WHEEL</p>
+      <h1 class="reveal mt-5 font-display font-semibold tracking-tight text-fg" style="font-size: clamp(2.2rem, 6vw, 4.2rem); line-height: 1.02;">
+        Build. Document. Publish.<br />Repeat until undeniable.
+      </h1>
+      <p class="reveal mt-6 max-w-[58ch] text-fg-muted leading-relaxed">
+        Everything I ship — agents, automations, client systems — gets documented and published.
+        Each channel feeds the next: the videos explain the builds, the writing deepens the videos,
+        the client work proves all of it. One engine, many surfaces.
+      </p>
+    </section>
+
+    <section class="border-y border-line bg-ink-900">
+      <div class="mx-auto max-w-shell px-6 md:px-10 py-8 overflow-x-auto">
+        <p class="reveal font-mono text-[12px] md:text-[13px] tracking-mono uppercase text-fg-dim whitespace-nowrap text-center">
+          BUILD <span class="text-signal">&rarr;</span> DOCUMENT <span class="text-signal">&rarr;</span> PUBLISH <span class="text-signal">&rarr;</span> ATTRACT <span class="text-signal">&rarr;</span> BUILD
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-shell px-6 md:px-10 py-16 md:py-24">
+      <div class="grid gap-5 md:grid-cols-2" id="channels">
+
+        <article class="reveal rounded-lg border border-line bg-ink-800/60 p-7 flex flex-col" data-link="youtube">
+          <div class="flex items-center justify-between">
+            <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">CH-01</p>
+            <p class="status font-mono text-[11px] tracking-mono uppercase text-fg-dim">COMING ONLINE</p>
+          </div>
+          <h2 class="mt-4 font-display text-[22px] font-semibold text-fg">YouTube — build walkthroughs</h2>
+          <p class="mt-3 text-[15px] text-fg-muted leading-relaxed flex-1">
+            Screen-recorded tours of the systems as they exist: MAVIS on Telegram, the agent fleet,
+            multi-agent testing. Not tutorials — operations footage.
+          </p>
+          <a class="channel-link mt-6 hidden font-mono text-[12px] tracking-mono uppercase text-signal hover:text-fg transition-colors" target="_blank" rel="noopener">WATCH &rarr;</a>
+        </article>
+
+        <article class="reveal rounded-lg border border-line bg-ink-800/60 p-7 flex flex-col" data-link="blog">
+          <div class="flex items-center justify-between">
+            <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">CH-02</p>
+            <p class="status font-mono text-[11px] tracking-mono uppercase text-fg-dim">COMING ONLINE</p>
+          </div>
+          <h2 class="mt-4 font-display text-[22px] font-semibold text-fg">Writing — field notes</h2>
+          <p class="mt-3 text-[15px] text-fg-muted leading-relaxed flex-1">
+            Essays at the intersection of program governance and agentic AI — what fifteen years of
+            regulated delivery teaches you about deploying agents that can't be allowed to improvise.
+          </p>
+          <a class="channel-link mt-6 hidden font-mono text-[12px] tracking-mono uppercase text-signal hover:text-fg transition-colors" target="_blank" rel="noopener">READ &rarr;</a>
+        </article>
+
+        <article class="reveal rounded-lg border border-line bg-ink-800/60 p-7 flex flex-col" data-link="podcast">
+          <div class="flex items-center justify-between">
+            <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">CH-03</p>
+            <p class="status font-mono text-[11px] tracking-mono uppercase text-fg-dim">COMING ONLINE</p>
+          </div>
+          <h2 class="mt-4 font-display text-[22px] font-semibold text-fg">Podcast — conversations</h2>
+          <p class="mt-3 text-[15px] text-fg-muted leading-relaxed flex-1">
+            Long-form conversations on operational AI, resilience, and building a second career in
+            public — recorded from Santiago, aimed everywhere.
+          </p>
+          <a class="channel-link mt-6 hidden font-mono text-[12px] tracking-mono uppercase text-signal hover:text-fg transition-colors" target="_blank" rel="noopener">LISTEN &rarr;</a>
+        </article>
+
+        <article class="reveal rounded-lg border border-line bg-ink-800/60 p-7 flex flex-col" data-link="clients">
+          <div class="flex items-center justify-between">
+            <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">CH-04</p>
+            <p class="status font-mono text-[11px] tracking-mono uppercase text-fg-dim">COMING ONLINE</p>
+          </div>
+          <h2 class="mt-4 font-display text-[22px] font-semibold text-fg">Client builds — use cases</h2>
+          <p class="mt-3 text-[15px] text-fg-muted leading-relaxed flex-1">
+            Real engagements, documented: the operational mess, the system that replaced it, and the
+            numbers after. Proof beats promise.
+          </p>
+          <a class="channel-link mt-6 hidden font-mono text-[12px] tracking-mono uppercase text-signal hover:text-fg transition-colors" target="_blank" rel="noopener">SEE CASES &rarr;</a>
+        </article>
+
+      </div>
+
+      <div class="reveal mt-14 text-center">
+        <a id="linkedin-cta" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 rounded-md border border-signal/50 px-6 py-3.5 font-mono text-[12px] tracking-mono uppercase text-signal transition-colors hover:bg-signal hover:text-ink">
+          FOLLOW THE BUILD ON LINKEDIN &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 py-8 flex items-center justify-between">
+      <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">JANE RIVEROS · SANTIAGO, CL</p>
+      <a href="/" class="font-mono text-[11px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; BACK</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var L = window.FLYWHEEL_LINKS || {};
+      document.querySelectorAll("[data-link]").forEach(function (card) {
+        var url = L[card.getAttribute("data-link")];
+        if (url) {
+          var a = card.querySelector(".channel-link");
+          var s = card.querySelector(".status");
+          if (a) { a.href = url; a.classList.remove("hidden"); }
+          if (s) { s.textContent = "LIVE"; s.classList.remove("text-fg-dim"); s.classList.add("text-signal"); }
+        }
+      });
+      var li = document.getElementById("linkedin-cta");
+      if (L.linkedin) li.href = L.linkedin; else li.style.display = "none";
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

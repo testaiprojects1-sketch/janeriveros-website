@@ -21,3 +21,14 @@ npm-debug.log*
 .vscode/
 .idea/
 .vercel
+
+# astro cache
+.astro/
+
+# local proofs/screenshots
+.preview/
+
+# local leftovers — not for deploy
+public/original-index.html
+public/preview.png
+public/preview-mavis.png

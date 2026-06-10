@@ -1,0 +1,30 @@
+# Jane Riveros
+
+> AI program manager who builds her own agents. 15+ years of enterprise program, risk, and resilience leadership in regulated financial services (Wells Fargo, Bank of America, EY, Accenture, U.S. Army veteran — two Iraq deployments), now building governed agentic AI systems from Santiago, Chile. U.S. and Chilean citizen, open to U.S.-based and international remote roles.
+
+## Who she is
+
+- Executive program leader: enterprise transformation, regulatory change, operational resilience, PMO and execution governance in financial services.
+- Hands-on AI builder: designs, ships, and operates her own agents rather than only managing AI programs.
+- Credentials: MBA (Florida International University), DBA in Strategy and Innovation in progress (Capella University), PMP, CSM, Lean Six Sigma Black Belt, Azure Fundamentals.
+- Bilingual English/Spanish.
+
+## What she has built
+
+- MAVIS: production operations agent on Telegram — persistent cross-conversation memory, email and calendar integration, file creation, image understanding, and agent-to-agent handoffs.
+- Agent fleet: ATLAS and VICTORIA — research and multi-agent testing systems with governance gates between sandbox and production.
+- This site: scroll-aware MAVIS concierge dock (ElevenLabs voice), 5-language i18n, live build changelog.
+
+## Why it matters
+
+She applies the discipline of regulated delivery — controls, audit trails, accountability — to agentic AI. The combination of senior enterprise program leadership and hands-on agent engineering is rare.
+
+## Pages
+
+- /: profile, track record, methodology, agent architecture, career journey, live kanban
+- /flywheel: building-in-public channels — YouTube walkthroughs, writing, podcast, client builds
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7/
+- Booking: via the MAVIS assistant on the site

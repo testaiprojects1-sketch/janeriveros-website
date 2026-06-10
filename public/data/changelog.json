@@ -1,0 +1,7 @@
+[
+  { "date": "2026-05-28", "tag": "MAVIS", "text": "handoff-confidence threshold tuned to 0.82" },
+  { "date": "2026-05-26", "tag": "ATLAS", "text": "audit-log schema v3 merged" },
+  { "date": "2026-05-22", "tag": "VICTORIA", "text": "reviewed 1,200 control statements (supervised)" },
+  { "date": "2026-05-19", "tag": "FLEET", "text": "immutable timestamp signing rolled out across the fleet" },
+  { "date": "2026-05-15", "tag": "GOVERNANCE", "text": "published Q2 governance posture" }
+]
