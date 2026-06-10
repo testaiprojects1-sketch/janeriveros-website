@@ -111,6 +111,33 @@
     .dial-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; height: 18px; width: 18px; border-radius: 999px; background: #D4AF37; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #D4AF37, 0 0 16px -2px rgba(212,175,55,0.7); cursor: pointer; }
     .dial-range::-moz-range-thumb { height: 14px; width: 14px; border-radius: 999px; background: #D4AF37; border: 3px solid #0A0C0F; box-shadow: 0 0 0 1px #D4AF37; cursor: pointer; }
     .dial-range:focus-visible { box-shadow: 0 0 0 2px rgba(212,175,55,0.5); }
+
+    /* MAVIS dock — fixed companion that tracks scroll context */
+    .mavis-dock {
+      position: fixed;
+      z-index: 60;
+      right: max(1rem, env(safe-area-inset-right));
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      width: min(22rem, calc(100vw - 2rem));
+      pointer-events: none;
+    }
+    .mavis-dock > * { pointer-events: auto; }
+    .mavis-dock-panel {
+      max-height: min(70vh, 32rem);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10,12,15,0.94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.08);
+    }
+    .mavis-convai-mount {
+      min-height: 14rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .mavis-convai-mount elevenlabs-convai { display: block; width: 100%; }
+    @media (max-width: 640px) {
+      .mavis-dock { width: calc(100vw - 1.25rem); right: 0.625rem; bottom: 0.625rem; }
+    }
   </style>
 </head>
 <body class="bg-ink">
@@ -136,6 +163,180 @@
 
 window.SITE_LINKS = {
   youtubeRunthrough: "", // paste your YouTube runthrough URL here
+  bookingUrl: "https://calendly.com/testaiprojects1/30-minutes-with-jane",
+};
+
+/* Sections MAVIS tracks while the visitor scrolls */
+window.MAVIS_SECTIONS = [
+  { id: "top", key: "home" },
+  { id: "credentials", key: "credentials" },
+  { id: "method", key: "method" },
+  { id: "arch", key: "architecture" },
+  { id: "before", key: "before" },
+  { id: "journey", key: "journey" },
+  { id: "principles", key: "principles" },
+  { id: "public", key: "public" },
+  { id: "flywheel", key: "flywheel" },
+  { id: "contact", key: "contact" },
+];
+
+window.MAVIS_UI = {
+  en: {
+    name: "MAVIS",
+    role: "Operations agent · Jane Riveros",
+    live: "LIVE",
+    talk: "Talk to MAVIS",
+    open: "Open MAVIS",
+    close: "Close",
+    powered: "Voice by ElevenLabs",
+    following: "Following",
+    context: "Page context",
+    book: "Book a call",
+    promptsTitle: "Ask about this section",
+    voiceReady: "Voice agent ready",
+    voicePending: "Voice loads when agent ID is configured",
+    fallbackNote: "Leave your details — Jane follows up personally. No funnels.",
+    form: { name: "Name", email: "Email", interest: "What are you exploring?", send: "Send", sent: "Received. Jane will be in touch." },
+    sections: {
+      home: "Home", credentials: "Track record", method: "How Jane works", architecture: "Agent architecture",
+      before: "Before agents", journey: "Career journey", principles: "Principles", public: "Building in public",
+      flywheel: "Fly wheel", contact: "Book a call",
+    },
+    prompts: {
+      home: ["Who is Jane Riveros?", "What does MAVIS handle?", "Schedule a call with Jane"],
+      credentials: ["Summarize Jane's enterprise background", "Which firms and certifications matter?"],
+      method: ["How does Jane run a client engagement?", "What happens in discovery?"],
+      architecture: ["Explain the agent fleet", "What is live vs in training?", "How is governance enforced?"],
+      before: ["Why agentic AI now?", "What changed in enterprise AI?"],
+      journey: ["Walk me through Jane's career arc", "Banking to agentic AI — why?"],
+      principles: ["What are Jane's operating principles?", "How does accountability work here?"],
+      public: ["What is Jane shipping right now?", "Show me the live kanban"],
+      flywheel: ["What is the fly wheel?", "Passive income + agents — how?"],
+      contact: ["Book a meeting", "What should I prepare for a call?", "Share my project scope"],
+    },
+  },
+  es: {
+    name: "MAVIS",
+    role: "Agente de operaciones · Jane Riveros",
+    live: "EN VIVO",
+    talk: "Hablar con MAVIS",
+    open: "Abrir MAVIS",
+    close: "Cerrar",
+    powered: "Voz por ElevenLabs",
+    following: "Siguiendo",
+    context: "Contexto de página",
+    book: "Agendar llamada",
+    promptsTitle: "Pregunta sobre esta sección",
+    voiceReady: "Agente de voz listo",
+    voicePending: "La voz se activa cuando configures el ID del agente",
+    fallbackNote: "Deja tus datos — Jane responde personalmente. Sin embudos.",
+    form: { name: "Nombre", email: "Correo", interest: "¿Qué estás explorando?", send: "Enviar", sent: "Recibido. Jane se pondrá en contacto." },
+    sections: {
+      home: "Inicio", credentials: "Trayectoria", method: "Cómo trabaja Jane", architecture: "Arquitectura de agentes",
+      before: "Antes de los agentes", journey: "Trayectoria profesional", principles: "Principios", public: "Construyendo en público",
+      flywheel: "Volante", contact: "Agendar llamada",
+    },
+    prompts: {
+      home: ["¿Quién es Jane Riveros?", "¿Qué hace MAVIS?", "Agendar una llamada con Jane"],
+      credentials: ["Resume el background enterprise de Jane", "¿Qué firmas y certificaciones importan?"],
+      method: ["¿Cómo ejecuta Jane un engagement?", "¿Qué pasa en discovery?"],
+      architecture: ["Explica la flota de agentes", "¿Qué está en vivo vs en entrenamiento?", "¿Cómo se aplica la gobernanza?"],
+      before: ["¿Por qué IA agéntica ahora?", "¿Qué cambió en IA enterprise?"],
+      journey: ["Recorre la trayectoria de Jane", "Banca a IA agéntica — ¿por qué?"],
+      principles: ["¿Cuáles son los principios operativos?", "¿Cómo funciona la responsabilidad aquí?"],
+      public: ["¿Qué está lanzando Jane ahora?", "Muéstrame el kanban en vivo"],
+      flywheel: ["¿Qué es el volante?", "Ingreso pasivo + agentes — ¿cómo?"],
+      contact: ["Agendar reunión", "¿Qué debo preparar para la llamada?", "Compartir el alcance de mi proyecto"],
+    },
+  },
+  fr: {
+    name: "MAVIS",
+    role: "Agent opérations · Jane Riveros",
+    live: "EN DIRECT",
+    talk: "Parler à MAVIS",
+    open: "Ouvrir MAVIS",
+    close: "Fermer",
+    powered: "Voix par ElevenLabs",
+    following: "Section",
+    context: "Contexte",
+    book: "Réserver un appel",
+    promptsTitle: "Questions sur cette section",
+    voiceReady: "Agent vocal prêt",
+    voicePending: "Voix activée quand l'ID agent est configuré",
+    fallbackNote: "Laissez vos coordonnées — Jane répond personnellement.",
+    form: { name: "Nom", email: "E-mail", interest: "Votre sujet", send: "Envoyer", sent: "Reçu. Jane vous contactera." },
+    sections: {
+      home: "Accueil", credentials: "Parcours", method: "Méthode", architecture: "Architecture agents",
+      before: "Avant les agents", journey: "Parcours", principles: "Principes", public: "En public",
+      flywheel: "Fly wheel", contact: "Réserver",
+    },
+    prompts: {
+      home: ["Qui est Jane Riveros ?", "Que fait MAVIS ?", "Planifier un appel"],
+      credentials: ["Parcours enterprise de Jane"],
+      method: ["Comment Jane mène un engagement ?"],
+      architecture: ["Expliquez la flotte d'agents", "Qu'est-ce qui est en production ?"],
+      before: ["Pourquoi l'IA agentique maintenant ?"],
+      journey: ["Parcours de Jane"],
+      principles: ["Principes opérationnels"],
+      public: ["Que livre Jane actuellement ?"],
+      flywheel: ["Qu'est-ce que le fly wheel ?"],
+      contact: ["Réserver une réunion", "Préparer un appel"],
+    },
+  },
+  zh: {
+    name: "MAVIS",
+    role: "运营代理 · Jane Riveros",
+    live: "在线",
+    talk: "与 MAVIS 对话",
+    open: "打开 MAVIS",
+    close: "关闭",
+    powered: "ElevenLabs 语音",
+    following: "当前板块",
+    context: "页面上下文",
+    book: "预约通话",
+    promptsTitle: "关于本板块提问",
+    voiceReady: "语音代理已就绪",
+    voicePending: "配置代理 ID 后启用语音",
+    fallbackNote: "留下联系方式，Jane 会亲自回复。",
+    form: { name: "姓名", email: "邮箱", interest: "您想了解什么？", send: "发送", sent: "已收到，Jane 会联系您。" },
+    sections: {
+      home: "首页", credentials: "履历", method: "工作方式", architecture: "代理架构",
+      before: "代理之前", journey: "职业历程", principles: "原则", public: "公开构建",
+      flywheel: "飞轮", contact: "预约",
+    },
+    prompts: {
+      home: ["Jane Riveros 是谁？", "MAVIS 做什么？", "预约与 Jane 通话"],
+      architecture: ["解释代理舰队", "哪些已上线？"],
+      contact: ["预约会议", "通话前需要准备什么？"],
+    },
+  },
+  hi: {
+    name: "MAVIS",
+    role: "ऑपरेशंस एजेंट · Jane Riveros",
+    live: "लाइव",
+    talk: "MAVIS से बात करें",
+    open: "MAVIS खोलें",
+    close: "बंद करें",
+    powered: "ElevenLabs आवाज़",
+    following: "सेक्शन",
+    context: "पेज संदर्भ",
+    book: "कॉल बुक करें",
+    promptsTitle: "इस सेक्शन के बारे में पूछें",
+    voiceReady: "वॉइस एजेंट तैयार",
+    voicePending: "एजेंट ID सेट होने पर वॉइस चालू होगी",
+    fallbackNote: "विवरण छोड़ें — Jane व्यक्तिगत रूप से जवाब देंगी।",
+    form: { name: "नाम", email: "ईमेल", interest: "आप क्या खोज रहे हैं?", send: "भेजें", sent: "प्राप्त। Jane संपर्क करेंगी।" },
+    sections: {
+      home: "होम", credentials: "ट्रैक रिकॉर्ड", method: "Jane का तरीका", architecture: "एजेंट आर्किटेक्चर",
+      before: "एजेंट्स से पहले", journey: "करियर", principles: "सिद्धांत", public: "पब्लिक में निर्माण",
+      flywheel: "फ्लाई व्हील", contact: "कॉल बुक",
+    },
+    prompts: {
+      home: ["Jane Riveros कौन हैं?", "MAVIS क्या करती है?", "Jane के साथ मीटिंग"],
+      architecture: ["एजेंट फ्लीट समझाएं"],
+      contact: ["मीटिंग शेड्यूल करें"],
+    },
+  },
 };
 
 window.CONTENT = {
@@ -1565,6 +1766,18 @@ function Hero() {
              className="group inline-flex items-center gap-2.5 rounded-md border border-fg-dim/50 bg-ink-900/40 px-6 py-3.5 font-mono text-[13px] tracking-mono uppercase text-fg backdrop-blur-sm transition-colors hover:border-signal hover:text-signal">
             {t.hero.ctaSecondary}
           </a>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("mavis:open"))}
+            className="group inline-flex items-center gap-3 rounded-md border border-live/35 bg-ink-900/55 px-5 py-3.5 font-mono text-[12px] tracking-mono uppercase text-fg backdrop-blur-sm transition-colors hover:border-signal hover:text-signal"
+            aria-label={t.hero.talk}
+          >
+            <StatusPill id="MAVIS" label={t.hero.chip.id} live size="sm" />
+            <span className="text-fg-muted group-hover:text-signal transition-colors">{t.hero.talk}</span>
+          </button>
+        </Reveal>
+        <Reveal delay={500} className="mt-4 font-mono text-[11px] tracking-mono text-fg-dim">
+          {t.hero.tryLine}
         </Reveal>
       </div>
 
@@ -2860,6 +3073,286 @@ function FlyWheel() {
 Object.assign(window, { FlyWheel });
 
 </script>
+  <script type="text/babel" data-src="components/MavisWidget.jsx">
+// MAVIS — scroll-aware dock + ElevenLabs ConvAI embed + lead capture fallback
+
+function mavisAgentConfigured() {
+  var id = window.MAVIS_AGENT_ID;
+  return id && id.indexOf("REPLACE_") !== 0;
+}
+
+function mavisDynamicVars(lang, sectionKey, sectionId) {
+  var m = (window.MAVIS_UI && window.MAVIS_UI[lang]) || window.MAVIS_UI.en;
+  return {
+    current_section: sectionId,
+    current_section_key: sectionKey,
+    current_section_label: (m.sections && m.sections[sectionKey]) || sectionId,
+    page_language: lang,
+    site_name: "Jane Riveros",
+    booking_url: (window.SITE_LINKS && window.SITE_LINKS.bookingUrl) || "#contact",
+    viewer_timezone: (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) { return "unknown"; } })(),
+  };
+}
+
+function mavisApplyConvai(el, lang, sectionKey, sectionId, m) {
+  if (!el) return;
+  el.setAttribute("dynamic-variables", JSON.stringify(mavisDynamicVars(lang, sectionKey, sectionId)));
+  el.setAttribute("action-text", m.talk);
+  el.setAttribute("start-call-text", m.open);
+  el.setAttribute("end-call-text", m.close);
+  el.setAttribute("listening-text", m.name + " · " + m.following.toLowerCase() + "…");
+  el.setAttribute("speaking-text", m.name + "…");
+  el.setAttribute("avatar-orb-color-1", "#7A621E");
+  el.setAttribute("avatar-orb-color-2", "#D4AF37");
+  el.setAttribute("dismissible", "true");
+  el.setAttribute("markdown-link-allowed-hosts", "*");
+}
+
+function MavisWidget() {
+  const { lang } = useLanguage();
+  const m = (window.MAVIS_UI && window.MAVIS_UI[lang]) || window.MAVIS_UI.en;
+  const [open, setOpen] = useState(false);
+  const [sectionId, setSectionId] = useState("top");
+  const [sectionKey, setSectionKey] = useState("home");
+  const [form, setForm] = useState({ name: "", email: "", interest: "" });
+  const [sent, setSent] = useState(false);
+  const convaiMountRef = useRef(null);
+  const convaiElRef = useRef(null);
+  const callBoundRef = useRef(false);
+
+  const sectionLabel = (m.sections && m.sections[sectionKey]) || sectionId;
+  const prompts = (m.prompts && (m.prompts[sectionKey] || m.prompts.home)) || [];
+  const voiceReady = mavisAgentConfigured();
+
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener("mavis:open", onOpen);
+    return () => window.removeEventListener("mavis:open", onOpen);
+  }, []);
+
+  useEffect(() => {
+    const nodes = (window.MAVIS_SECTIONS || [])
+      .map((s) => ({ cfg: s, el: document.getElementById(s.id) }))
+      .filter((x) => x.el);
+    if (!nodes.length) return;
+
+    const ratios = new Map();
+    const pickActive = () => {
+      let best = nodes[0];
+      let bestRatio = -1;
+      nodes.forEach(({ cfg, el }) => {
+        const r = ratios.get(cfg.id) || 0;
+        if (r > bestRatio) { bestRatio = r; best = { cfg, el }; }
+      });
+      if (best && best.cfg) {
+        setSectionId(best.cfg.id);
+        setSectionKey(best.cfg.key);
+      }
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          const match = nodes.find((n) => n.el === e.target);
+          if (match) ratios.set(match.cfg.id, e.intersectionRatio);
+        });
+        pickActive();
+      },
+      { threshold: [0, 0.15, 0.35, 0.55, 0.75, 1], rootMargin: "-12% 0px -55% 0px" }
+    );
+    nodes.forEach((n) => io.observe(n.el));
+    pickActive();
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!open || !voiceReady || !convaiMountRef.current) return;
+
+    var el = convaiElRef.current;
+    if (!el) {
+      el = document.createElement("elevenlabs-convai");
+      el.setAttribute("agent-id", window.MAVIS_AGENT_ID);
+      convaiMountRef.current.appendChild(el);
+      convaiElRef.current = el;
+
+      if (!window.__MAVIS_SCRIPT_LOADED) {
+        var s = document.createElement("script");
+        s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+        s.async = true;
+        document.body.appendChild(s);
+        window.__MAVIS_SCRIPT_LOADED = true;
+      }
+
+      if (!callBoundRef.current) {
+        el.addEventListener("elevenlabs-convai:call", function (event) {
+          event.detail.config.clientTools = {
+            scrollToSection: function (params) {
+              var raw = (params && (params.section || params.sectionId)) || "contact";
+              var id = String(raw).replace(/^#/, "");
+              var target = document.getElementById(id);
+              if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+            openBooking: function () {
+              var url = (window.SITE_LINKS && window.SITE_LINKS.bookingUrl) || "";
+              if (url) { window.open(url, "_blank", "noopener,noreferrer"); return; }
+              var contact = document.getElementById("contact");
+              if (contact) contact.scrollIntoView({ behavior: "smooth", block: "start" });
+              window.dispatchEvent(new CustomEvent("mavis:open"));
+            },
+            captureLead: function (params) {
+              try {
+                var leads = JSON.parse(localStorage.getItem("jr-mavis-leads") || "[]");
+                leads.push({
+                  at: new Date().toISOString(),
+                  name: (params && params.name) || "",
+                  email: (params && params.email) || "",
+                  interest: (params && params.interest) || "",
+                  section: window.MAVIS_CURRENT_SECTION || "top",
+                });
+                localStorage.setItem("jr-mavis-leads", JSON.stringify(leads.slice(-20)));
+              } catch (e) {}
+            },
+          };
+        });
+        callBoundRef.current = true;
+      }
+    }
+
+    mavisApplyConvai(el, lang, sectionKey, sectionId, m);
+    window.MAVIS_READY = true;
+  }, [open, lang, sectionKey, sectionId, voiceReady, m]);
+
+  useEffect(() => {
+    window.MAVIS_CURRENT_SECTION = sectionId;
+    var el = convaiElRef.current;
+    if (el && voiceReady) mavisApplyConvai(el, lang, sectionKey, sectionId, m);
+  }, [lang, sectionKey, sectionId, voiceReady, m]);
+
+  function submitLead(e) {
+    e.preventDefault();
+    try {
+      var leads = JSON.parse(localStorage.getItem("jr-mavis-leads") || "[]");
+      leads.push({
+        at: new Date().toISOString(),
+        name: form.name,
+        email: form.email,
+        interest: form.interest,
+        section: sectionId,
+        lang: lang,
+      });
+      localStorage.setItem("jr-mavis-leads", JSON.stringify(leads.slice(-20)));
+    } catch (err) {}
+    setSent(true);
+    var contact = document.getElementById("contact");
+    if (contact) contact.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function usePrompt(text) {
+    setForm((f) => ({ ...f, interest: text }));
+    setOpen(true);
+  }
+
+  return (
+    <div className="mavis-dock" aria-live="polite">
+      {open && (
+        <div className="mavis-dock-panel mb-3 rounded-xl overflow-hidden anim-float" style={{ animationDuration: "9s" }}>
+          <div className="flex items-start justify-between gap-3 px-4 py-3 border-b border-line">
+            <div>
+              <div className="flex items-center gap-2">
+                <StatusPill id="MAVIS" label={m.live} live size="sm" />
+                <span className="font-display text-[15px] font-600 text-fg">{m.name}</span>
+              </div>
+              <p className="mt-1 font-mono text-[10px] tracking-mono uppercase text-fg-dim">{m.role}</p>
+            </div>
+            <button type="button" onClick={() => setOpen(false)} className="rounded-md border border-line px-2.5 py-1 font-mono text-[10px] tracking-mono uppercase text-fg-muted hover:text-fg" aria-label={m.close}>
+              {m.close}
+            </button>
+          </div>
+
+          <div className="px-4 py-3 border-b border-line/80 bg-ink-800/40">
+            <p className="font-mono text-[9px] tracking-mono uppercase text-fg-dim">{m.following}</p>
+            <p className="mt-1 font-mono text-[12px] tracking-mono text-signal">{sectionLabel}</p>
+            <p className="mt-1 font-mono text-[9px] tracking-mono uppercase text-fg-faint">{m.powered}</p>
+          </div>
+
+          {prompts.length > 0 && (
+            <div className="px-4 py-3 border-b border-line/60">
+              <p className="font-mono text-[9px] tracking-mono uppercase text-fg-dim mb-2">{m.promptsTitle}</p>
+              <div className="flex flex-wrap gap-2">
+                {prompts.map((p) => (
+                  <button key={p} type="button" onClick={() => usePrompt(p)}
+                    className="rounded-full border border-line bg-ink-900/60 px-3 py-1.5 text-left font-mono text-[10px] tracking-mono text-fg-muted hover:border-signal/40 hover:text-fg transition-colors">
+                    {p}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {voiceReady ? (
+            <div ref={convaiMountRef} className="mavis-convai-mount px-2 py-2" aria-label={m.voiceReady} />
+          ) : (
+            <div className="px-4 py-4 border-b border-line/60">
+              <p className="font-mono text-[10px] tracking-mono uppercase text-fg-dim">{m.voicePending}</p>
+              <p className="mt-2 text-[13px] text-fg-muted leading-relaxed">{m.fallbackNote}</p>
+            </div>
+          )}
+
+          <form onSubmit={submitLead} className="px-4 py-4 space-y-3">
+            {sent ? (
+              <p className="font-mono text-[11px] tracking-mono text-signal">{m.form.sent}</p>
+            ) : (
+              <>
+                <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder={m.form.name} className="w-full rounded-md border border-line bg-ink-900/80 px-3 py-2 text-[13px] text-fg placeholder:text-fg-faint focus:border-signal/50 focus:outline-none" />
+                <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder={m.form.email} className="w-full rounded-md border border-line bg-ink-900/80 px-3 py-2 text-[13px] text-fg placeholder:text-fg-faint focus:border-signal/50 focus:outline-none" />
+                <textarea value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })} rows={2}
+                  placeholder={m.form.interest} className="w-full rounded-md border border-line bg-ink-900/80 px-3 py-2 text-[13px] text-fg placeholder:text-fg-faint focus:border-signal/50 focus:outline-none resize-none" />
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-signal px-4 py-2 font-mono text-[11px] tracking-mono uppercase text-ink font-600">
+                    {m.form.send}
+                  </button>
+                  <button type="button" onClick={() => { var u = window.SITE_LINKS && window.SITE_LINKS.bookingUrl; if (u) window.open(u, "_blank", "noopener"); else document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                    className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-[11px] tracking-mono uppercase text-fg-muted hover:text-signal hover:border-signal/40 transition-colors">
+                    {m.book}
+                  </button>
+                </div>
+              </>
+            )}
+          </form>
+        </div>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={`w-full flex items-center gap-3 rounded-full border px-4 py-3 text-left shadow-2xl transition-all ${
+          open ? "border-signal/50 bg-ink-900/95" : "border-line bg-ink-900/90 hover:border-signal/35"
+        }`}
+        aria-expanded={open}
+        aria-label={open ? m.close : m.open}
+      >
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-signal/30 bg-signal/10">
+          <span className="absolute inset-0 rounded-full bg-signal/20" style={{ animation: "pulse-ring 2.2s cubic-bezier(0,.55,.45,1) infinite" }} aria-hidden="true" />
+          <I.Mic className="relative h-4 w-4 text-signal" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-mono text-[11px] tracking-mono uppercase text-fg">{m.talk}</span>
+          <span className="block truncate font-mono text-[9px] tracking-mono uppercase text-fg-dim mt-0.5">
+            {m.following}: <span className="text-signal">{sectionLabel}</span>
+          </span>
+        </span>
+        <I.ChevronDown className={`h-4 w-4 shrink-0 text-fg-dim transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+    </div>
+  );
+}
+
+window.openMavis = function () { window.dispatchEvent(new CustomEvent("mavis:open")); };
+Object.assign(window, { MavisWidget, mavisAgentConfigured });
+
+</script>
   <script type="text/babel" data-src="App.jsx">
 // src/App.jsx
 // Language provider (useState + localStorage persistence) + page assembly.
@@ -2914,6 +3407,7 @@ function App() {
         <Closing />
       </main>
       <Footer />
+      <MavisWidget />
     </LanguageProvider>
   );
 }
@@ -2922,39 +3416,20 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 </script>
 
-  <!-- ============================================================= -->
-  <!-- MAVIS voice agent — ElevenLabs Conversational AI.             -->
-  <!-- Visitors talk to MAVIS (Jane's agent persona) and book calls. -->
-  <!-- TO GO LIVE: set MAVIS_AGENT_ID below to your real agent id    -->
-  <!--   (ElevenLabs dashboard → Conversational AI → Agents). Set    -->
-  <!--   MAVIS's personality, voice, knowledge & a booking tool      -->
-  <!--   there; theme colors are configured in-dashboard too.        -->
-  <!-- Until then the widget stays dormant (no console errors) and   -->
-  <!-- the "Talk to MAVIS" button routes visitors to booking.        -->
-  <!-- ============================================================= -->
+  <!-- MAVIS / ElevenLabs — set agent id to enable voice inside the dock widget -->
   <script>
-    window.MAVIS_AGENT_ID = "REPLACE_WITH_MAVIS_AGENT_ID"; // <-- paste real agent id here
-    (function () {
-      var id = window.MAVIS_AGENT_ID;
-      if (!id || id.indexOf("REPLACE_") === 0) {
-        window.MAVIS_READY = false;
-        console.info("[MAVIS] Voice agent not configured — set window.MAVIS_AGENT_ID to your ElevenLabs agent id to enable it.");
-        return;
-      }
-      window.MAVIS_READY = true;
-      var el = document.createElement("elevenlabs-convai");
-      el.setAttribute("agent-id", id);
-      el.setAttribute("action-text", "Talk to MAVIS");
-      el.setAttribute("start-call-text", "Start conversation");
-      el.setAttribute("end-call-text", "End");
-      el.setAttribute("listening-text", "MAVIS is listening…");
-      el.setAttribute("speaking-text", "MAVIS is speaking…");
-      document.body.appendChild(el);
-      var s = document.createElement("script");
-      s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
-      s.async = true;
-      document.body.appendChild(s);
-    })();
+    window.MAVIS_AGENT_ID = "agent_8701ks3wgepsf7tvtz3hywq5fv12";
+    window.MAVIS_READY = false;
+    if (!window.MAVIS_AGENT_ID || window.MAVIS_AGENT_ID.indexOf("REPLACE_") === 0) {
+      console.info("[MAVIS] Text mode active — set window.MAVIS_AGENT_ID (ElevenLabs → Agents) for voice.");
+    }
+    /*
+     * Recommended ElevenLabs client tools (configure in agent dashboard):
+     *   scrollToSection({ section: "arch" | "contact" | ... })
+     *   openBooking()
+     *   captureLead({ name, email, interest })
+     * Dynamic variables injected at runtime: current_section, current_section_label, page_language, booking_url
+     */
   </script>
 </body>
 </html>
