@@ -1,11 +1,8 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
 
-// https://astro.build
+// Minimal config — the site is a single self-contained HTML file
+// served by Astro's static output. No React, Tailwind, or other
+// integrations needed.
 export default defineConfig({
-  integrations: [
-    react(),
-    tailwind({ applyBaseStyles: false }), // base styles come from src/styles/global.css
-  ],
+  output: 'static',
 });
