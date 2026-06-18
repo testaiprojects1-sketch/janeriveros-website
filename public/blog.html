@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notes — Jane Riveros</title>
+  <meta name="description" content="Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery — MAVIS, Victoria, and the practice of shipping agents that can't improvise." />
+  <link rel="canonical" href="https://janeriveros.com/blog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Notes — Jane Riveros" />
+  <meta property="og:description" content="Field notes on building governed AI agents with the discipline of regulated delivery." />
+  <meta property="og:url" content="https://janeriveros.com/blog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          ink:    { DEFAULT: "#08090B", 900: "#0A0C0F", 800: "#0E1115", 700: "#13171C", 600: "#191E24" },
+          line:   "rgba(255,255,255,0.08)",
+          fg:     { DEFAULT: "#EBEEF2", muted: "#9BA3AD", dim: "#5B6470", faint: "#3A4048" },
+          signal: { DEFAULT: "#FF4D00", deep: "#CC3D00", dim: "#8A2E0C" },
+        },
+        fontFamily: {
+          display: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+          sans:    ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+          mono:    ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        },
+        letterSpacing: { mono: "0.14em" },
+        maxWidth: { shell: "1180px" },
+      } },
+    };
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body { background: #08090B; color: #EBEEF2; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #FF4D00; color: #08090B; }
+    .bg-grid { background-image: linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px); background-size: 72px 72px; }
+  </style>
+</head>
+<body class="bg-grid min-h-screen flex flex-col">
+  <header class="border-b border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="/" class="font-display text-[17px] font-semibold tracking-tight text-fg hover:text-signal transition-colors">Jane Riveros.</a>
+      <a href="/" class="font-mono text-[12px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; Home</a>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <section class="mx-auto max-w-shell px-6 md:px-10 pt-20 md:pt-28 pb-10">
+      <p class="font-mono text-[11px] tracking-mono uppercase text-signal">// NOTES</p>
+      <h1 class="mt-5 font-display font-semibold tracking-tight text-fg" style="font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.03;">Building in public</h1>
+      <p class="mt-6 max-w-[60ch] text-fg-muted leading-relaxed">
+        Field notes from Jane Riveros — fifteen years of enterprise program, risk, and resilience leadership in regulated financial services, now building governed AI agents. Essays on what regulated delivery teaches you about deploying agents that can't be allowed to improvise.
+      </p>
+    </section>
+
+    <section class="mx-auto max-w-shell px-6 md:px-10 pb-20 md:pb-28">
+      <div class="border-t border-line">
+        <a href="/blog/building-mavis" class="group block py-8 border-b border-line">
+          <div class="flex items-center gap-3">
+            <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">2026 · AI &amp; GOVERNANCE</p>
+          </div>
+          <h2 class="mt-3 font-display text-[24px] md:text-[28px] font-semibold text-fg group-hover:text-signal transition-colors">Why I build AI agents like regulated programs</h2>
+          <p class="mt-3 max-w-[68ch] text-[15px] text-fg-muted leading-relaxed">
+            MAVIS and Victoria aren't demos — they're production agents built with governance gates, audit trails, and permission-scoped access. Here's the discipline I carried from the bank to the build.
+          </p>
+          <span class="mt-4 inline-flex items-center gap-1 font-mono text-[12px] tracking-mono uppercase text-signal">Read &rarr;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 py-8 flex items-center justify-between">
+      <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">JANE RIVEROS · SANTIAGO, CL</p>
+      <a href="/" class="font-mono text-[11px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; BACK</a>
+    </div>
+  </footer>
+</body>
+</html>

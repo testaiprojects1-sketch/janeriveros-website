@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why I build AI agents like regulated programs — Jane Riveros</title>
+  <meta name="description" content="Jane Riveros on building governed AI agents — MAVIS and Victoria — with the discipline of regulated financial-services delivery: governance gates, audit trails, and permission-scoped access." />
+  <link rel="canonical" href="https://janeriveros.com/blog/building-mavis" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Why I build AI agents like regulated programs" />
+  <meta property="og:description" content="The discipline I carried from regulated financial services into building governed AI agents." />
+  <meta property="og:url" content="https://janeriveros.com/blog/building-mavis" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Why I build AI agents like regulated programs",
+    "description": "Jane Riveros on building governed AI agents (MAVIS, Victoria) with the discipline of regulated financial-services delivery.",
+    "author": { "@type": "Person", "name": "Jane Riveros", "url": "https://janeriveros.com" },
+    "publisher": { "@type": "Person", "name": "Jane Riveros" },
+    "datePublished": "2026-06-18",
+    "mainEntityOfPage": "https://janeriveros.com/blog/building-mavis",
+    "keywords": "governed AI agents, agentic AI, AI governance, MAVIS, enterprise program management, operational resilience, regulated delivery"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          ink:    { DEFAULT: "#08090B", 900: "#0A0C0F", 800: "#0E1115", 700: "#13171C", 600: "#191E24" },
+          line:   "rgba(255,255,255,0.08)",
+          fg:     { DEFAULT: "#EBEEF2", muted: "#9BA3AD", dim: "#5B6470", faint: "#3A4048" },
+          signal: { DEFAULT: "#FF4D00", deep: "#CC3D00", dim: "#8A2E0C" },
+        },
+        fontFamily: {
+          display: ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+          sans:    ['"IBM Plex Sans"', "system-ui", "sans-serif"],
+          mono:    ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        },
+        letterSpacing: { mono: "0.14em" },
+        maxWidth: { shell: "1180px", prose: "44rem" },
+      } },
+    };
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body { background: #08090B; color: #EBEEF2; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    ::selection { background: #FF4D00; color: #08090B; }
+    .prose p { margin-top: 1.25rem; line-height: 1.75; color: #C7CDD4; font-size: 1.0625rem; }
+    .prose h2 { margin-top: 2.5rem; font-weight: 600; font-size: 1.4rem; color: #EBEEF2; letter-spacing: -0.01em; }
+    .prose strong { color: #EBEEF2; font-weight: 600; }
+    .prose em { color: #EBEEF2; font-style: italic; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <header class="border-b border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 h-16 flex items-center justify-between">
+      <a href="/" class="font-display text-[17px] font-semibold tracking-tight text-fg hover:text-signal transition-colors">Jane Riveros.</a>
+      <a href="/blog" class="font-mono text-[12px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; Notes</a>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <article class="mx-auto max-w-prose px-6 md:px-8 pt-16 md:pt-24 pb-20">
+      <p class="font-mono text-[11px] tracking-mono uppercase text-signal">2026 · AI &amp; GOVERNANCE</p>
+      <h1 class="mt-5 font-display font-semibold tracking-tight text-fg" style="font-size: clamp(2rem, 5.4vw, 3.1rem); line-height: 1.06;">Why I build AI agents like regulated programs</h1>
+      <p class="mt-5 font-mono text-[12px] tracking-mono uppercase text-fg-dim">By Jane Riveros — Santiago, Chile</p>
+
+      <div class="prose mt-8">
+        <p>I spent fifteen years delivering enterprise programs in places where a missing control wasn't a bug — it was a finding, a fine, a name in front of a regulator. Wells Fargo, Bank of America, EY, Accenture. Risk, compliance, operational resilience, regulatory-driven change. Before that, two deployments to Iraq with the U.S. Army. The thread through all of it: when the stakes are real, you don't ship things that improvise.</p>
+
+        <p>Now I build AI agents. And the first instinct most people have with agentic AI is the one I've spent my career training out of teams: ship fast, let it figure things out, fix it in production. That works until it touches something that matters — a customer, a payment, a compliance boundary. Then "it figured it out" becomes "no one can explain what it did."</p>
+
+        <h2>So I build agents the way I delivered regulated programs.</h2>
+        <p><strong>MAVIS</strong> is my production operations agent — live on Telegram and Slack, with persistent memory across conversations, plus email, calendar, file, and vision capabilities. She's not a chatbot bolted onto a workflow; she's an operator I can hand work to. But the part I care about most isn't what she can do. It's what she can't do without a gate.</p>
+
+        <p><strong>Victoria</strong> is the team-facing side of the same philosophy. She runs inside a company's Slack — joining conversations, posting and updating team work status, asking team members for what's needed — and every channel is permission-scoped. Each team sees only what it should. That isn't a feature I added at the end; it's the foundation. Governance baked in, not bolted on.</p>
+
+        <h2>Three things I refuse to skip.</h2>
+        <p><strong>Governance gates.</strong> An agent moving from sandbox to production crosses a controlled boundary, the same way a change does in a regulated bank. Nothing reaches production because it happened to work once.</p>
+
+        <p><strong>Audit trails.</strong> Every meaningful action an agent takes should be reconstructable after the fact. If I can't answer "what did it do, and why," it isn't ready. That single question kills more bad ideas than any amount of testing.</p>
+
+        <p><strong>Least privilege.</strong> Agents get the narrowest access that lets them do their job — scoped per channel, per team, per task. The blast radius of a mistake should be small by design.</p>
+
+        <h2>Why this matters now.</h2>
+        <p>Most organizations don't have an AI capability problem. They have an AI <em>trust</em> problem — leaders who can see the upside but can't get comfortable handing real work to a system they can't govern. That gap is exactly where my two careers meet. I'm not choosing between enterprise discipline and hands-on building. I'm insisting on both.</p>
+
+        <p>This site is part of the proof. It's multilingual, it's optimized for how AI search actually reads the web, and it has MAVIS embedded as a live voice and text agent — designed, built, and deployed by me. If you'd rather see the work than read about it, talk to MAVIS, or book a call.</p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-3">
+        <a href="/work" class="inline-flex items-center gap-2 rounded-md border border-signal/50 px-5 py-3 font-mono text-[12px] tracking-mono uppercase text-signal transition-colors hover:bg-signal hover:text-ink">See the work &rarr;</a>
+        <a href="/" class="inline-flex items-center gap-2 rounded-md border border-line px-5 py-3 font-mono text-[12px] tracking-mono uppercase text-fg-muted transition-colors hover:text-signal hover:border-signal/40">Talk to MAVIS &rarr;</a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto max-w-shell px-6 md:px-10 py-8 flex items-center justify-between">
+      <p class="font-mono text-[11px] tracking-mono uppercase text-fg-dim">JANE RIVEROS · SANTIAGO, CL</p>
+      <a href="/blog" class="font-mono text-[11px] tracking-mono uppercase text-fg-muted hover:text-signal transition-colors">&larr; ALL NOTES</a>
+    </div>
+  </footer>
+</body>
+</html>
