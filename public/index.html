@@ -3238,10 +3238,21 @@ function MavisWidget() {
             },
             openBooking: function () {
               var url = (window.SITE_LINKS && window.SITE_LINKS.bookingUrl) || "";
-              if (url) { window.open(url, "_blank", "noopener,noreferrer"); return; }
-              var contact = document.getElementById("contact");
-              if (contact) contact.scrollIntoView({ behavior: "smooth", block: "start" });
-              window.dispatchEvent(new CustomEvent("mavis:open"));
+              if (!url) return;
+              var win = null;
+              try { win = window.open(url, "_blank", "noopener,noreferrer"); } catch (e) {}
+              if (win) return;
+              // popup blocked (common during a voice call): show a tappable link instead
+              var existing = document.getElementById("mavis-booking-cta");
+              if (existing) existing.remove();
+              var a = document.createElement("a");
+              a.id = "mavis-booking-cta";
+              a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
+              a.textContent = "Book a call with Jane →";
+              a.style.cssText = "position:fixed;left:50%;bottom:6.5rem;transform:translateX(-50%);z-index:99999;background:#FF4D00;color:#0a0a0a;font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.05em;text-transform:uppercase;padding:14px 22px;border-radius:10px;box-shadow:0 14px 44px rgba(0,0,0,.55);text-decoration:none;";
+              a.addEventListener("click", function () { setTimeout(function () { a.remove(); }, 150); });
+              document.body.appendChild(a);
+              setTimeout(function () { if (a.parentNode) a.remove(); }, 30000);
             },
             captureLead: function (params) {
               try {
