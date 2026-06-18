@@ -217,6 +217,14 @@ window.SITE_LINKS = {
   bookingUrl: "https://calendly.com/testaiprojects1/30-minutes-with-jane",
 };
 
+/* Demo videos for the LIVE build cards. Paste a YouTube URL per agent; */
+/* empty shows "Demo · soon". Keys match the card titles in every language. */
+window.DEMO_LINKS = {
+  "Mavis": "",
+  "NOVAXIS OS": "",
+  "Trading Dashboard": "", "Panel de Trading": "", "Tableau de trading": "",
+};
+
 /* Sections MAVIS tracks while the visitor scrolls */
 window.MAVIS_SECTIONS = [
   { id: "top", key: "home" },
@@ -2936,22 +2944,27 @@ function KanbanCard({ card, cardKey, hot, onHover, expanded, onToggle, columnId,
           Tap to expand
         </span>
       )}
-      {columnId === "live" && card.demoUrl && demoLabel && (
-        <a
-          href={card.demoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          onKeyDown={(e) => e.stopPropagation()}
-          className="mt-1.5 inline-flex items-center gap-1 font-mono text-[9px] tracking-mono uppercase text-signal/80 hover:text-signal transition-colors"
-        >
+      {columnId === "live" && (() => {
+        var dUrl = card.demoUrl || (typeof window !== "undefined" && window.DEMO_LINKS && window.DEMO_LINKS[card.title]) || "";
+        var dLabel = demoLabel || "Demo";
+        var playIcon = (
           <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" className="h-2.5 w-2.5" aria-hidden="true">
             <path d="M3 2.5h6v7H3z" />
             <path d="M5 5.5l2 1-2 1V5.5z" />
           </svg>
-          {demoLabel}
-        </a>
-      )}
+        );
+        return dUrl ? (
+          <a href={dUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} onKeyDown={(e) => e.stopPropagation()}
+            className="mt-1.5 inline-flex items-center gap-1 font-mono text-[9px] tracking-mono uppercase text-signal/80 hover:text-signal transition-colors">
+            {playIcon}{dLabel}
+          </a>
+        ) : (
+          <span onClick={(e) => e.stopPropagation()} title="Demo coming soon"
+            className="mt-1.5 inline-flex items-center gap-1 font-mono text-[9px] tracking-mono uppercase text-fg-muted/50 cursor-default">
+            {playIcon}{dLabel} · soon
+          </span>
+        );
+      })()}
     </div>
   );
 }
@@ -3434,7 +3447,10 @@ function App() {
       <Nav />
       <main>
         {isWork ? (
-          <SystemArchitecture />
+          <>
+            <SystemArchitecture />
+            <Closing />
+          </>
         ) : (
           <>
             <Hero />
@@ -3446,7 +3462,6 @@ function App() {
             <Principles />
             <BuildingInPublic />
             <CinematicBand variant="archive" />
-            <Closing />
           </>
         )}
       </main>
