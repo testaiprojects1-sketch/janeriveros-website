@@ -13,3 +13,5 @@ Allow: /
 
 User-agent: Google-Extended
 Allow: /
+
+Sitemap: https://janeriveros.com/sitemap.xml
