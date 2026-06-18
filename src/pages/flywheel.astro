@@ -1,5 +1,7 @@
 ---
+import Analytics from '@vercel/analytics/astro';
 import fs from 'node:fs';
 const html = fs.readFileSync('public/flywheel.html', 'utf-8');
 ---
 <fragment set:html={html} />
+<Analytics />
