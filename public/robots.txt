@@ -1,16 +1,15 @@
-# PRE-LAUNCH: indexing disabled while the site is a work in progress.
-# On launch day, restore the crawler-welcoming version (Allow: / + AI bots).
 User-agent: *
-Disallow: /
+Allow: /
 
+# AI crawlers welcome — see /llms.txt for a structured summary
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
 
 User-agent: PerplexityBot
-Disallow: /
+Allow: /
 
 User-agent: Google-Extended
-Disallow: /
+Allow: /
