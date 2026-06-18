@@ -1546,6 +1546,7 @@ const I = {
   Terminal: (p) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}><path d="m4 17 6-6-6-6M12 19h8"/></svg>),
   Linkedin: (p) => (<svg viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4z"/></svg>),
   Youtube: (p) => (<svg viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.3 5.1 12 5.1 12 5.1s-7.3 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77C4.7 18.9 12 18.9 12 18.9s7.3 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12Zm-13 3.2V8.8l5.5 3.2Z"/></svg>),
+  Instagram: (p) => (<svg viewBox="0 0 24 24" fill="currentColor" {...p}><path fillRule="evenodd" clipRule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5Zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5ZM17.5 6a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/></svg>),
 };
 
 Object.assign(window, { Reveal, Section, Kicker, StatusPill, STATE_BY_ID, I });
@@ -3093,7 +3094,7 @@ Object.assign(window, { Closing });
 function Footer() {
   const { t } = useLanguage();
   const f = t.footer;
-  const icon = { li: I.Linkedin, yt: I.Youtube };
+  const icon = { li: I.Linkedin, yt: I.Youtube, ig: I.Instagram };
   return (
     <footer className="border-t border-line bg-ink">
       <div className="mx-auto max-w-shell px-6 md:px-10 py-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -3104,7 +3105,7 @@ function Footer() {
             const Ic = icon[l.id];
             return (
               <a key={l.id} href={l.href} target={l.href && l.href.indexOf("http") === 0 ? "_blank" : undefined} rel={l.href && l.href.indexOf("http") === 0 ? "noopener noreferrer" : undefined} className="inline-flex items-center gap-2 font-mono text-[12px] tracking-mono uppercase text-fg-muted transition-colors hover:text-signal">
-                {Ic && <Ic className="h-4 w-4" style={{ color: l.id === "li" ? "#0A66C2" : l.id === "yt" ? "#FF0000" : undefined }} />}
+                {Ic && <Ic className="h-4 w-4" style={{ color: l.id === "li" ? "#0A66C2" : l.id === "yt" ? "#FF0000" : l.id === "ig" ? "#E4405F" : undefined }} />}
                 {l.label}
               </a>
             );
