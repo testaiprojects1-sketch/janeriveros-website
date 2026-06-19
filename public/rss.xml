@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 18 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2026 21:38:17 GMT</lastBuildDate>
+    <item>
+      <title>Tax compliance is the canary in the AI coal mine</title>
+      <link>https://janeriveros.com/blog/tax-compliance-ai-coal-mine-20260619</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/tax-compliance-ai-coal-mine-20260619</guid>
+      <description>Manufacturers rushing to deploy AI often overlook tax implications until audit season. Wolters Kluwer shows that responsible AI research can surface impacts early, but the real lesson is for governance teams everywhere.</description>
+      <category>Compliance</category>
+      <pubDate>Fri, 19 Jun 2026 21:38:17 GMT</pubDate>
+    </item>
     <item>
       <title>When Bannon and Sanders agree on AI regulation, pay attention</title>
       <link>https://janeriveros.com/blog/when-bannon-sanders-agree-on-ai-regulation-20260618</link>
