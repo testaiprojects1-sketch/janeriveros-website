@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jane Riveros — Notes</title>
+    <link>https://janeriveros.com/blog</link>
+    <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 18 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>When Bannon and Sanders agree on AI regulation, pay attention</title>
+      <link>https://janeriveros.com/blog/when-bannon-sanders-agree-on-ai-regulation-20260618</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/when-bannon-sanders-agree-on-ai-regulation-20260618</guid>
+      <description>Steve Bannon and Bernie Sanders share almost nothing politically, but both call for AI regulation. That rare alignment is a signal that governance practitioners need to stop waiting and start building measured compliance frameworks now.</description>
+      <category>Governance</category>
+      <pubDate>Thu, 18 Jun 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Why I build AI agents like regulated programs</title>
+      <link>https://janeriveros.com/blog/building-mavis</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/building-mavis</guid>
+      <description>MAVIS and Victoria aren't demos — they're production agents built with governance gates, audit trails, and permission-scoped access. Here's the discipline I carried from the bank to the build.</description>
+      <category>AI &amp; Governance</category>
+      <pubDate>Wed, 10 Jun 2026 12:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
