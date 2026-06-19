@@ -2129,6 +2129,110 @@ function SystemArchitecture() {
 Object.assign(window, { SystemArchitecture });
 
 </script>
+<script type="text/babel" data-src="components/FlowShowcase.jsx">
+// src/components/FlowShowcase.jsx
+// Decorative n8n-style canvas — mirrors the real blog pipeline behind the notes.
+function FlowShowcase() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => { setReduce(window.matchMedia("(prefers-reduced-motion: reduce)").matches); }, []);
+
+  const W = 150, H = 64, Y = 132, GAP = 191;
+  const xOf = (i) => 24 + i * GAP;
+  const nodes = [
+    { id: "schedule", name: "Schedule", sub: "07:00 daily", icon: "clock" },
+    { id: "fetch", name: "Fetch sources", sub: "news RSS", icon: "rss" },
+    { id: "draft", name: "Draft", sub: "LLM agent", icon: "pen" },
+    { id: "humanize", name: "Humanize", sub: "voice rules", icon: "spark" },
+    { id: "review", name: "Review", sub: "you approve", icon: "check", gate: true },
+    { id: "publish", name: "Publish", sub: "to production", icon: "upload", live: true },
+  ];
+
+  const glyph = (kind) => {
+    const p = { fill: "none", stroke: "#FF4D00", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" };
+    if (kind === "clock") return (<g {...p}><circle r="7" /><path d="M0 -4 V0 L3.5 2.5" /></g>);
+    if (kind === "rss") return (<g {...p}><circle cx="-5" cy="5" r="1.5" fill="#FF4D00" stroke="none" /><path d="M-6 0 a8 8 0 0 1 8 8" /><path d="M-6 -6 a14 14 0 0 1 14 14" /></g>);
+    if (kind === "pen") return (<g {...p}><path d="M-6 6 L5 -5" /><path d="M2 -7 l5 5" /><path d="M-6 6 l-1 3 3 -1" /></g>);
+    if (kind === "spark") return (<path d="M0 -7 L1.6 -1.6 L7 0 L1.6 1.6 L0 7 L-1.6 1.6 L-7 0 L-1.6 -1.6 Z" fill="#FF4D00" stroke="none" />);
+    if (kind === "check") return (<g {...p}><path d="M-6 0 L-1 5 L7 -6" /></g>);
+    if (kind === "upload") return (<g {...p}><path d="M0 5 V-6" /><path d="M-4 -2 L0 -6 L4 -2" /><path d="M-6 7 H6" /></g>);
+    return null;
+  };
+
+  const fwd = nodes.slice(0, -1).map((_, i) => {
+    const x1 = xOf(i) + W, x2 = xOf(i + 1), yc = Y + H / 2;
+    return "M " + x1 + " " + yc + " C " + (x1 + 22) + " " + yc + ", " + (x2 - 22) + " " + yc + ", " + x2 + " " + yc;
+  });
+  const reviewCx = xOf(4) + W / 2, draftCx = xOf(2) + W / 2, yb = Y + H;
+  const loop = "M " + reviewCx + " " + yb + " C " + reviewCx + " " + (yb + 92) + ", " + draftCx + " " + (yb + 92) + ", " + draftCx + " " + yb;
+  const VW = xOf(5) + W + 24;
+
+  return (
+    <Section id="flow" className="pb-24 md:pb-36">
+      <Reveal><Kicker index="07" label="Proof · Live workflow" /></Reveal>
+      <Reveal delay={80}>
+        <h2 className="mt-6 font-display font-600 leading-[1.02] tracking-[-0.01em] text-fg"
+            style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
+          How a post ships itself.
+        </h2>
+      </Reveal>
+      <Reveal delay={140}>
+        <p className="mt-5 max-w-[58ch] text-fg-muted leading-[1.6]" style={{ fontSize: "1.0625rem" }}>
+          The notes below aren&rsquo;t posted by hand. This is the actual n8n pipeline that drafts them, rewrites them in my voice, then waits for me in Slack. Nothing reaches production without a human approve.
+        </p>
+      </Reveal>
+
+      <Reveal delay={160} className="mt-12 rounded-2xl border border-line bg-ink-900/60 bg-grid p-5 md:p-8 overflow-hidden">
+        <div className="mb-6 flex items-center justify-between">
+          <span className="font-mono text-[10px] tracking-mono uppercase text-fg-dim">n8n · daily · human-in-the-loop</span>
+          <span className="flex items-center gap-2 font-mono text-[10px] tracking-mono uppercase text-fg-dim">
+            <span className="h-1.5 w-1.5 rounded-full bg-signal" style={reduce ? {} : { animation: "node-breathe 2.2s ease-in-out infinite" }}></span>
+            ACTIVE
+          </span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <svg viewBox={"0 0 " + VW + " 330"} className="w-full" style={{ minWidth: "760px" }} role="img" aria-label="n8n workflow: schedule, fetch sources, draft, humanize, review approval, publish, with a reject loop back to draft">
+            {/* reject loop (under) */}
+            <path d={loop} fill="none" stroke="rgba(255,77,0,0.22)" strokeWidth="1.5" strokeDasharray="4 6" />
+            <path d={"M " + (draftCx - 4) + " " + (yb + 7) + " L " + draftCx + " " + yb + " L " + (draftCx + 4) + " " + (yb + 7)} fill="none" stroke="rgba(255,77,0,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <text x={(reviewCx + draftCx) / 2} y={yb + 108} textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9.5" letterSpacing="0.12em" fill="#6B7480">REJECT → REDRAFT</text>
+
+            {/* forward connectors */}
+            {fwd.map((d, i) => (
+              <g key={i}>
+                <path d={d} fill="none" stroke="rgba(255,77,0,0.2)" strokeWidth="2" />
+                <path d={d} fill="none" stroke="#FF4D00" strokeWidth="2" strokeDasharray="5 9" strokeLinecap="round" opacity="0.9">
+                  {!reduce && <animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.9s" repeatCount="indefinite" />}
+                </path>
+              </g>
+            ))}
+
+            {/* nodes */}
+            {nodes.map((n, i) => {
+              const x = xOf(i);
+              return (
+                <g key={n.id}>
+                  <rect x={x} y={Y} width={W} height={H} rx="12"
+                    fill="#0C0E11" stroke={n.gate ? "rgba(255,77,0,0.5)" : "rgba(255,255,255,0.1)"} strokeWidth="1" />
+                  <circle cx={x + 30} cy={Y + 32} r="16" fill="rgba(255,77,0,0.1)" stroke="rgba(255,77,0,0.5)" strokeWidth="1" />
+                  <g transform={"translate(" + (x + 30) + " " + (Y + 32) + ")"}>{glyph(n.icon)}</g>
+                  <text x={x + 54} y={Y + 29} fontFamily="'IBM Plex Mono', monospace" fontSize="11.5" fontWeight="500" fill="#EBEEF2">{n.name}</text>
+                  <text x={x + 54} y={Y + 45} fontFamily="'IBM Plex Mono', monospace" fontSize="9" letterSpacing="0.06em" fill="#6B7480">{n.sub}</text>
+                  {n.gate && (<text x={x + W - 8} y={Y - 8} textAnchor="end" fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" letterSpacing="0.16em" fill="#FF4D00">GATE</text>)}
+                  {n.live && (<circle cx={x + W - 12} cy={Y + 12} r="3.5" fill="#FF4D00" style={reduce ? {} : { animation: "node-breathe 2.2s ease-in-out infinite" }} />)}
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </Reveal>
+    </Section>
+  );
+}
+
+Object.assign(window, { FlowShowcase });
+
+</script>
 <script type="text/babel" data-src="components/HowIWork.jsx">
 // src/components/HowIWork.jsx
 // How I Work — connected four-step process flow.
@@ -3477,6 +3581,7 @@ function App() {
         {isWork ? (
           <>
             <SystemArchitecture />
+            <FlowShowcase />
             <Closing />
           </>
         ) : (
