@@ -44,6 +44,9 @@
     .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); }
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; } }
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .float-icon { animation: floaty 4.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .float-icon { animation: none; } }
   </style>
   <script>
     // Paste real URLs here as channels go live. Empty string = card shows "COMING ONLINE".
@@ -54,6 +57,31 @@
       clients:  "",
       linkedin: "https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7",
     };
+
+    // The stack — apps & connectors Jane builds with. Add an affiliate URL in `aff` and it overrides the site link.
+    // Edit freely: add/remove items, reorder. Logo auto-loads from the domain; falls back to a monogram.
+    window.STACK_APPS = [
+      { name: "Claude",     domain: "claude.ai",     aff: "" },
+      { name: "n8n",        domain: "n8n.io",        aff: "" },
+      { name: "Cursor",     domain: "cursor.com",    aff: "" },
+      { name: "Luma AI",    domain: "lumalabs.ai",   aff: "" },
+      { name: "Higgsfield",  domain: "higgsfield.ai", aff: "" },
+      { name: "ElevenLabs", domain: "elevenlabs.io", aff: "" },
+      { name: "GitHub",     domain: "github.com",    aff: "" },
+      { name: "Supabase",   domain: "supabase.com",  aff: "" },
+      { name: "Vercel",     domain: "vercel.com",    aff: "" },
+      { name: "Slack",      domain: "slack.com",     aff: "" },
+      { name: "Notion",     domain: "notion.so",     aff: "" },
+      { name: "Figma",      domain: "figma.com",     aff: "" },
+      { name: "Canva",      domain: "canva.com",     aff: "" },
+      { name: "HubSpot",    domain: "hubspot.com",   aff: "" },
+      { name: "Asana",      domain: "asana.com",     aff: "" },
+      { name: "Google Drive", domain: "google.com",  aff: "" },
+      { name: "Gmail",      domain: "gmail.com",     aff: "" },
+      { name: "Zoom",       domain: "zoom.us",       aff: "" },
+      { name: "DocuSign",   domain: "docusign.com",  aff: "" },
+      { name: "Calendly",   domain: "calendly.com",  aff: "" },
+    ];
   </script>
 </head>
 <body class="bg-grid min-h-screen flex flex-col">
@@ -144,6 +172,17 @@
         </a>
       </div>
     </section>
+
+    <section class="border-t border-line">
+      <div class="mx-auto max-w-shell px-6 md:px-10 py-16 md:py-24">
+        <p class="reveal font-mono text-[11px] tracking-mono uppercase text-signal">// THE STACK</p>
+        <h2 class="reveal mt-5 font-display font-semibold tracking-tight text-fg" style="font-size: clamp(1.8rem, 4.5vw, 3rem); line-height: 1.05;">The tools behind the build.</h2>
+        <p class="reveal mt-5 max-w-[56ch] text-fg-muted leading-relaxed">
+          The apps and connectors I actually run — for automation, agents, design, and delivery. Tap any to explore it.
+        </p>
+        <div id="stack-grid" class="reveal mt-12 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"></div>
+      </div>
+    </section>
   </main>
 
   <footer style="border-top:1px solid rgba(255,255,255,0.08)"><div style="max-width:1180px;margin:0 auto;padding:2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap"><span style="font-family:'IBM Plex Mono',ui-monospace,monospace;letter-spacing:0.14em;text-transform:uppercase;font-size:11px;color:#5B6470">Jane Riveros · Santiago, CL</span><span style="display:inline-flex;align-items:center;gap:1.25rem"><a href="https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4z"/></svg></a><a href="https://www.youtube.com/@janeriveros" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="#FF0000" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.3 5.1 12 5.1 12 5.1s-7.3 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77C4.7 18.9 12 18.9 12 18.9s7.3 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12Zm-13 3.2V8.8l5.5 3.2Z"/></svg></a><a href="https://www.instagram.com/jane_riveros" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="#E4405F" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5Zm0 2A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5ZM17.5 6a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/></svg></a></span></div></footer>
@@ -167,6 +206,41 @@
         entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
       }, { threshold: 0.12 });
       document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var apps = window.STACK_APPS || [];
+      var grid = document.getElementById("stack-grid");
+      if (!grid) return;
+      apps.forEach(function (app, i) {
+        var href = (app.aff && app.aff.trim()) ? app.aff.trim() : "https://" + app.domain;
+        var a = document.createElement("a");
+        a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer"; a.title = app.name;
+        a.className = "group flex flex-col items-center justify-center gap-2.5 rounded-xl border border-line bg-ink-800/50 p-4 transition-all hover:border-signal/45 hover:-translate-y-1";
+        a.style.aspectRatio = "1 / 1";
+        var wrap = document.createElement("span");
+        wrap.className = "float-icon flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-white/5";
+        wrap.style.animationDelay = (i * 0.16).toFixed(2) + "s";
+        var img = document.createElement("img");
+        img.src = "https://logo.clearbit.com/" + app.domain;
+        img.alt = app.name; img.loading = "lazy"; img.width = 36; img.height = 36;
+        img.className = "h-9 w-9 object-contain";
+        img.onerror = function () {
+          if (img.parentNode) img.parentNode.removeChild(img);
+          var mono = document.createElement("span");
+          mono.textContent = app.name.charAt(0);
+          mono.className = "font-display text-lg font-semibold text-signal";
+          wrap.appendChild(mono);
+        };
+        wrap.appendChild(img);
+        var label = document.createElement("span");
+        label.textContent = app.name;
+        label.className = "font-mono text-[10px] tracking-mono uppercase text-fg-dim group-hover:text-signal transition-colors text-center leading-tight";
+        a.appendChild(wrap); a.appendChild(label);
+        grid.appendChild(a);
+      });
     })();
   </script>
 </body>
