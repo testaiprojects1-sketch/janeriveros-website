@@ -1855,7 +1855,10 @@ function Hero() {
             className="group inline-flex items-center gap-3 rounded-md border border-live/35 bg-ink-900/55 px-5 py-3.5 font-mono text-[12px] tracking-mono uppercase text-fg backdrop-blur-sm transition-colors hover:border-signal hover:text-signal"
             aria-label={t.hero.talk}
           >
-            <StatusPill id="MAVIS" label={t.hero.chip.id} live size="sm" />
+            <span className="relative shrink-0" aria-hidden="true">
+              <img src="/preview-mavis.png" alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-live/60 group-hover:ring-signal transition-colors" />
+              <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-live ring-2 ring-ink"></span>
+            </span>
             <span className="text-fg-muted group-hover:text-signal transition-colors">{t.hero.talk}</span>
           </button>
         </Reveal>
