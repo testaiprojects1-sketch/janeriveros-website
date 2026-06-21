@@ -185,6 +185,11 @@
     @media (max-width: 640px) {
       .mavis-dock { width: calc(100vw - 1.25rem); right: 0.625rem; bottom: 0.625rem; }
     }
+    @keyframes jr-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .jr-marquee-track { animation: jr-marquee 34s linear infinite; }
+    .jr-marquee-mask:hover .jr-marquee-track { animation-play-state: paused; }
+    .jr-marquee-mask { -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
+    @media (prefers-reduced-motion: reduce) { .jr-marquee-track { animation: none; } }
   </style>
 </head>
 <body class="bg-ink">
@@ -3583,30 +3588,75 @@ function LanguageProvider({ children }) {
   return <window.LanguageContext.Provider value={value}>{children}</window.LanguageContext.Provider>;
 }
 
-function ProofStrip() {
+function TrackRecord() {
   const { t, lang } = useLanguage();
-  const firms = (t.credentials && t.credentials.firms) ? t.credentials.firms : "";
-  if (!firms) return null;
+  const creds = t.credentials;
+  if (!creds) return null;
+  const labels = creds.labels || { firms: "FIRMS", certs: "CERTIFICATIONS", education: "EDUCATION" };
   const LEAD = { en: "Trusted in rooms that get audited", es: "Forjada en entornos auditados", fr: "Eprouvee dans des environnements audites", zh: "在受审计的环境中久经考验", hi: "ऑडिट होने वाले माहौल में परखी गई" };
   const METRIC = { en: "15+ yrs · regulated delivery", es: "15+ años · entrega regulada", fr: "15+ ans · livraison reglementee", zh: "15+ 年 · 合规交付", hi: "15+ वर्ष · विनियमित डिलीवरी" };
   const lead = LEAD[lang] || LEAD.en;
   const metric = METRIC[lang] || METRIC.en;
-  const firmList = firms.split("·").map(function (s) { return s.trim(); }).filter(Boolean);
+  const FIRMS = [
+    { name: "Wells Fargo", domain: "wellsfargo.com" },
+    { name: "Bank of America", domain: "bankofamerica.com" },
+    { name: "EY", domain: "ey.com" },
+    { name: "Accenture", domain: "accenture.com" },
+    { name: "MetLife", domain: "metlife.com" },
+    { name: "Brighthouse Financial", domain: "brighthousefinancial.com" },
+    { name: "Duke Energy", domain: "duke-energy.com" },
+  ];
+  const row = FIRMS.concat(FIRMS);
   return (
-    <section aria-label="Proof points" className="border-y border-line bg-ink-900/40">
-      <div className="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-          <span className="font-mono text-[10px] tracking-mono uppercase text-fg-muted">{lead}</span>
+    <Section id="credentials" className="py-12 md:py-16">
+      <Reveal>
+        <div className="flex flex-col gap-5">
+          <Kicker label={creds.kicker} />
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+              <span className="font-mono text-[11px] tracking-mono uppercase text-fg-muted">{lead}</span>
+            </div>
+            <span className="self-start sm:self-auto font-mono text-[10px] tracking-mono uppercase text-signal/90 border border-signal/30 rounded-full px-2.5 py-1 whitespace-nowrap">{metric}</span>
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-          {firmList.map(function (f, i) {
-            return <span key={i} className="font-mono text-[11px] tracking-mono uppercase text-fg-dim hover:text-fg transition-colors">{f}</span>;
+      </Reveal>
+
+      <div className="jr-marquee-mask relative mt-6 overflow-hidden border-y border-line py-5">
+        <div className="jr-marquee-track flex w-max items-start gap-10">
+          {row.map(function (f, i) {
+            return (
+              <a key={i} href={"https://" + f.domain} target="_blank" rel="noopener noreferrer" title={f.name} aria-label={f.name}
+                className="group flex shrink-0 flex-col items-center gap-2 opacity-75 hover:opacity-100 transition-opacity">
+                <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-line bg-ink-800/60 group-hover:border-signal transition-colors">
+                  <img src={"https://www.google.com/s2/favicons?domain=" + f.domain + "&sz=128"} alt="" loading="lazy" className="h-7 w-7 rounded"
+                    onError={function (e) { e.currentTarget.style.display = "none"; if (e.currentTarget.nextSibling) e.currentTarget.nextSibling.style.display = "flex"; }} />
+                  <span style={{ display: "none" }} className="h-7 w-7 items-center justify-center rounded font-mono text-[11px] font-600 text-fg-muted">{f.name.slice(0, 2).toUpperCase()}</span>
+                </span>
+                <span className="font-mono text-[9px] tracking-mono uppercase text-fg-dim group-hover:text-fg transition-colors whitespace-nowrap">{f.name}</span>
+              </a>
+            );
           })}
         </div>
-        <span className="shrink-0 font-mono text-[10px] tracking-mono uppercase text-signal/90 border border-signal/30 rounded-full px-2.5 py-1 whitespace-nowrap">{metric}</span>
       </div>
-    </section>
+
+      <div className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        <div>
+          <p className="font-mono text-[10px] tracking-mono uppercase text-fg-dim mb-3">{labels.certs}</p>
+          <ul className="space-y-1.5 font-mono text-sm tracking-wider text-fg">
+            {(creds.certs || []).map(function (cert, i) { return <li key={i}>{cert}</li>; })}
+          </ul>
+        </div>
+        <div>
+          <p className="font-mono text-[10px] tracking-mono uppercase text-fg-dim mb-3">{labels.education}</p>
+          <ul className="space-y-1.5 font-mono text-sm tracking-wider text-fg">
+            {(creds.education || []).map(function (r, i) {
+              return (<li key={i}>{r.line}{r.suffix ? (<>{" · "}<span className={r.muted ? "italic text-fg-muted" : ""}>{r.suffix}</span></>) : null}</li>);
+            })}
+          </ul>
+        </div>
+      </div>
+    </Section>
   );
 }
 
@@ -3625,9 +3675,8 @@ function App() {
         ) : (
           <>
             <Hero />
-            <ProofStrip />
+            <TrackRecord />
             <HowIWork />
-            <CredentialFlash />
             <CinematicBand variant="boardroom" />
             <BeforeAgents />
             <Journey />
