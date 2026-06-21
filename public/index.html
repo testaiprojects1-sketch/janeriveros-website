@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jane Riveros · Built Without a Blueprint</title>
+  <title>Jane Riveros · AI Program Manager Who Builds Her Own Agents</title>
+  <link rel="canonical" href="https://janeriveros.com/" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="description" content="Jane Riveros — AI program manager who builds her own agents. 15+ years leading enterprise transformation, risk, and resilience programs in financial services (Wells Fargo, Bank of America, EY, Accenture). Now building governed agentic AI: MAVIS and a multi-agent fleet with audit trails and compliance baked in." />
 
   <meta property="og:type" content="profile" />
@@ -44,7 +46,9 @@
     ],
     "knowsLanguage": ["en", "es"],
     "sameAs": [
-      "https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7/"
+      "https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7/",
+      "https://www.youtube.com/@janeriveros",
+      "https://www.instagram.com/jane_riveros"
     ]
   }
   </script>
@@ -3579,6 +3583,33 @@ function LanguageProvider({ children }) {
   return <window.LanguageContext.Provider value={value}>{children}</window.LanguageContext.Provider>;
 }
 
+function ProofStrip() {
+  const { t, lang } = useLanguage();
+  const firms = (t.credentials && t.credentials.firms) ? t.credentials.firms : "";
+  if (!firms) return null;
+  const LEAD = { en: "Trusted in rooms that get audited", es: "Forjada en entornos auditados", fr: "Eprouvee dans des environnements audites", zh: "在受审计的环境中久经考验", hi: "ऑडिट होने वाले माहौल में परखी गई" };
+  const METRIC = { en: "15+ yrs · regulated delivery", es: "15+ años · entrega regulada", fr: "15+ ans · livraison reglementee", zh: "15+ 年 · 合规交付", hi: "15+ वर्ष · विनियमित डिलीवरी" };
+  const lead = LEAD[lang] || LEAD.en;
+  const metric = METRIC[lang] || METRIC.en;
+  const firmList = firms.split("·").map(function (s) { return s.trim(); }).filter(Boolean);
+  return (
+    <section aria-label="Proof points" className="border-y border-line bg-ink-900/40">
+      <div className="mx-auto max-w-6xl px-6 py-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-2 shrink-0">
+          <span className="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
+          <span className="font-mono text-[10px] tracking-mono uppercase text-fg-muted">{lead}</span>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+          {firmList.map(function (f, i) {
+            return <span key={i} className="font-mono text-[11px] tracking-mono uppercase text-fg-dim hover:text-fg transition-colors">{f}</span>;
+          })}
+        </div>
+        <span className="shrink-0 font-mono text-[10px] tracking-mono uppercase text-signal/90 border border-signal/30 rounded-full px-2.5 py-1 whitespace-nowrap">{metric}</span>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   var path = (typeof window !== "undefined" ? window.location.pathname : "/").replace(/\/+$/, "");
   var isWork = path === "/work";
@@ -3594,6 +3625,7 @@ function App() {
         ) : (
           <>
             <Hero />
+            <ProofStrip />
             <HowIWork />
             <CredentialFlash />
             <CinematicBand variant="boardroom" />
