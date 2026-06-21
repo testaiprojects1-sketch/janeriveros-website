@@ -105,7 +105,7 @@
 
     <section class="border-y border-line bg-ink-900">
       <div class="mx-auto max-w-shell px-6 md:px-10 py-14 md:py-20 flex flex-col items-center">
-        <svg viewBox="0 0 400 400" class="w-[290px] h-[290px] md:w-[380px] md:h-[380px]" role="img" aria-label="The flywheel: build, document, publish, attract — compounding each turn">
+        <svg viewBox="-120 0 640 400" class="w-[340px] md:w-[480px] h-auto" role="img" aria-label="The flywheel: build, document, publish, attract — compounding each turn">
           <defs>
             <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#FF4D00" stop-opacity="0.32"></stop>
@@ -119,12 +119,7 @@
             <circle cx="200" cy="200" r="140" fill="none" stroke="#FF4D00" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="2 18" stroke-linecap="round"></circle>
             <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="28s" repeatCount="indefinite"></animateTransform>
           </g>
-          <circle r="6.5" fill="#FF4D00" filter="url(#pulseBlur)">
-            <animateMotion dur="9s" repeatCount="indefinite" path="M200,60 A140,140 0 1,1 200,340 A140,140 0 1,1 200,60"></animateMotion>
-          </circle>
-          <circle r="3.5" fill="#FFE2D4">
-            <animateMotion dur="9s" repeatCount="indefinite" path="M200,60 A140,140 0 1,1 200,340 A140,140 0 1,1 200,60"></animateMotion>
-          </circle>
+          <g id="orbits"></g>
           <g>
             <circle cx="200" cy="60" r="7" fill="#FF4D00"></circle>
             <circle cx="340" cy="200" r="7" fill="#FF4D00"></circle>
@@ -232,6 +227,27 @@
   <script>
     (function () {
       var L = window.FLYWHEEL_LINKS || {};
+
+      // Momentum orbs — one amber orb per channel/idea card. Add a card, an orb joins the orbit.
+      var orbits = document.getElementById("orbits");
+      if (orbits) {
+        var SVGNS = "http://www.w3.org/2000/svg";
+        var ORB_PATH = "M200,60 A140,140 0 1,1 200,340 A140,140 0 1,1 200,60";
+        var ORB_DUR = 16;
+        var n = Math.max(document.querySelectorAll("#channels article").length, 1);
+        for (var oi = 0; oi < n; oi++) {
+          var begin = (-(oi * ORB_DUR / n)).toFixed(2) + "s";
+          [["6", "#FFC24B"], ["3", "#FFEFD0"]].forEach(function (spec) {
+            var c = document.createElementNS(SVGNS, "circle");
+            c.setAttribute("r", spec[0]); c.setAttribute("fill", spec[1]);
+            if (spec[0] === "6") c.setAttribute("filter", "url(#pulseBlur)");
+            var m = document.createElementNS(SVGNS, "animateMotion");
+            m.setAttribute("dur", ORB_DUR + "s"); m.setAttribute("repeatCount", "indefinite");
+            m.setAttribute("begin", begin); m.setAttribute("path", ORB_PATH);
+            c.appendChild(m); orbits.appendChild(c);
+          });
+        }
+      }
       document.querySelectorAll("[data-link]").forEach(function (card) {
         var url = L[card.getAttribute("data-link")];
         if (url) {
