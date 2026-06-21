@@ -3629,7 +3629,7 @@ function TrackRecord() {
               <a key={i} href={"https://" + f.domain} target="_blank" rel="noopener noreferrer" title={f.name} aria-label={f.name}
                 className="group flex shrink-0 flex-col items-center gap-2 opacity-75 hover:opacity-100 transition-opacity">
                 <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-line bg-ink-800/60 group-hover:border-signal transition-colors">
-                  <img src={"https://www.google.com/s2/favicons?domain=" + f.domain + "&sz=128"} alt="" loading="lazy" className="h-7 w-7 rounded"
+                  <img src={"https://www.google.com/s2/favicons?domain=" + f.domain + "&sz=128"} alt="" className="h-7 w-7 rounded"
                     onError={function (e) { e.currentTarget.style.display = "none"; if (e.currentTarget.nextSibling) e.currentTarget.nextSibling.style.display = "flex"; }} />
                   <span style={{ display: "none" }} className="h-7 w-7 items-center justify-center rounded font-mono text-[11px] font-600 text-fg-muted">{f.name.slice(0, 2).toUpperCase()}</span>
                 </span>
