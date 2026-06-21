@@ -1844,11 +1844,11 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={430} className="mt-9 flex flex-wrap items-center gap-4">
-          <a href="/work"
-             className="group inline-flex items-center gap-2.5 rounded-md bg-signal px-6 py-3.5 font-mono text-[13px] tracking-mono uppercase text-ink font-600 transition-transform hover:-translate-y-0.5">
-            {t.hero.ctaPrimary}
-            <I.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          <span className="inline-flex items-center gap-3 rounded-md border border-line bg-ink-900/55 px-5 py-3.5 backdrop-blur-sm">
+            <a href="https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-opacity hover:opacity-80"><I.Linkedin className="h-5 w-5" style={{ color: "#0A66C2" }} /></a>
+            <a href="https://www.youtube.com/@janeriveros" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-opacity hover:opacity-80"><I.Youtube className="h-5 w-5" style={{ color: "#FF0000" }} /></a>
+            <a href="https://www.instagram.com/jane_riveros" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-opacity hover:opacity-80"><I.Instagram className="h-5 w-5" style={{ color: "#E4405F" }} /></a>
+          </span>
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("mavis:open"))}
