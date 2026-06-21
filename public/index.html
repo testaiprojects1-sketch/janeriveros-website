@@ -1844,11 +1844,9 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={430} className="mt-9 flex flex-wrap items-center gap-4">
-          <span className="inline-flex items-center gap-3 rounded-md border border-line bg-ink-900/55 px-5 py-3.5 backdrop-blur-sm">
-            <a href="https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="transition-opacity hover:opacity-80"><I.Linkedin className="h-5 w-5" style={{ color: "#0A66C2" }} /></a>
-            <a href="https://www.youtube.com/@janeriveros" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-opacity hover:opacity-80"><I.Youtube className="h-5 w-5" style={{ color: "#FF0000" }} /></a>
-            <a href="https://www.instagram.com/jane_riveros" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-opacity hover:opacity-80"><I.Instagram className="h-5 w-5" style={{ color: "#E4405F" }} /></a>
-          </span>
+          <a href="https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="inline-flex items-center justify-center rounded-md border border-line bg-ink-900/55 p-4 backdrop-blur-sm transition-colors hover:border-signal"><I.Linkedin className="h-6 w-6" style={{ color: "#0A66C2" }} /></a>
+          <a href="https://www.youtube.com/@janeriveros" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="inline-flex items-center justify-center rounded-md border border-line bg-ink-900/55 p-4 backdrop-blur-sm transition-colors hover:border-signal"><I.Youtube className="h-6 w-6" style={{ color: "#FF0000" }} /></a>
+          <a href="https://www.instagram.com/jane_riveros" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="inline-flex items-center justify-center rounded-md border border-line bg-ink-900/55 p-4 backdrop-blur-sm transition-colors hover:border-signal"><I.Instagram className="h-6 w-6" style={{ color: "#E4405F" }} /></a>
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent("mavis:open"))}
@@ -1856,7 +1854,7 @@ function Hero() {
             aria-label={t.hero.talk}
           >
             <span className="relative shrink-0" aria-hidden="true">
-              <img src="/preview-mavis.png" alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-live/60 group-hover:ring-signal transition-colors" />
+              <img src="/jane-avatar.png" alt="" className="h-7 w-7 rounded-full object-cover ring-1 ring-live/60 group-hover:ring-signal transition-colors" style={{ objectPosition: "center 22%" }} />
               <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-live ring-2 ring-ink"></span>
             </span>
             <span className="text-fg-muted group-hover:text-signal transition-colors">{t.hero.talk}</span>
