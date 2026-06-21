@@ -3684,6 +3684,32 @@ function TrackRecord() {
   );
 }
 
+function FollowBuild() {
+  const links = [
+    { href: "https://www.linkedin.com/in/jane-riveros-mba-pmp-csm-8260b2a7", label: "LinkedIn", Icon: I.Linkedin, color: "#0A66C2" },
+    { href: "https://www.youtube.com/@janeriveros", label: "YouTube", Icon: I.Youtube, color: "#FF0000" },
+    { href: "https://www.instagram.com/jane_riveros", label: "Instagram", Icon: I.Instagram, color: "#E4405F" },
+  ];
+  return (
+    <Section className="py-12 md:py-16">
+      <div className="flex flex-col items-center gap-4 border-t border-line pt-12">
+        <p className="font-mono text-[12px] tracking-mono uppercase text-signal">Follow the build</p>
+        <div className="flex items-center gap-3">
+          {links.map(function (l, i) {
+            var Icon = l.Icon;
+            return (
+              <a key={i} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={l.label}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-line bg-ink-800/60 hover:border-signal transition-colors">
+                <Icon className="h-5 w-5" style={{ color: l.color }} />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 function App() {
   var path = (typeof window !== "undefined" ? window.location.pathname : "/").replace(/\/+$/, "");
   var isWork = path === "/work";
@@ -3695,6 +3721,7 @@ function App() {
           <>
             <SystemArchitecture />
             <Closing />
+            <FollowBuild />
           </>
         ) : (
           <>
