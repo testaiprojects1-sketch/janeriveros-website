@@ -104,10 +104,43 @@
     </section>
 
     <section class="border-y border-line bg-ink-900">
-      <div class="mx-auto max-w-shell px-6 md:px-10 py-8 overflow-x-auto">
-        <p class="reveal font-mono text-[12px] md:text-[13px] tracking-mono uppercase text-fg-dim whitespace-nowrap text-center">
-          BUILD <span class="text-signal">&rarr;</span> DOCUMENT <span class="text-signal">&rarr;</span> PUBLISH <span class="text-signal">&rarr;</span> ATTRACT <span class="text-signal">&rarr;</span> BUILD
-        </p>
+      <div class="mx-auto max-w-shell px-6 md:px-10 py-14 md:py-20 flex flex-col items-center">
+        <svg viewBox="0 0 400 400" class="w-[290px] h-[290px] md:w-[380px] md:h-[380px]" role="img" aria-label="The flywheel: build, document, publish, attract — compounding each turn">
+          <defs>
+            <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FF4D00" stop-opacity="0.32"></stop>
+              <stop offset="100%" stop-color="#FF4D00" stop-opacity="0"></stop>
+            </radialGradient>
+            <filter id="pulseBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4"></feGaussianBlur></filter>
+          </defs>
+          <circle cx="200" cy="200" r="120" fill="url(#coreGlow)"></circle>
+          <circle cx="200" cy="200" r="140" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5"></circle>
+          <g>
+            <circle cx="200" cy="200" r="140" fill="none" stroke="#FF4D00" stroke-opacity="0.5" stroke-width="2.5" stroke-dasharray="2 18" stroke-linecap="round"></circle>
+            <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="28s" repeatCount="indefinite"></animateTransform>
+          </g>
+          <circle r="6.5" fill="#FF4D00" filter="url(#pulseBlur)">
+            <animateMotion dur="9s" repeatCount="indefinite" path="M200,60 A140,140 0 1,1 200,340 A140,140 0 1,1 200,60"></animateMotion>
+          </circle>
+          <circle r="3.5" fill="#FFE2D4">
+            <animateMotion dur="9s" repeatCount="indefinite" path="M200,60 A140,140 0 1,1 200,340 A140,140 0 1,1 200,60"></animateMotion>
+          </circle>
+          <g>
+            <circle cx="200" cy="60" r="7" fill="#FF4D00"></circle>
+            <circle cx="340" cy="200" r="7" fill="#FF4D00"></circle>
+            <circle cx="200" cy="340" r="7" fill="#FF4D00"></circle>
+            <circle cx="60" cy="200" r="7" fill="#FF4D00"></circle>
+          </g>
+          <g fill="#EBEEF2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="13" letter-spacing="2">
+            <text x="200" y="34" text-anchor="middle">BUILD</text>
+            <text x="356" y="205" text-anchor="start">DOCUMENT</text>
+            <text x="200" y="374" text-anchor="middle">PUBLISH</text>
+            <text x="44" y="205" text-anchor="end">ATTRACT</text>
+          </g>
+          <text x="200" y="196" text-anchor="middle" fill="#FF4D00" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="12" letter-spacing="3">FLYWHEEL</text>
+          <text x="200" y="214" text-anchor="middle" fill="#9BA3AD" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" letter-spacing="2">COMPOUNDING</text>
+        </svg>
+        <p class="reveal mt-7 font-mono text-[11px] md:text-[12px] tracking-mono uppercase text-fg-dim text-center">Each turn compounds &mdash; the engine spins faster every loop.</p>
       </div>
     </section>
 
