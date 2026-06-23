@@ -1,0 +1,5 @@
+---
+import fs from 'node:fs';
+const html = fs.readFileSync('public/blog/state-ai-regulation-compliance-ethics-20260623.html', 'utf-8');
+---
+<fragment set:html={html} />
