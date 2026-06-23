@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Jun 2026 21:38:17 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2026 20:31:29 GMT</lastBuildDate>
+    <item>
+      <title>State AI regulation is here. Now we need to get it right.</title>
+      <link>https://janeriveros.com/blog/state-ai-regulation-compliance-ethics-20260623</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/state-ai-regulation-compliance-ethics-20260623</guid>
+      <description>A news roundup on state AI regulation highlights the growing patchwork of rules that governance teams must navigate. Compliance is not a one-size-fits-all exercise, and ethics must be woven into every implementation decision.</description>
+      <category>Governance</category>
+      <pubDate>Tue, 23 Jun 2026 20:31:29 GMT</pubDate>
+    </item>
     <item>
       <title>Tax compliance is the canary in the AI coal mine</title>
       <link>https://janeriveros.com/blog/tax-compliance-ai-coal-mine-20260619</link>
