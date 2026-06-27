@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 23 Jun 2026 20:31:29 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 14:04:26 GMT</lastBuildDate>
+    <item>
+      <title>Invited, Authorized, and Out of Control: Re-evaluating Trust for Agentic AI</title>
+      <link>https://janeriveros.com/blog/post-20260627</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/post-20260627</guid>
+      <description>Agentic AI is changing how I think about cybersecurity. The biggest threat is no longer unauthorized access anymore but what happens when autonomous agents are trusted with “too much access.”</description>
+      <category>Governance</category>
+      <pubDate>Sat, 27 Jun 2026 14:04:26 GMT</pubDate>
+    </item>
     <item>
       <title>State AI regulation is here. Now we need to get it right.</title>
       <link>https://janeriveros.com/blog/state-ai-regulation-compliance-ethics-20260623</link>
