@@ -1,0 +1,5 @@
+---
+import fs from 'node:fs';
+const html = fs.readFileSync('public/blog/partial-approval-mythos-5-mixed-signal-20260628.html', 'utf-8');
+---
+<fragment set:html={html} />
