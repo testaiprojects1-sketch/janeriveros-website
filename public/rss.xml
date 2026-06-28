@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 27 Jun 2026 14:04:26 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 13:16:14 GMT</lastBuildDate>
+    <item>
+      <title>Partial Approval for Mythos 5 Sends a Mixed Signal</title>
+      <link>https://janeriveros.com/blog/partial-approval-mythos-5-mixed-signal-20260628</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/partial-approval-mythos-5-mixed-signal-20260628</guid>
+      <description>Anthropic won partial U.S. approval for Mythos 5 as regulatory pressure on AI increases. We need clearer transparency and governance frameworks.</description>
+      <category>Governance</category>
+      <pubDate>Sun, 28 Jun 2026 13:16:14 GMT</pubDate>
+    </item>
     <item>
       <title>Invited, Authorized, and Out of Control: Re-evaluating Trust for Agentic AI</title>
       <link>https://janeriveros.com/blog/post-20260627</link>
