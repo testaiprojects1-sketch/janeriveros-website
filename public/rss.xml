@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 28 Jun 2026 13:16:14 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 13:17:42 GMT</lastBuildDate>
+    <item>
+      <title>Spain's AI sandbox is a smart start for biometric rules</title>
+      <link>https://janeriveros.com/blog/spain-ai-sandbox-biometric-compliance-20260630</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/spain-ai-sandbox-biometric-compliance-20260630</guid>
+      <description>Spain is launching an AI sandbox to test biometric systems against the EU AI Act before enforcement. This is the kind of hands-on regulatory experimentation we need, not more theoretical white papers.</description>
+      <category>Governance</category>
+      <pubDate>Tue, 30 Jun 2026 13:17:42 GMT</pubDate>
+    </item>
     <item>
       <title>Partial Approval for Mythos 5 Sends a Mixed Signal</title>
       <link>https://janeriveros.com/blog/partial-approval-mythos-5-mixed-signal-20260628</link>
