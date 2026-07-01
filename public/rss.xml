@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Jun 2026 13:17:42 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 13:26:47 GMT</lastBuildDate>
+    <item>
+      <title>Don't Let Agentic AI Hype Outrun Your Governance</title>
+      <link>https://janeriveros.com/blog/agentic-ai-governance-supply-chain-20260701</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/agentic-ai-governance-supply-chain-20260701</guid>
+      <description>Gartner just named agentic and physical AI the top supply chain trends for 2026, but most organizations are nowhere near ready to govern them. If you think today's AI compliance is hard, wait until your bots start negotiating contracts without telling you.</description>
+      <category>Governance</category>
+      <pubDate>Wed, 01 Jul 2026 13:26:47 GMT</pubDate>
+    </item>
     <item>
       <title>Spain's AI sandbox is a smart start for biometric rules</title>
       <link>https://janeriveros.com/blog/spain-ai-sandbox-biometric-compliance-20260630</link>
