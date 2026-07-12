@@ -48,6 +48,7 @@
   .flow h3{font-family:var(--serif);font-weight:600;font-size:29px;line-height:1.12;margin-bottom:14px;letter-spacing:-.01em}
   .flow .txt p{font-size:15px;color:var(--mut);line-height:1.62;margin-bottom:20px}
   .flow .txt p b{color:var(--green);font-weight:600}
+  .flow .txt p.ret{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:-10px 0 20px}
   .dl{display:inline-block;font-family:var(--mono);font-size:12.5px;color:var(--bg);background:var(--green);
     padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700}
   .dl:hover{filter:brightness(1.12)}
@@ -111,7 +112,8 @@
       <div class="num">01</div>
       <div class="tag">Ventas · WhatsApp → Planilla</div>
       <h3>Adiós Excel manual</h3>
-      <p>Cada pedido por WhatsApp o formulario se guarda solo en tu planilla. <b>~5 hrs/semana devueltas.</b></p>
+      <p>Cada pedido por WhatsApp o formulario se guarda solo en tu planilla.</p>
+      <p class="ret">Te devuelve ~5 hrs/semana</p>
       <a class="dl" href="jane-riveros-flujo-01.json" download>↓ descargar .json</a>
     </div>
     <figure class="fig"><img src="jane-riveros-flujo-01.svg" alt="Diagrama del flujo 01: webhook → extraer datos → Google Sheets" loading="lazy"><figcaption><span>3 nodos</span><span>~15 min setup</span></figcaption></figure>
@@ -122,7 +124,8 @@
       <div class="num">02</div>
       <div class="tag">Clientes · CRM automático</div>
       <h3>El CRM que se llena solo</h3>
-      <p>Mensaje nuevo → contacto registrado + recordatorio de seguimiento a las 48h. <b>Ningún lead se enfría.</b></p>
+      <p>Mensaje nuevo → contacto en HubSpot + recordatorio de seguimiento a las 48h.</p>
+      <p class="ret">Te devuelve las ventas que hoy se enfrían</p>
       <a class="dl" href="jane-riveros-flujo-02.json" download>↓ descargar .json</a>
     </div>
     <figure class="fig"><img src="jane-riveros-flujo-02.svg" alt="Diagrama del flujo 02: webhook → HubSpot → espera 48h → Gmail" loading="lazy"><figcaption><span>4 nodos</span><span>~20 min setup</span></figcaption></figure>
@@ -133,10 +136,11 @@
       <div class="num">03</div>
       <div class="tag">Correo · IA que clasifica</div>
       <h3>Tu asistente de correo con IA</h3>
-      <p>La IA clasifica y deja borradores listos. Tú apruebas y envías. <b>~1 hr/día devuelta.</b></p>
+      <p>La IA clasifica cada correo y deja el borrador listo. Tú apruebas y envías.</p>
+      <p class="ret">Te devuelve ~1 hr/día</p>
       <a class="dl" href="jane-riveros-flujo-03.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-03.svg" alt="Diagrama del flujo 03: Gmail trigger → agente IA → borrador Gmail" loading="lazy"><figcaption><span>4 nodos · IA</span><span>~25 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-03.svg" alt="Diagrama del flujo 03: Gmail trigger → agente IA → borrador Gmail" loading="lazy"><figcaption><span>4 nodos · IA</span><span>~20 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -144,7 +148,8 @@
       <div class="num">04</div>
       <div class="tag">Datos · Tablero diario</div>
       <h3>Un tablero, todos tus datos</h3>
-      <p>Ventas, pagos y pedidos en una sola planilla, <b>actualizada cada mañana</b> antes de tu primer café.</p>
+      <p>Ventas, pagos y pedidos de todas tus apps en una sola planilla, cada mañana.</p>
+      <p class="ret">Te devuelve claridad en 1 vistazo</p>
       <a class="dl" href="jane-riveros-flujo-04.json" download>↓ descargar .json</a>
     </div>
     <figure class="fig"><img src="jane-riveros-flujo-04.svg" alt="Diagrama del flujo 04: schedule → APIs → merge → Google Sheets" loading="lazy"><figcaption><span>6 nodos</span><span>~30 min setup</span></figcaption></figure>
@@ -155,10 +160,11 @@
       <div class="num">05</div>
       <div class="tag">Finanzas · Facturas con IA</div>
       <h3>Facturas sin tipeo</h3>
-      <p>PDF de factura → IA extrae RUT y montos → planilla contable → <b>aviso al contador.</b> Cero digitación.</p>
+      <p>PDF al correo → IA extrae RUT y montos → planilla contable → aviso al contador.</p>
+      <p class="ret">Te devuelve horas de digitación + menos multas</p>
       <a class="dl" href="jane-riveros-flujo-05.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-05.svg" alt="Diagrama del flujo 05: Gmail trigger → extraer PDF → agente IA → Sheets → Gmail" loading="lazy"><figcaption><span>6 nodos · IA</span><span>~30 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-05.svg" alt="Diagrama del flujo 05: Gmail trigger → extraer PDF → agente IA → Sheets → Gmail" loading="lazy"><figcaption><span>6 nodos · IA</span><span>~25 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -166,10 +172,11 @@
       <div class="num">06</div>
       <div class="tag">Agenda · Anti no-show</div>
       <h3>Mata el "no show"</h3>
-      <p>Confirmación inmediata + recordatorios 24h y 2h antes. <b>Hasta 30% menos horas perdidas.</b></p>
+      <p>Confirmación inmediata por WhatsApp + recordatorios 24h y 2h antes + reagendar.</p>
+      <p class="ret">Te devuelve hasta 30% de horas perdidas</p>
       <a class="dl" href="jane-riveros-flujo-06.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-06.svg" alt="Diagrama del flujo 06: Calendly trigger → mensajes → esperas → recordatorios" loading="lazy"><figcaption><span>6 nodos</span><span>~20 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-06.svg" alt="Diagrama del flujo 06: Calendly trigger → mensajes → esperas → recordatorios" loading="lazy"><figcaption><span>6 nodos</span><span>~25 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -177,10 +184,11 @@
       <div class="num">07</div>
       <div class="tag">Marketing · Publicación programada</div>
       <h3>Publica aunque no tengas tiempo</h3>
-      <p>Tus posts en una planilla → publicación automática programada + registro. <b>Presencia constante, esfuerzo cero.</b></p>
+      <p>Tus posts en una planilla → publicación automática programada + registro.</p>
+      <p class="ret">Te devuelve presencia sin estar presente</p>
       <a class="dl" href="jane-riveros-flujo-07.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-07.svg" alt="Diagrama del flujo 07: schedule → leer planilla → filtrar → publicar → registrar" loading="lazy"><figcaption><span>5 nodos</span><span>~25 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-07.svg" alt="Diagrama del flujo 07: schedule → leer planilla → filtrar → publicar → registrar" loading="lazy"><figcaption><span>5 nodos</span><span>~30 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -188,10 +196,11 @@
       <div class="num">08</div>
       <div class="tag">Reputación · Reseñas</div>
       <h3>Testimonios en piloto automático</h3>
-      <p>Venta cerrada → 3 días después, mensaje pidiendo la reseña con link directo. <b>Prueba social que se acumula sola.</b></p>
+      <p>Venta cerrada → 3 días después, mensaje pidiendo reseña con link directo.</p>
+      <p class="ret">Te devuelve reputación que vende sola</p>
       <a class="dl" href="jane-riveros-flujo-08.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-08.svg" alt="Diagrama del flujo 08: webhook → espera 3 días → mensaje → registro" loading="lazy"><figcaption><span>4 nodos</span><span>~15 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-08.svg" alt="Diagrama del flujo 08: webhook → espera 3 días → mensaje → registro" loading="lazy"><figcaption><span>4 nodos</span><span>~20 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -199,10 +208,11 @@
       <div class="num">09</div>
       <div class="tag">Audiencia · Lista propia</div>
       <h3>Tu lista de correo, en serio</h3>
-      <p>Comentario con palabra clave → DM con tu regalo → lista propia con consentimiento. <b>Audiencia que nadie te puede quitar.</b></p>
+      <p>Comentario con palabra clave → DM con tu regalo → captura con consentimiento.</p>
+      <p class="ret">Te devuelve un activo que es tuyo</p>
       <a class="dl" href="jane-riveros-flujo-09.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-09.svg" alt="Diagrama del flujo 09: webhook → if → DM → Mailchimp" loading="lazy"><figcaption><span>5 nodos</span><span>~25 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-09.svg" alt="Diagrama del flujo 09: webhook → if → DM → Mailchimp" loading="lazy"><figcaption><span>4 nodos</span><span>~30 min setup</span></figcaption></figure>
   </article>
 
   <article class="flow">
@@ -210,10 +220,11 @@
       <div class="num">10</div>
       <div class="tag">Dirección · Resumen semanal</div>
       <h3>El pulso semanal de tu negocio</h3>
-      <p>Cada lunes 8:00: resumen IA de 10 líneas con ventas, gastos y agenda. <b>Decisiones con datos, no con intuición.</b></p>
+      <p>Cada lunes 8:00: ventas, gastos y agenda resumidos por IA, a tu correo.</p>
+      <p class="ret">Te devuelve dirección con datos</p>
       <a class="dl" href="jane-riveros-flujo-10.json" download>↓ descargar .json</a>
     </div>
-    <figure class="fig"><img src="jane-riveros-flujo-10.svg" alt="Diagrama del flujo 10: schedule → Sheets → agente IA → resumen por Gmail" loading="lazy"><figcaption><span>5 nodos · IA</span><span>~25 min setup</span></figcaption></figure>
+    <figure class="fig"><img src="jane-riveros-flujo-10.svg" alt="Diagrama del flujo 10: schedule → Sheets → agente IA → resumen por Gmail" loading="lazy"><figcaption><span>5 nodos · IA</span><span>~20 min setup</span></figcaption></figure>
   </article>
 
   <div class="all">
