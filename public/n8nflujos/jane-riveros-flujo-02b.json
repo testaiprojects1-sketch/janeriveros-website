@@ -1,0 +1,194 @@
+{
+  "name": "Jane Riveros — Flujo 02·B · CRM en una planilla (versión simple)",
+  "nodes": [
+    {
+      "id": "81e8a9d4-1392-4283-9850-0e55b822af3b",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        64
+      ],
+      "parameters": {
+        "content": "## Flujo 02·B · CRM en una planilla (versión simple)\n**Qué hace:** la versión del video — sin HubSpot, sin software nuevo. Cada cliente que te escribe queda registrado solo en una planilla de Google (nombre, fecha, qué pidió) y a las 48 horas te llega un recordatorio de seguimiento al correo.\n\n**Configuración (≈15 min):**\n1. **Webhook** — copia la URL y conéctala a tu WhatsApp Business API o formulario. JSON esperado: { \"nombre\", \"telefono\", \"mensaje\" }\n2. **Google Sheets** — conecta tu cuenta y crea una hoja con columnas: fecha, nombre, telefono, mensaje, estado.\n3. **Recordatorio** — cambia el correo destinatario al tuyo.\n4. Activa el workflow.\n\n**Tip:** cuando la planilla se te quede chica, importa el Flujo 02 (versión HubSpot) — mismo cerebro, más músculo.\n\n**Te devuelve:** las ventas que hoy se enfrían por olvido.\n\n— Jane Riveros · janeriveros.com",
+        "width": 480,
+        "height": 500
+      }
+    },
+    {
+      "id": "4edfb068-c00d-4b1a-8e38-194f6603609b",
+      "name": "Mensaje nuevo (WhatsApp / Instagram)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cliente-nuevo"
+      },
+      "webhookId": "6fff71c1-2f2d-48d2-b8da-f82227233bf7"
+    },
+    {
+      "id": "9bc4ce5c-34a9-41a6-a683-a1739fbc4ec9",
+      "name": "Armar la fila del cliente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c-fecha",
+              "name": "fecha",
+              "value": "={{ $now.toFormat(\"yyyy-MM-dd HH:mm\") }}",
+              "type": "string"
+            },
+            {
+              "id": "c-nombre",
+              "name": "nombre",
+              "value": "={{ $json.body.nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "c-fono",
+              "name": "telefono",
+              "value": "={{ $json.body.telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "c-msj",
+              "name": "mensaje",
+              "value": "={{ $json.body.mensaje }}",
+              "type": "string"
+            },
+            {
+              "id": "c-estado",
+              "name": "estado",
+              "value": "nuevo — por contactar",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "7390fd68-b0bb-45ab-abae-ae8a69a16ace",
+      "name": "Guardar en tu planilla-CRM",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        0
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "d483a511-821f-4dc1-aa5d-f10434e713df",
+      "name": "Esperar 48 horas",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        0
+      ],
+      "parameters": {
+        "unit": "hours",
+        "amount": 48
+      },
+      "webhookId": "67f205ea-c5ee-4498-ad1b-9c20bc8b71e6"
+    },
+    {
+      "id": "bc6185ae-729b-4096-b829-0b0519c489ac",
+      "name": "Recordatorio de seguimiento",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        896,
+        0
+      ],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "tu-correo@tu-pyme.cl",
+        "subject": "={{ \"Seguimiento pendiente: \" + ($(\"Armar la fila del cliente\").item.json.nombre || \"cliente nuevo\") }}",
+        "message": "={{ \"Hace 48h te escribió \" + ($(\"Armar la fila del cliente\").item.json.nombre || \"un cliente\") + \" (\" + ($(\"Armar la fila del cliente\").item.json.telefono || \"\") + \"). Pedido: \" + ($(\"Armar la fila del cliente\").item.json.mensaje || \"\") + \". Escríbele hoy — el seguimiento a tiempo es el que cierra.\" }}",
+        "options": {}
+      },
+      "webhookId": "61671ebc-f8fc-4ff3-9e80-83dbaad21717"
+    }
+  ],
+  "connections": {
+    "Mensaje nuevo (WhatsApp / Instagram)": {
+      "main": [
+        [
+          {
+            "node": "Armar la fila del cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar la fila del cliente": {
+      "main": [
+        [
+          {
+            "node": "Guardar en tu planilla-CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en tu planilla-CRM": {
+      "main": [
+        [
+          {
+            "node": "Esperar 48 horas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 48 horas": {
+      "main": [
+        [
+          {
+            "node": "Recordatorio de seguimiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
