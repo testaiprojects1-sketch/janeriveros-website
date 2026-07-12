@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 582.64 200" role="img" aria-label="Jane Riveros — Flujo 08 · Testimonios en piloto automático">
+<style>
+.node{fill:#14243a;stroke:#2f4258;stroke-width:1.4}
+.node.trig{stroke:#10b981;stroke-width:1.6}
+.wire{fill:none;stroke:#10b981;stroke-opacity:.55;stroke-width:1.8}
+.wire.sub{stroke-dasharray:4 4;stroke-opacity:.35}
+.dot{fill:#10b981;fill-opacity:.8}
+.lbl{fill:#8a94a6;font-family:Menlo,Consolas,monospace;font-size:11.5px}
+</style>
+<defs><pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#182335"/></pattern></defs>
+<rect width="582.64" height="200" fill="#0d1626" rx="12"/><rect width="582.64" height="200" fill="url(#grid)" rx="12"/>
+<path d="M120 93 C152.44 93, 152.44 93, 184.88 93" class="wire"/><circle cx="120" cy="93" r="3.2" class="dot"/><circle cx="184.88" cy="93" r="3.2" class="dot"/><path d="M258.88 93 C291.32 93, 291.32 93, 323.76 93" class="wire"/><circle cx="258.88" cy="93" r="3.2" class="dot"/><circle cx="323.76" cy="93" r="3.2" class="dot"/><path d="M397.76 93 C430.2 93, 430.2 93, 462.64 93" class="wire"/><circle cx="397.76" cy="93" r="3.2" class="dot"/><circle cx="462.64" cy="93" r="3.2" class="dot"/><g><rect x="46" y="56" width="74" height="74" rx="15" class="node trig"/><rect x="46" y="72" width="3.5" height="42" rx="1.75" fill="#10b981"/><text x="83" y="102" text-anchor="middle" font-size="26">⚡</text><text x="83" y="148" text-anchor="middle" class="lbl">Venta cerrada</text></g><g><rect x="184.88" y="56" width="74" height="74" rx="15" class="node"/><text x="221.88" y="102" text-anchor="middle" font-size="26">⏳</text><text x="221.88" y="148" text-anchor="middle" class="lbl">Esperar 3 días</text></g><g><rect x="323.76" y="56" width="74" height="74" rx="15" class="node"/><text x="360.76" y="102" text-anchor="middle" font-size="26">🌐</text><text x="360.76" y="148" text-anchor="middle" class="lbl">Pedir reseña por</text><text x="360.76" y="163" text-anchor="middle" class="lbl">WhatsApp</text></g><g><rect x="462.64" y="56" width="74" height="74" rx="15" class="node"/><text x="499.64" y="102" text-anchor="middle" font-size="26">📊</text><text x="499.64" y="148" text-anchor="middle" class="lbl">Registrar</text><text x="499.64" y="163" text-anchor="middle" class="lbl">solicitud</text></g></svg>

@@ -5,98 +5,231 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>n8n Flujos — Jane Riveros · 10 flujos gratis para tu pyme</title>
 <meta name="description" content="Los 10 flujos n8n del libro Automatízame Esto — gratis, listos para importar. Por Jane Riveros.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0b1220;--card:#111b2b;--edge:#2a3a4d;--green:#10b981;--ink:#ebf0f6;--mut:#8a94a6;--panel:#0e1826}
+  :root{--bg:#0b1220;--card:#111b2b;--edge:#2a3a4d;--green:#10b981;--ink:#ebf0f6;--mut:#8a94a6;--panel:#0e1826;
+    --serif:'Fraunces',Georgia,serif;--mono:'SF Mono',Menlo,Consolas,monospace}
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
     background-image:radial-gradient(circle,#172132 1px,transparent 1px);background-size:28px 28px}
-  .wrap{max-width:880px;margin:0 auto;padding:64px 24px}
-  .kicker{font-family:'SF Mono',Menlo,Consolas,monospace;color:var(--green);font-size:13px;letter-spacing:.08em;margin-bottom:14px}
-  h1{font-size:clamp(30px,5vw,44px);line-height:1.08;margin-bottom:14px}
-  .sub{color:var(--mut);font-size:17px;line-height:1.55;max-width:600px;margin-bottom:8px}
-  .rule{width:64px;height:3px;background:var(--green);margin:26px 0 34px}
-  .doctrine{border:1px solid var(--edge);background:var(--panel);border-radius:10px;padding:18px 20px;margin-bottom:40px;font-size:14px;line-height:1.55;color:var(--mut)}
-  .doctrine b{color:var(--green)}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px}
-  .step{background:var(--card);border:1px solid var(--edge);border-radius:10px;padding:16px}
-  .step .n{font-family:Menlo,Consolas,monospace;color:var(--green);font-weight:700;font-size:13px;margin-bottom:8px}
-  .step p{font-size:13.5px;color:var(--ink);line-height:1.45}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .flow{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
-  .flow:hover{border-color:var(--green)}
-  .flow .tag{font-family:Menlo,Consolas,monospace;font-size:11px;color:var(--green);letter-spacing:.06em}
-  .flow h3{font-size:16.5px;line-height:1.25}
-  .flow p{font-size:13px;color:var(--mut);line-height:1.45;flex:1}
-  .flow a{display:inline-block;margin-top:4px;font-family:Menlo,Consolas,monospace;font-size:12.5px;color:var(--bg);background:var(--green);
-    padding:8px 14px;border-radius:7px;text-decoration:none;font-weight:700;align-self:flex-start}
-  .flow a:hover{filter:brightness(1.1)}
-  .all{margin:34px 0 0;text-align:center}
-  .all a{display:inline-block;font-family:Menlo,Consolas,monospace;font-size:14px;color:var(--green);border:1.5px solid var(--green);
-    padding:13px 26px;border-radius:9px;text-decoration:none;font-weight:700}
+  .wrap{max-width:960px;margin:0 auto;padding:40px 24px 64px}
+  .masthead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--edge);padding-bottom:16px;margin-bottom:56px;font-family:var(--mono);font-size:11.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+  .masthead b{color:var(--ink);font-weight:600}
+  .masthead .free{color:var(--green)}
+  .kicker{font-family:var(--mono);color:var(--green);font-size:13px;letter-spacing:.08em;margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6.4vw,64px);line-height:1.04;letter-spacing:-.01em;margin-bottom:22px;max-width:15ch}
+  h1 em{font-style:italic;color:var(--green);font-weight:400}
+  .sub{color:var(--mut);font-size:18px;line-height:1.6;max-width:56ch;margin-bottom:26px}
+  .byline{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .byline img{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--green)}
+  .byline b{color:var(--ink)}
+  .rule{width:64px;height:3px;background:var(--green);margin:40px 0}
+  .doctrine{border-left:3px solid var(--green);background:var(--panel);border-radius:0 10px 10px 0;padding:20px 24px;margin:0 0 52px;
+    font-size:14.5px;line-height:1.6;color:var(--mut)}
+  .doctrine .dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+  .doctrine b{color:var(--ink)}
+  .howto{display:flex;gap:0;border:1px solid var(--edge);border-radius:12px;overflow:hidden;margin-bottom:72px}
+  .howto .step{flex:1;padding:18px 20px;background:var(--card)}
+  .howto .step+.step{border-left:1px solid var(--edge)}
+  .howto .n{font-family:var(--mono);color:var(--green);font-weight:700;font-size:12px;margin-bottom:8px}
+  .howto p{font-size:13.5px;color:var(--mut);line-height:1.5}
+  .howto p b{color:var(--ink)}
+  .indexline{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);
+    display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .indexline::after{content:"";flex:1;height:1px;background:var(--edge)}
+  .flow{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;padding:52px 0;border-bottom:1px solid var(--edge)}
+  article.flow:nth-of-type(even) .txt{order:2}
+  .flow .num{font-family:var(--serif);font-style:italic;font-weight:400;font-size:64px;line-height:1;color:var(--green);opacity:.9}
+  .flow .tag{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.14em;text-transform:uppercase;margin:10px 0 12px}
+  .flow h3{font-family:var(--serif);font-weight:600;font-size:29px;line-height:1.12;margin-bottom:14px;letter-spacing:-.01em}
+  .flow .txt p{font-size:15px;color:var(--mut);line-height:1.62;margin-bottom:20px}
+  .flow .txt p b{color:var(--green);font-weight:600}
+  .dl{display:inline-block;font-family:var(--mono);font-size:12.5px;color:var(--bg);background:var(--green);
+    padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:700}
+  .dl:hover{filter:brightness(1.12)}
+  .fig{background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:14px;transition:border-color .2s}
+  .flow:hover .fig{border-color:var(--green)}
+  .fig img{display:block;width:100%;height:auto}
+  .fig figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--edge);display:flex;justify-content:space-between;gap:8px}
+  .fig figcaption span:last-child{color:var(--green)}
+  .all{margin:64px 0 0;text-align:center}
+  .all a{display:inline-block;font-family:var(--mono);font-size:14.5px;color:var(--green);border:1.5px solid var(--green);
+    padding:15px 34px;border-radius:10px;text-decoration:none;font-weight:700}
   .all a:hover{background:var(--green);color:var(--bg)}
-  .hub{margin-top:44px;border:1px dashed var(--edge);border-radius:10px;padding:18px 20px;font-size:13.5px;color:var(--mut);line-height:1.55}
+  .all .note{margin-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--mut)}
+  .hub{margin-top:64px;border:1px dashed var(--edge);border-radius:12px;padding:22px 26px;font-size:14px;color:var(--mut);line-height:1.65}
+  .hub b{color:var(--ink)}
+  .pull{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.6vw,34px);line-height:1.3;text-align:center;
+    color:var(--ink);max-width:22ch;margin:80px auto 0}
+  .pull em{color:var(--green);font-style:italic}
   footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--edge);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
-    font-size:12.5px;color:var(--mut)}
+    font-size:12.5px;color:var(--mut);font-family:var(--mono)}
   footer a{color:var(--green);text-decoration:none}
-  n8n-demo{display:block;width:100%;height:240px;border:1px solid var(--edge);border-radius:8px;overflow:hidden;margin:6px 0 4px;background:#0e1826}
-  @media(max-width:640px){.grid,.steps{grid-template-columns:1fr}}
+  @media(max-width:700px){
+    .flow{grid-template-columns:1fr;gap:20px;padding:40px 0}
+    article.flow:nth-of-type(even) .txt{order:0}
+    .howto{flex-direction:column}
+    .howto .step+.step{border-left:none;border-top:1px solid var(--edge)}
+  }
 </style>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@n8n_io/n8n-demo-component@latest/n8n-demo.bundled.js"></script>
 </head>
 <body>
 <div class="wrap">
-  <div class="kicker">// N8N FLUJOS · GRATIS · DEL LIBRO "AUTOMATÍZAME ESTO"</div>
-  <h1>Los 10 flujos que toda pyme chilena necesita.</h1>
-  <p class="sub">Listos para importar en n8n (gratis). Cada uno trae adentro una nota amarilla con la configuración paso a paso — menos de 30 minutos por flujo.</p>
+
+  <div class="masthead">
+    <span><b>Jane Riveros</b> · Sistemas que trabajan solos</span>
+    <span class="free">10 flujos · gratis · edición 2026</span>
+  </div>
+
+  <div class="kicker">// N8N FLUJOS · DEL LIBRO "AUTOMATÍZAME ESTO"</div>
+  <h1>Los 10 flujos que toda <em>pyme chilena</em> necesita.</h1>
+  <p class="sub">Listos para importar en n8n (gratis). Cada uno trae adentro una nota amarilla con la configuración paso a paso — menos de 30 minutos por flujo, sin escribir una línea de código.</p>
+  <div class="byline"><img src="/jane-avatar.png" alt="Jane Riveros"><span>Por <b>Jane Riveros</b> · Santiago de Chile · <a href="https://janeriveros.com" style="color:var(--green);text-decoration:none">janeriveros.com</a></span></div>
+
   <div class="rule"></div>
 
-  <div class="doctrine"><b>Regla de seguridad:</b> este es el único sitio donde publico estos archivos — estás en <b>janeriveros.com</b>, escrito por ti misma en el navegador. Nunca te voy a mandar links por DM ni por correo. Si alguien lo hace en mi nombre, no soy yo.</div>
+  <div class="doctrine">
+    <div class="dt">Regla de seguridad</div>
+    Este es el <b>único sitio</b> donde publico estos archivos — estás en <b>janeriveros.com</b>, escrito por ti misma en el navegador. Nunca te voy a mandar links por DM ni por correo. Si alguien lo hace en mi nombre, no soy yo.
+  </div>
 
-  <div class="steps">
-    <div class="step"><div class="n">PASO 1</div><p>Descarga el flujo que necesitas (archivo .json).</p></div>
+  <div class="howto">
+    <div class="step"><div class="n">PASO 1</div><p>Descarga el flujo que necesitas (archivo <b>.json</b>).</p></div>
     <div class="step"><div class="n">PASO 2</div><p>En n8n: <b>Workflow → Import from File</b> y elige el archivo.</p></div>
-    <div class="step"><div class="n">PASO 3</div><p>Sigue la nota amarilla que viene adentro. Conecta tus cuentas. Activa.</p></div>
+    <div class="step"><div class="n">PASO 3</div><p>Sigue la <b>nota amarilla</b> que viene adentro. Conecta tus cuentas. Activa.</p></div>
   </div>
 
-  <div class="grid">
-    <div class="flow"><div class="tag">FLUJO 01</div><h3>Adiós Excel manual</h3><p>Cada pedido por WhatsApp o formulario se guarda solo en tu planilla. ~5 hrs/semana devueltas.</p><a href="jane-riveros-flujo-01.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 02</div><h3>El CRM que se llena solo</h3><p>Mensaje nuevo → contacto registrado + recordatorio de seguimiento a las 48h.</p><a href="jane-riveros-flujo-02.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 03</div><h3>Tu asistente de correo con IA</h3><p>La IA clasifica y deja borradores listos. Tú apruebas y envías. ~1 hr/día.</p><a href="jane-riveros-flujo-03.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 04</div><h3>Un tablero, todos tus datos</h3><p>Ventas, pagos y pedidos en una sola planilla, actualizada cada mañana.</p><a href="jane-riveros-flujo-04.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 05</div><h3>Facturas sin tipeo</h3><p>PDF de factura → IA extrae RUT y montos → planilla contable → aviso al contador.</p><a href="jane-riveros-flujo-05.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 06</div><h3>Mata el "no show"</h3><p>Confirmación inmediata + recordatorios 24h y 2h antes. Hasta 30% menos horas perdidas.</p><a href="jane-riveros-flujo-06.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 07</div><h3>Publica aunque no tengas tiempo</h3><p>Tus posts en una planilla → publicación automática programada + registro.</p><a href="jane-riveros-flujo-07.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 08</div><h3>Testimonios en piloto automático</h3><p>Venta cerrada → 3 días después, mensaje pidiendo la reseña con link directo.</p><a href="jane-riveros-flujo-08.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 09</div><h3>Tu lista de correo, en serio</h3><p>Comentario con palabra clave → DM con tu regalo → lista propia con consentimiento.</p><a href="jane-riveros-flujo-09.json" download>↓ descargar .json</a></div>
-    <div class="flow"><div class="tag">FLUJO 10</div><h3>El pulso semanal de tu negocio</h3><p>Cada lunes 8:00: resumen IA de 10 líneas con ventas, gastos y agenda.</p><a href="jane-riveros-flujo-10.json" download>↓ descargar .json</a></div>
+  <div class="indexline">Índice · 10 flujos</div>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">01</div>
+      <div class="tag">Ventas · WhatsApp → Planilla</div>
+      <h3>Adiós Excel manual</h3>
+      <p>Cada pedido por WhatsApp o formulario se guarda solo en tu planilla. <b>~5 hrs/semana devueltas.</b></p>
+      <a class="dl" href="jane-riveros-flujo-01.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-01.svg" alt="Diagrama del flujo 01: webhook → extraer datos → Google Sheets" loading="lazy"><figcaption><span>3 nodos</span><span>~15 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">02</div>
+      <div class="tag">Clientes · CRM automático</div>
+      <h3>El CRM que se llena solo</h3>
+      <p>Mensaje nuevo → contacto registrado + recordatorio de seguimiento a las 48h. <b>Ningún lead se enfría.</b></p>
+      <a class="dl" href="jane-riveros-flujo-02.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-02.svg" alt="Diagrama del flujo 02: webhook → HubSpot → espera 48h → Gmail" loading="lazy"><figcaption><span>4 nodos</span><span>~20 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">03</div>
+      <div class="tag">Correo · IA que clasifica</div>
+      <h3>Tu asistente de correo con IA</h3>
+      <p>La IA clasifica y deja borradores listos. Tú apruebas y envías. <b>~1 hr/día devuelta.</b></p>
+      <a class="dl" href="jane-riveros-flujo-03.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-03.svg" alt="Diagrama del flujo 03: Gmail trigger → agente IA → borrador Gmail" loading="lazy"><figcaption><span>4 nodos · IA</span><span>~25 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">04</div>
+      <div class="tag">Datos · Tablero diario</div>
+      <h3>Un tablero, todos tus datos</h3>
+      <p>Ventas, pagos y pedidos en una sola planilla, <b>actualizada cada mañana</b> antes de tu primer café.</p>
+      <a class="dl" href="jane-riveros-flujo-04.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-04.svg" alt="Diagrama del flujo 04: schedule → APIs → merge → Google Sheets" loading="lazy"><figcaption><span>6 nodos</span><span>~30 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">05</div>
+      <div class="tag">Finanzas · Facturas con IA</div>
+      <h3>Facturas sin tipeo</h3>
+      <p>PDF de factura → IA extrae RUT y montos → planilla contable → <b>aviso al contador.</b> Cero digitación.</p>
+      <a class="dl" href="jane-riveros-flujo-05.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-05.svg" alt="Diagrama del flujo 05: Gmail trigger → extraer PDF → agente IA → Sheets → Gmail" loading="lazy"><figcaption><span>6 nodos · IA</span><span>~30 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">06</div>
+      <div class="tag">Agenda · Anti no-show</div>
+      <h3>Mata el "no show"</h3>
+      <p>Confirmación inmediata + recordatorios 24h y 2h antes. <b>Hasta 30% menos horas perdidas.</b></p>
+      <a class="dl" href="jane-riveros-flujo-06.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-06.svg" alt="Diagrama del flujo 06: Calendly trigger → mensajes → esperas → recordatorios" loading="lazy"><figcaption><span>6 nodos</span><span>~20 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">07</div>
+      <div class="tag">Marketing · Publicación programada</div>
+      <h3>Publica aunque no tengas tiempo</h3>
+      <p>Tus posts en una planilla → publicación automática programada + registro. <b>Presencia constante, esfuerzo cero.</b></p>
+      <a class="dl" href="jane-riveros-flujo-07.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-07.svg" alt="Diagrama del flujo 07: schedule → leer planilla → filtrar → publicar → registrar" loading="lazy"><figcaption><span>5 nodos</span><span>~25 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">08</div>
+      <div class="tag">Reputación · Reseñas</div>
+      <h3>Testimonios en piloto automático</h3>
+      <p>Venta cerrada → 3 días después, mensaje pidiendo la reseña con link directo. <b>Prueba social que se acumula sola.</b></p>
+      <a class="dl" href="jane-riveros-flujo-08.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-08.svg" alt="Diagrama del flujo 08: webhook → espera 3 días → mensaje → registro" loading="lazy"><figcaption><span>4 nodos</span><span>~15 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">09</div>
+      <div class="tag">Audiencia · Lista propia</div>
+      <h3>Tu lista de correo, en serio</h3>
+      <p>Comentario con palabra clave → DM con tu regalo → lista propia con consentimiento. <b>Audiencia que nadie te puede quitar.</b></p>
+      <a class="dl" href="jane-riveros-flujo-09.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-09.svg" alt="Diagrama del flujo 09: webhook → if → DM → Mailchimp" loading="lazy"><figcaption><span>5 nodos</span><span>~25 min setup</span></figcaption></figure>
+  </article>
+
+  <article class="flow">
+    <div class="txt">
+      <div class="num">10</div>
+      <div class="tag">Dirección · Resumen semanal</div>
+      <h3>El pulso semanal de tu negocio</h3>
+      <p>Cada lunes 8:00: resumen IA de 10 líneas con ventas, gastos y agenda. <b>Decisiones con datos, no con intuición.</b></p>
+      <a class="dl" href="jane-riveros-flujo-10.json" download>↓ descargar .json</a>
+    </div>
+    <figure class="fig"><img src="jane-riveros-flujo-10.svg" alt="Diagrama del flujo 10: schedule → Sheets → agente IA → resumen por Gmail" loading="lazy"><figcaption><span>5 nodos · IA</span><span>~25 min setup</span></figcaption></figure>
+  </article>
+
+  <div class="all">
+    <a href="jane-riveros-n8nflujos.zip" download>↓ descargar los 10 (zip)</a>
+    <div class="note">17 KB · sin registro · sin correo · sin trucos</div>
   </div>
 
-  <div class="all"><a href="jane-riveros-n8nflujos.zip" download>↓ descargar los 10 (zip)</a></div>
+  <div class="hub">📚 <b>El libro:</b> en Amazon (Kindle) busca <b>"Automatízame Esto"</b> — gratis, con cada flujo explicado y dibujado.<br>
+  🟢 <b>Muy pronto:</b> estos mismos flujos en la galería oficial de n8n — en n8n.io → Templates, busca <b>"Jane Riveros"</b>.</div>
 
-  <div class="hub">📚 <b style="color:var(--ink)">El libro:</b> en Amazon (Kindle) busca <b style="color:var(--ink)">"Automatízame Esto"</b> — gratis, con cada flujo explicado y dibujado.<br>
-  🟢 <b style="color:var(--ink)">Muy pronto:</b> estos mismos flujos en la galería oficial de n8n — en n8n.io → Templates, busca <b style="color:var(--ink)">"Jane Riveros"</b>.</div>
+  <p class="pull">La IA no te reemplaza. <em>Te devuelve tu tiempo.</em></p>
 
   <footer>
     <div>© Jane Riveros · <a href="https://janeriveros.com">janeriveros.com</a></div>
-    <div>La IA no te reemplaza. Te devuelve tu tiempo.</div>
+    <div><a href="https://janeriveros.com/flywheel">← volver al Fly Wheel</a></div>
   </footer>
 </div>
-<script>
-  // Live n8n canvas preview on each flow card — rendered by n8n's official demo component,
-  // fed from the same .json file the download button serves. Always in sync.
-  document.querySelectorAll(".flow").forEach(function (card) {
-    var a = card.querySelector('a[href$=".json"]');
-    if (!a) return;
-    var demo = document.createElement("n8n-demo");
-    demo.setAttribute("clicktointeract", "true");
-    demo.setAttribute("collapseformobile", "false");
-    demo.setAttribute("hidecanvaserrors", "true");
-    card.insertBefore(demo, a);
-    fetch(a.getAttribute("href"))
-      .then(function (r) { return r.text(); })
-      .then(function (t) { demo.setAttribute("workflow", t); })
-      .catch(function () { demo.remove(); });
-  });
-</script>
 </body>
 </html>
