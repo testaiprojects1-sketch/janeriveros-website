@@ -1,0 +1,175 @@
+{
+  "name": "Jane Riveros — Flujo 05 · Facturas sin tipeo",
+  "nodes": [
+    {
+      "id": "de429408-0444-445c-81f8-41159f9775b8",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [512, 384],
+      "parameters": {
+        "content": "## Flujo 05 · Facturas sin tipeo\n**Qué hace:** cuando llega una factura PDF a tu correo, se lee sola, la IA extrae los datos (emisor, RUT, montos, IVA), se guardan en tu planilla contable y tu contador recibe aviso. Cero digitación, cero errores de tipeo.\n\n**Configuración (≈25 min):**\n1. **Gmail Trigger** — conecta tu correo. El filtro ya busca adjuntos PDF con \"factura\"; ajústalo a tu realidad.\n2. **Modelo IA** — conecta tu API key de OpenAI.\n3. **Google Sheets** — conecta y elige tu planilla contable (columnas: emisor, RUT, fecha, número, neto, IVA, total).\n4. **Aviso al contador** — cambia el correo del destinatario.\n5. Activa el workflow.\n\n**Te devuelve:** horas de digitación + menos multas por errores.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 480
+      }
+    },
+    {
+      "id": "b9b42a0c-20dd-45c9-a534-0adfd272d9e4",
+      "name": "Llega factura al correo",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 112],
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "has:attachment filename:pdf factura"
+        },
+        "options": {
+          "downloadAttachments": true
+        }
+      }
+    },
+    {
+      "id": "8ac65888-0884-453c-9845-6574699eb2da",
+      "name": "Leer PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [224, 112],
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "attachment_0"
+      }
+    },
+    {
+      "id": "8bb30d51-0b14-4cef-9451-7c908ef4bade",
+      "name": "Extraer datos de la factura",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [448, 112],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ \"Texto de la factura:\\n\" + $json.text }}",
+        "options": {
+          "systemMessage": "Extrae de la factura: emisor, RUT, fecha, numero_factura, neto, iva, total. Responde SOLO un JSON plano con esas claves."
+        }
+      }
+    },
+    {
+      "id": "cbaf3e37-cee4-45b1-9c70-ab2e1e2cdecf",
+      "name": "Modelo IA (OpenAI)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [528, 336],
+      "parameters": {}
+    },
+    {
+      "id": "7783bfe8-2515-4564-bcd8-416dab8f08de",
+      "name": "Guardar en planilla contable",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [800, 112],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "5c2990a7-0549-46b3-a83b-fedd596a4a46",
+      "name": "Aviso al contador",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1024, 112],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "contador@tu-pyme.cl",
+        "subject": "Nueva factura registrada automáticamente",
+        "message": "={{ \"Se registró una nueva factura en la planilla contable:\\n\\n\" + $(\"Extraer datos de la factura\").item.json.output }}",
+        "options": {}
+      },
+      "webhookId": "c4c93547-c3d0-4d15-82ee-536e4052a43d"
+    }
+  ],
+  "connections": {
+    "Llega factura al correo": {
+      "main": [
+        [
+          {
+            "node": "Leer PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer PDF": {
+      "main": [
+        [
+          {
+            "node": "Extraer datos de la factura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer datos de la factura": {
+      "main": [
+        [
+          {
+            "node": "Guardar en planilla contable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Modelo IA (OpenAI)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Extraer datos de la factura",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en planilla contable": {
+      "main": [
+        [
+          {
+            "node": "Aviso al contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

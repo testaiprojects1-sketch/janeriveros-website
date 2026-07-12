@@ -1,0 +1,127 @@
+{
+  "name": "Jane Riveros — Flujo 01 · Adiós Excel manual",
+  "nodes": [
+    {
+      "id": "642045b9-990a-4511-8d23-28c62d62932b",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [224, 64],
+      "parameters": {
+        "content": "## Flujo 01 · Adiós Excel manual\n**Qué hace:** cada pedido que llega por WhatsApp o formulario se guarda solo en tu planilla. Chao copiar y pegar.\n\n**Configuración (≈15 min):**\n1. **Webhook** — copia la URL del nodo y pégala en tu proveedor de WhatsApp Business API (360dialog, Twilio) o en tu formulario web. JSON esperado: { \"cliente\", \"producto\", \"monto\", \"canal\" }\n2. **Google Sheets** — conecta tu cuenta Google, elige planilla y hoja con columnas: fecha, cliente, producto, monto, canal.\n3. Activa el workflow. Tu planilla se llena sola.\n\n**Te devuelve:** ~5 hrs/semana.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 420
+      }
+    },
+    {
+      "id": "2fabe867-1779-4999-8f87-69676c37b11a",
+      "name": "Nuevo pedido (WhatsApp / Formulario)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nuevo-pedido"
+      },
+      "webhookId": "ec79177b-e6d8-4478-ae5d-bb3c82123302"
+    },
+    {
+      "id": "b0f97152-be2b-46e1-a6bf-daa1ff61536a",
+      "name": "Extraer datos del pedido",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [224, 0],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f-fecha",
+              "name": "fecha",
+              "value": "={{ $now.toFormat(\"yyyy-MM-dd HH:mm\") }}",
+              "type": "string"
+            },
+            {
+              "id": "f-cliente",
+              "name": "cliente",
+              "value": "={{ $json.body.cliente }}",
+              "type": "string"
+            },
+            {
+              "id": "f-producto",
+              "name": "producto",
+              "value": "={{ $json.body.producto }}",
+              "type": "string"
+            },
+            {
+              "id": "f-monto",
+              "name": "monto",
+              "value": "={{ $json.body.monto }}",
+              "type": "string"
+            },
+            {
+              "id": "f-canal",
+              "name": "canal",
+              "value": "={{ $json.body.canal || \"whatsapp\" }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ed46dda7-b45b-4d20-9532-3ac798faef64",
+      "name": "Guardar en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [448, 0],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Nuevo pedido (WhatsApp / Formulario)": {
+      "main": [
+        [
+          {
+            "node": "Extraer datos del pedido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer datos del pedido": {
+      "main": [
+        [
+          {
+            "node": "Guardar en Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

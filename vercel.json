@@ -1,11 +1,28 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/n8nflujos", "destination": "/n8nflujos/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "Permissions-Policy", "value": "microphone=*, autoplay=*" }
+      ]
+    },
+    {
+      "source": "/n8nflujos/(.*)\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    },
+    {
+      "source": "/n8nflujos/(.*)\\.zip",
+      "headers": [
+        { "key": "Content-Type", "value": "application/zip" },
+        { "key": "Content-Disposition", "value": "attachment" }
       ]
     }
   ]

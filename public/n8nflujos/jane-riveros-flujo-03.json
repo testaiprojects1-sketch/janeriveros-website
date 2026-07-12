@@ -1,0 +1,111 @@
+{
+  "name": "Jane Riveros — Flujo 03 · Tu asistente de correo con IA",
+  "nodes": [
+    {
+      "id": "29cdc28c-ef73-44be-bf3d-33a5def720ac",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [288, 384],
+      "parameters": {
+        "content": "## Flujo 03 · Tu asistente de correo con IA\n**Qué hace:** cada correo entrante se clasifica solo (pregunta frecuente / cotización / urgente) y la IA deja un BORRADOR de respuesta listo en tu Gmail. La IA redacta; tú decides y envías.\n\n**Configuración (≈20 min):**\n1. **Gmail Trigger** — conecta tu cuenta Gmail.\n2. **Modelo IA** — conecta tu API key de OpenAI (platform.openai.com). Cuesta centavos por correo.\n3. **Crear borrador** — usa la misma cuenta Gmail. Los borradores quedan en tu carpeta Borradores: revisas, ajustas y envías.\n4. Activa el workflow.\n\n**Importante:** nada se envía solo. El humano siempre aprueba.\n\n**Te devuelve:** ~1 hr/día.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 460
+      }
+    },
+    {
+      "id": "69519c6c-e88f-4984-904d-a861289efeff",
+      "name": "Correo entrante",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 112],
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": true,
+        "filters": {}
+      }
+    },
+    {
+      "id": "d448cacf-e131-4532-a3ad-edf95aca1853",
+      "name": "Clasificar y redactar respuesta",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [224, 112],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ \"Correo de: \" + $json.from + \"\\nAsunto: \" + $json.subject + \"\\nMensaje: \" + $json.snippet }}",
+        "options": {
+          "systemMessage": "Eres el asistente de correo de una pyme chilena. Clasifica cada correo como PREGUNTA_FRECUENTE, COTIZACION o URGENTE y redacta una respuesta breve, profesional y cercana en español. Responde SOLO con el texto de la respuesta sugerida, empezando con la clasificación entre corchetes, ej: [COTIZACION]."
+        }
+      }
+    },
+    {
+      "id": "d4967703-e2f4-4763-9ba4-ad63cb048d7a",
+      "name": "Modelo IA (OpenAI)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [304, 336],
+      "parameters": {}
+    },
+    {
+      "id": "ccfb4643-2aa0-4f01-9ba6-1c51d16de4f7",
+      "name": "Crear borrador (tú apruebas)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [576, 112],
+      "parameters": {
+        "resource": "draft",
+        "operation": "create",
+        "subject": "={{ \"Re: \" + $(\"Correo entrante\").item.json.subject }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "webhookId": "703a08b6-738a-4a01-8048-04de3b61ddd7"
+    }
+  ],
+  "connections": {
+    "Correo entrante": {
+      "main": [
+        [
+          {
+            "node": "Clasificar y redactar respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar y redactar respuesta": {
+      "main": [
+        [
+          {
+            "node": "Crear borrador (tú apruebas)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Modelo IA (OpenAI)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Clasificar y redactar respuesta",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

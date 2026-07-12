@@ -1,0 +1,129 @@
+{
+  "name": "Jane Riveros — Flujo 08 · Testimonios en piloto automático",
+  "nodes": [
+    {
+      "id": "ab1925de-c2f4-4eda-a2aa-2139cabc9901",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [336, 64],
+      "parameters": {
+        "content": "## Flujo 08 · Testimonios en piloto automático\n**Qué hace:** cada venta cerrada dispara —3 días después— un mensaje pidiendo la reseña con link directo a tu perfil de Google, más un gracias automático y registro en planilla. Reputación que vende sola.\n\n**Configuración (≈20 min):**\n1. **Webhook** — dispáralo desde tu sistema de ventas / POS / o incluso a mano con un atajo. JSON esperado: { \"cliente\", \"telefono\", \"producto\" }\n2. **Mensaje de reseña** — reemplaza la URL por tu proveedor de WhatsApp API y pon TU link corto de reseña de Google (Perfil de Empresa → Pedir reseñas).\n3. **Google Sheets** — conecta y elige tu hoja de registro.\n4. Activa el workflow.\n\n**Te devuelve:** reseñas constantes sin perseguir a nadie.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 460
+      }
+    },
+    {
+      "id": "7c4fd822-1332-4524-ab8b-8038ce3bc4f1",
+      "name": "Venta cerrada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "venta-cerrada"
+      },
+      "webhookId": "fd6153d6-02a5-47ec-abaa-9a2192ccc893"
+    },
+    {
+      "id": "1319a3ad-2acf-434f-a2e6-fb872f238e40",
+      "name": "Esperar 3 días",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [224, 0],
+      "parameters": {
+        "unit": "days",
+        "amount": 3
+      },
+      "webhookId": "46fc1d9c-6815-4e56-abbe-2e208a65f952"
+    },
+    {
+      "id": "eee5b173-3967-4d4e-974b-3185ba5f09ca",
+      "name": "Pedir reseña por WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [448, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://TU-PROVEEDOR-WHATSAPP.com/api/enviar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "telefono",
+              "value": "={{ $json.body.telefono }}"
+            },
+            {
+              "name": "mensaje",
+              "value": "={{ \"¡Hola \" + $json.body.cliente + \"! Esperamos que estés disfrutando tu \" + $json.body.producto + \". Si te fue bien con nosotros, ¿nos regalas una reseña? Te toma 1 minuto: https://g.page/r/TU-LINK-DE-RESENA 🙏\" }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b451c459-c441-4dbc-b34a-b39b4abeea7e",
+      "name": "Registrar solicitud",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [672, 0],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Venta cerrada": {
+      "main": [
+        [
+          {
+            "node": "Esperar 3 días",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 3 días": {
+      "main": [
+        [
+          {
+            "node": "Pedir reseña por WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pedir reseña por WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "Registrar solicitud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

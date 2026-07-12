@@ -1,0 +1,177 @@
+{
+  "name": "Jane Riveros — Flujo 06 · Mata el no show",
+  "nodes": [
+    {
+      "id": "b495bce8-1458-4d64-b994-713e42cc77e6",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [560, 64],
+      "parameters": {
+        "content": "## Flujo 06 · Mata el \"no show\"\n**Qué hace:** cada reserva en Calendly recibe confirmación inmediata por WhatsApp, recordatorio 24h antes (con link para reagendar en 1 click) y otro 2h antes. Hasta 30% menos horas perdidas.\n\n**Configuración (≈25 min):**\n1. **Calendly** — conecta tu cuenta (el trigger escucha reservas nuevas).\n2. **Nodos WhatsApp** — reemplaza la URL por tu proveedor de WhatsApp Business API (360dialog, Twilio, Wati) y ajusta el campo teléfono según tu formulario de Calendly.\n3. Activa el workflow.\n\n**Tip:** también sirve con Cal.com o cualquier agenda que tenga webhooks.\n\n**Te devuelve:** hasta 30% menos horas perdidas.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 460
+      }
+    },
+    {
+      "id": "86dcec7a-1e98-44f0-b410-184ec927e6b5",
+      "name": "Nueva reserva (Calendly)",
+      "type": "n8n-nodes-base.calendlyTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "parameters": {
+        "events": ["invitee.created"]
+      },
+      "webhookId": "43aed94e-8cfc-48fe-8f1f-b7e824b88955"
+    },
+    {
+      "id": "9617c5f1-c7a5-46e3-9157-01d7820839d9",
+      "name": "Confirmación WhatsApp inmediata",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [224, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://TU-PROVEEDOR-WHATSAPP.com/api/enviar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "telefono",
+              "value": "={{ $json.payload.questions_and_answers?.[0]?.answer || \"\" }}"
+            },
+            {
+              "name": "mensaje",
+              "value": "={{ \"¡Hola \" + $json.payload.name + \"! Tu hora quedó confirmada para \" + $json.payload.scheduled_event.start_time + \". Te esperamos 🙌\" }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "56b6e784-02e1-4783-a1c9-74bc4d77327a",
+      "name": "Esperar hasta 24h antes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [448, 0],
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ DateTime.fromISO($json.payload.scheduled_event.start_time).minus({ hours: 24 }).toISO() }}"
+      },
+      "webhookId": "5e8b8de0-01d6-4321-a5b7-a54c23f812b7"
+    },
+    {
+      "id": "f9808212-d45b-4980-a5b6-c27e21aaebb0",
+      "name": "Recordatorio 24h antes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [672, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://TU-PROVEEDOR-WHATSAPP.com/api/enviar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mensaje",
+              "value": "={{ \"Mañana tienes tu hora con nosotros. Si no puedes, reagenda aquí con 1 click: \" + $json.payload.reschedule_url }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "e900bdaa-d600-439e-ae24-426c3c0e3fc3",
+      "name": "Esperar hasta 2h antes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [896, 0],
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ DateTime.fromISO($(\"Nueva reserva (Calendly)\").item.json.payload.scheduled_event.start_time).minus({ hours: 2 }).toISO() }}"
+      },
+      "webhookId": "37f467c1-3348-41f1-afab-6f251a62f9de"
+    },
+    {
+      "id": "18fe1e78-e10a-4f01-9476-0e7d539e4b29",
+      "name": "Recordatorio 2h antes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [1120, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://TU-PROVEEDOR-WHATSAPP.com/api/enviar",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mensaje",
+              "value": "¡Nos vemos en 2 horas! Te esperamos."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Nueva reserva (Calendly)": {
+      "main": [
+        [
+          {
+            "node": "Confirmación WhatsApp inmediata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmación WhatsApp inmediata": {
+      "main": [
+        [
+          {
+            "node": "Esperar hasta 24h antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar hasta 24h antes": {
+      "main": [
+        [
+          {
+            "node": "Recordatorio 24h antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recordatorio 24h antes": {
+      "main": [
+        [
+          {
+            "node": "Esperar hasta 2h antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar hasta 2h antes": {
+      "main": [
+        [
+          {
+            "node": "Recordatorio 2h antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

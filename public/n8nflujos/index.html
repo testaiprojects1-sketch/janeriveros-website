@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>n8n Flujos — Jane Riveros · 10 flujos gratis para tu pyme</title>
+<meta name="description" content="Los 10 flujos n8n del libro Automatízame Esto — gratis, listos para importar. Por Jane Riveros.">
+<style>
+  :root{--bg:#0b1220;--card:#111b2b;--edge:#2a3a4d;--green:#10b981;--ink:#ebf0f6;--mut:#8a94a6;--panel:#0e1826}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background-image:radial-gradient(circle,#172132 1px,transparent 1px);background-size:28px 28px}
+  .wrap{max-width:880px;margin:0 auto;padding:64px 24px}
+  .kicker{font-family:'SF Mono',Menlo,Consolas,monospace;color:var(--green);font-size:13px;letter-spacing:.08em;margin-bottom:14px}
+  h1{font-size:clamp(30px,5vw,44px);line-height:1.08;margin-bottom:14px}
+  .sub{color:var(--mut);font-size:17px;line-height:1.55;max-width:600px;margin-bottom:8px}
+  .rule{width:64px;height:3px;background:var(--green);margin:26px 0 34px}
+  .doctrine{border:1px solid var(--edge);background:var(--panel);border-radius:10px;padding:18px 20px;margin-bottom:40px;font-size:14px;line-height:1.55;color:var(--mut)}
+  .doctrine b{color:var(--green)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:44px}
+  .step{background:var(--card);border:1px solid var(--edge);border-radius:10px;padding:16px}
+  .step .n{font-family:Menlo,Consolas,monospace;color:var(--green);font-weight:700;font-size:13px;margin-bottom:8px}
+  .step p{font-size:13.5px;color:var(--ink);line-height:1.45}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .flow{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+  .flow:hover{border-color:var(--green)}
+  .flow .tag{font-family:Menlo,Consolas,monospace;font-size:11px;color:var(--green);letter-spacing:.06em}
+  .flow h3{font-size:16.5px;line-height:1.25}
+  .flow p{font-size:13px;color:var(--mut);line-height:1.45;flex:1}
+  .flow a{display:inline-block;margin-top:4px;font-family:Menlo,Consolas,monospace;font-size:12.5px;color:var(--bg);background:var(--green);
+    padding:8px 14px;border-radius:7px;text-decoration:none;font-weight:700;align-self:flex-start}
+  .flow a:hover{filter:brightness(1.1)}
+  .all{margin:34px 0 0;text-align:center}
+  .all a{display:inline-block;font-family:Menlo,Consolas,monospace;font-size:14px;color:var(--green);border:1.5px solid var(--green);
+    padding:13px 26px;border-radius:9px;text-decoration:none;font-weight:700}
+  .all a:hover{background:var(--green);color:var(--bg)}
+  .hub{margin-top:44px;border:1px dashed var(--edge);border-radius:10px;padding:18px 20px;font-size:13.5px;color:var(--mut);line-height:1.55}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--edge);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    font-size:12.5px;color:var(--mut)}
+  footer a{color:var(--green);text-decoration:none}
+  @media(max-width:640px){.grid,.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">// N8N FLUJOS · GRATIS · DEL LIBRO "AUTOMATÍZAME ESTO"</div>
+  <h1>Los 10 flujos que toda pyme chilena necesita.</h1>
+  <p class="sub">Listos para importar en n8n (gratis). Cada uno trae adentro una nota amarilla con la configuración paso a paso — menos de 30 minutos por flujo.</p>
+  <div class="rule"></div>
+
+  <div class="doctrine"><b>Regla de seguridad:</b> este es el único sitio donde publico estos archivos — estás en <b>janeriveros.com</b>, escrito por ti misma en el navegador. Nunca te voy a mandar links por DM ni por correo. Si alguien lo hace en mi nombre, no soy yo.</div>
+
+  <div class="steps">
+    <div class="step"><div class="n">PASO 1</div><p>Descarga el flujo que necesitas (archivo .json).</p></div>
+    <div class="step"><div class="n">PASO 2</div><p>En n8n: <b>Workflow → Import from File</b> y elige el archivo.</p></div>
+    <div class="step"><div class="n">PASO 3</div><p>Sigue la nota amarilla que viene adentro. Conecta tus cuentas. Activa.</p></div>
+  </div>
+
+  <div class="grid">
+    <div class="flow"><div class="tag">FLUJO 01</div><h3>Adiós Excel manual</h3><p>Cada pedido por WhatsApp o formulario se guarda solo en tu planilla. ~5 hrs/semana devueltas.</p><a href="jane-riveros-flujo-01.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 02</div><h3>El CRM que se llena solo</h3><p>Mensaje nuevo → contacto registrado + recordatorio de seguimiento a las 48h.</p><a href="jane-riveros-flujo-02.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 03</div><h3>Tu asistente de correo con IA</h3><p>La IA clasifica y deja borradores listos. Tú apruebas y envías. ~1 hr/día.</p><a href="jane-riveros-flujo-03.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 04</div><h3>Un tablero, todos tus datos</h3><p>Ventas, pagos y pedidos en una sola planilla, actualizada cada mañana.</p><a href="jane-riveros-flujo-04.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 05</div><h3>Facturas sin tipeo</h3><p>PDF de factura → IA extrae RUT y montos → planilla contable → aviso al contador.</p><a href="jane-riveros-flujo-05.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 06</div><h3>Mata el "no show"</h3><p>Confirmación inmediata + recordatorios 24h y 2h antes. Hasta 30% menos horas perdidas.</p><a href="jane-riveros-flujo-06.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 07</div><h3>Publica aunque no tengas tiempo</h3><p>Tus posts en una planilla → publicación automática programada + registro.</p><a href="jane-riveros-flujo-07.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 08</div><h3>Testimonios en piloto automático</h3><p>Venta cerrada → 3 días después, mensaje pidiendo la reseña con link directo.</p><a href="jane-riveros-flujo-08.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 09</div><h3>Tu lista de correo, en serio</h3><p>Comentario con palabra clave → DM con tu regalo → lista propia con consentimiento.</p><a href="jane-riveros-flujo-09.json" download>↓ descargar .json</a></div>
+    <div class="flow"><div class="tag">FLUJO 10</div><h3>El pulso semanal de tu negocio</h3><p>Cada lunes 8:00: resumen IA de 10 líneas con ventas, gastos y agenda.</p><a href="jane-riveros-flujo-10.json" download>↓ descargar .json</a></div>
+  </div>
+
+  <div class="all"><a href="jane-riveros-n8nflujos.zip" download>↓ descargar los 10 (zip)</a></div>
+
+  <div class="hub">📚 <b style="color:var(--ink)">El libro:</b> en Amazon (Kindle) busca <b style="color:var(--ink)">"Automatízame Esto"</b> — gratis, con cada flujo explicado y dibujado.<br>
+  🟢 <b style="color:var(--ink)">Muy pronto:</b> estos mismos flujos en la galería oficial de n8n — en n8n.io → Templates, busca <b style="color:var(--ink)">"Jane Riveros"</b>.</div>
+
+  <footer>
+    <div>© Jane Riveros · <a href="https://janeriveros.com">janeriveros.com</a></div>
+    <div>La IA no te reemplaza. Te devuelve tu tiempo.</div>
+  </footer>
+</div>
+</body>
+</html>

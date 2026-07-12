@@ -1,0 +1,145 @@
+{
+  "name": "Jane Riveros — Flujo 10 · El pulso semanal de tu negocio",
+  "nodes": [
+    {
+      "id": "227a57b3-fe84-42b3-a342-6bfa539bb686",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [400, 384],
+      "parameters": {
+        "content": "## Flujo 10 · El pulso semanal de tu negocio\n**Qué hace:** cada lunes a las 8:00 junta tus ventas, gastos y agenda de la semana desde tu planilla, la IA lo resume en 10 líneas claras y te llega al correo antes de tu primer café. Dirección con datos, no con sensaciones.\n\n**Configuración (≈20 min):**\n1. **Google Sheets** — conecta tu planilla maestra (la del Flujo 04 sirve perfecto: fecha, fuente, concepto, monto).\n2. **Modelo IA** — conecta tu API key de OpenAI.\n3. **Correo** — cambia el destinatario a tu casilla. ¿Lo quieres por WhatsApp? Reemplaza el nodo Gmail por un HTTP Request a tu proveedor de WhatsApp API.\n4. Activa el workflow.\n\n**Te devuelve:** enterarte a tiempo, no tarde.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 460
+      }
+    },
+    {
+      "id": "60fd310a-158e-475b-80d0-d0ddc4ab8528",
+      "name": "Cada lunes 8:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [0, 112],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [1],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "949eb093-aca2-470a-a8ac-b659efaf9285",
+      "name": "Leer datos de la semana",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [224, 112],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "1d2040be-84c7-4968-8d08-ed3812d65577",
+      "name": "Resumen de 10 líneas",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [448, 112],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ \"Datos de la semana de mi pyme:\\n\" + JSON.stringify($input.all().map(i => i.json)) }}",
+        "options": {
+          "systemMessage": "Eres el analista de una pyme chilena. Resume la semana en máximo 10 líneas en español: ventas totales, gastos, tendencia vs. semana anterior si se puede inferir, lo mejor, lo preocupante y UNA recomendación concreta para esta semana. Directo y sin relleno."
+        }
+      },
+      "executeOnce": true
+    },
+    {
+      "id": "1e1e44aa-c88d-4196-ba03-6b63c6daf8d9",
+      "name": "Modelo IA (OpenAI)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [528, 336],
+      "parameters": {}
+    },
+    {
+      "id": "a52fdf18-0930-4130-bfa3-e7fda358849b",
+      "name": "Enviar pulso semanal",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [800, 112],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "tu-correo@tu-pyme.cl",
+        "subject": "={{ \"📊 Pulso semanal — \" + $now.toFormat(\"dd-MM-yyyy\") }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "webhookId": "991a5d29-d34a-438e-a9c7-d90508225f54"
+    }
+  ],
+  "connections": {
+    "Cada lunes 8:00": {
+      "main": [
+        [
+          {
+            "node": "Leer datos de la semana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer datos de la semana": {
+      "main": [
+        [
+          {
+            "node": "Resumen de 10 líneas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resumen de 10 líneas": {
+      "main": [
+        [
+          {
+            "node": "Enviar pulso semanal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Modelo IA (OpenAI)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Resumen de 10 líneas",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "name": "Jane Riveros — Flujo 04 · Un tablero, todos tus datos",
+  "nodes": [
+    {
+      "id": "91f95b9c-b6e0-4c84-859e-9e6d72ec2cbb",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [448, 256],
+      "parameters": {
+        "content": "## Flujo 04 · Un tablero, todos tus datos\n**Qué hace:** todos los días junta tus datos de ventas, pagos y pedidos desde sus apps y los deja normalizados en UNA planilla — tu tablero único, siempre al día.\n\n**Configuración (≈30 min):**\n1. **Fuente A y Fuente B** — reemplaza las URLs por las APIs de tus apps (tu e-commerce, tu pasarela de pago, tu sistema de pedidos). Agrega más nodos HTTP si tienes más fuentes.\n2. **Normalizar** — ajusta los campos al formato que uses: fecha, fuente, concepto, monto.\n3. **Google Sheets** — conecta tu cuenta y elige la planilla del tablero.\n4. Activa el workflow. Corre solo cada mañana a las 7:00.\n\n**Te devuelve:** claridad diaria en 1 vistazo — decisiones con datos, no a ciegas.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 460
+      }
+    },
+    {
+      "id": "ee2f17b3-1ce3-4ea6-9d00-f39f6ea8208d",
+      "name": "Cada mañana 7:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [0, 96],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "10828143-da08-4252-a9c2-38f027a41542",
+      "name": "Fuente A · Ventas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [224, 0],
+      "parameters": {
+        "method": "GET",
+        "url": "https://TU-APP-DE-VENTAS.com/api/ventas"
+      }
+    },
+    {
+      "id": "23b4997d-4df7-432f-89d4-491ea8824e94",
+      "name": "Juntar todo",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [448, 96],
+      "parameters": {
+        "mode": "append"
+      }
+    },
+    {
+      "id": "7fe40110-8657-4486-8fd5-26bd93bd9081",
+      "name": "Fuente B · Pagos",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [224, 192],
+      "parameters": {
+        "method": "GET",
+        "url": "https://TU-PASARELA-DE-PAGO.com/api/pagos"
+      }
+    },
+    {
+      "id": "91d4c127-0e33-40e4-8d25-f0d0ed67cee5",
+      "name": "Normalizar datos",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [672, 96],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "n-fecha",
+              "name": "fecha",
+              "value": "={{ $json.fecha || $now.toFormat(\"yyyy-MM-dd\") }}",
+              "type": "string"
+            },
+            {
+              "id": "n-fuente",
+              "name": "fuente",
+              "value": "={{ $json.fuente || \"api\" }}",
+              "type": "string"
+            },
+            {
+              "id": "n-concepto",
+              "name": "concepto",
+              "value": "={{ $json.concepto || $json.descripcion }}",
+              "type": "string"
+            },
+            {
+              "id": "n-monto",
+              "name": "monto",
+              "value": "={{ $json.monto || $json.amount }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dc5a9306-4b5a-4666-a1e9-b6701845601d",
+      "name": "Actualizar tablero (Google Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [896, 96],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Cada mañana 7:00": {
+      "main": [
+        [
+          {
+            "node": "Fuente A · Ventas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fuente B · Pagos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fuente A · Ventas": {
+      "main": [
+        [
+          {
+            "node": "Juntar todo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Juntar todo": {
+      "main": [
+        [
+          {
+            "node": "Normalizar datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fuente B · Pagos": {
+      "main": [
+        [
+          {
+            "node": "Juntar todo",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Normalizar datos": {
+      "main": [
+        [
+          {
+            "node": "Actualizar tablero (Google Sheets)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

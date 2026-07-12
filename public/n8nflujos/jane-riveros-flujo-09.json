@@ -1,0 +1,166 @@
+{
+  "name": "Jane Riveros — Flujo 09 · Tu lista de correo, en serio",
+  "nodes": [
+    {
+      "id": "af127866-17de-4c60-9905-6d088c7e39e1",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [336, 256],
+      "parameters": {
+        "content": "## Flujo 09 · Tu lista de correo, en serio\n**Qué hace:** cuando alguien comenta tu palabra clave (ej: \"FLUJOS\"), recibe un DM automático con tu regalo, capturas su correo y entra a tu lista con bienvenida por Mailchimp. Tus seguidores son del algoritmo; tu lista es TUYA.\n\n**Configuración (≈30 min):**\n1. **Webhook** — conéctalo a los webhooks de comentarios de Meta (Meta for Developers → Webhooks → comments). JSON esperado: { \"texto\", \"comment_id\", \"email\" }\n2. **Palabra clave** — cambia \"FLUJOS\" por la tuya.\n3. **DM automático** — pon tu token de página de Meta.\n4. **Mailchimp** — conecta tu cuenta y elige tu audiencia (lista).\n5. Activa el workflow.\n\n**Nota legal (Chile, Ley 21.719):** captura correos SOLO con consentimiento explícito. El DM debe pedir el correo, no sacarlo de otro lado.\n\n**Te devuelve:** un activo tuyo que crece solo.\n\n— Jane Riveros · janeriveros.com",
+        "width": 480,
+        "height": 520
+      }
+    },
+    {
+      "id": "92c85726-15cd-49fb-a053-2caa1c6a297a",
+      "name": "Comentario nuevo (IG / TikTok)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 96],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "comentario-nuevo"
+      },
+      "webhookId": "b0f4316e-57da-44e5-9cd7-a10c4003540d"
+    },
+    {
+      "id": "0e760644-a441-48b5-bea7-a2ab1769bf36",
+      "name": "¿Dice la palabra clave?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [224, 96],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.texto }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "rightValue": "FLUJOS"
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "283c5fb0-04ab-4f45-a5fa-f4ea4ab1c8ab",
+      "name": "DM automático con el regalo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [448, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/me/messages",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "recipient",
+              "value": "={{ JSON.stringify({ comment_id: $json.body.comment_id }) }}"
+            },
+            {
+              "name": "message",
+              "value": "¡Hola! Aquí va tu regalo 🎁 Déjame tu correo y te lo envío al tiro."
+            },
+            {
+              "name": "access_token",
+              "value": "TU_TOKEN_DE_PAGINA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "dd0ff4a2-82a5-4143-a414-ee7172fc749e",
+      "name": "Agregar a Mailchimp + bienvenida",
+      "type": "n8n-nodes-base.mailchimp",
+      "typeVersion": 1,
+      "position": [672, 0],
+      "parameters": {
+        "resource": "member",
+        "operation": "create",
+        "list": "TU_LISTA",
+        "email": "={{ $json.body.email }}",
+        "status": "subscribed",
+        "options": {}
+      }
+    },
+    {
+      "id": "08d4f0f3-a738-4c27-90df-1547674fff94",
+      "name": "Ignorar (sin palabra clave)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [448, 192],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ig-1",
+              "name": "ignorado",
+              "value": "true",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Comentario nuevo (IG / TikTok)": {
+      "main": [
+        [
+          {
+            "node": "¿Dice la palabra clave?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Dice la palabra clave?": {
+      "main": [
+        [
+          {
+            "node": "DM automático con el regalo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ignorar (sin palabra clave)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DM automático con el regalo": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Mailchimp + bienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

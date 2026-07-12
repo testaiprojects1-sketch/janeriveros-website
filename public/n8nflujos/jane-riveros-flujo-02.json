@@ -1,0 +1,109 @@
+{
+  "name": "Jane Riveros — Flujo 02 · El CRM que se llena solo",
+  "nodes": [
+    {
+      "id": "56bee060-0fab-4b65-83ef-548b093a0b37",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [336, 64],
+      "parameters": {
+        "content": "## Flujo 02 · El CRM que se llena solo\n**Qué hace:** cada cliente que te escribe queda registrado en HubSpot al instante, y 48 horas después te llega un recordatorio para hacer seguimiento. Cero clientes perdidos por olvido.\n\n**Configuración (≈20 min):**\n1. **Webhook** — conecta tu WhatsApp Business API o Instagram (vía Meta webhooks) para que envíe cada mensaje nuevo aquí. JSON esperado: { \"email\", \"nombre\", \"telefono\", \"mensaje\" }\n2. **HubSpot** — conecta tu cuenta (el plan gratis sirve).\n3. **Gmail** — conecta tu correo y cambia el destinatario a tu casilla.\n4. Activa el workflow.\n\n**Te devuelve:** las ventas que hoy se te escapan.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 440
+      }
+    },
+    {
+      "id": "0df58fec-6fad-4ec8-a9b8-533da804f2f3",
+      "name": "Mensaje nuevo (WhatsApp / Instagram)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [0, 0],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mensaje-nuevo"
+      },
+      "webhookId": "237fd7bf-9640-4054-897a-08aacfaf9d0e"
+    },
+    {
+      "id": "89d6aacc-b88c-4eec-ad29-8cc54be99b7d",
+      "name": "Crear / actualizar contacto en HubSpot",
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.1,
+      "position": [224, 0],
+      "parameters": {
+        "resource": "contact",
+        "operation": "upsert",
+        "email": "={{ $json.body.email }}",
+        "additionalFields": {}
+      }
+    },
+    {
+      "id": "a76adb20-ddc5-4139-8854-8872505c5c0c",
+      "name": "Esperar 48 horas",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [448, 0],
+      "parameters": {
+        "unit": "hours",
+        "amount": 48
+      },
+      "webhookId": "32d9c3cd-efb8-471b-bec5-6009f3d55d4b"
+    },
+    {
+      "id": "eef52c14-98c7-437f-bb0a-067612af4fb0",
+      "name": "Recordatorio de seguimiento",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [672, 0],
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "tu-correo@tu-pyme.cl",
+        "subject": "={{ \"Seguimiento pendiente: \" + ($json.body?.nombre || \"cliente nuevo\") }}",
+        "message": "Han pasado 48h desde el primer contacto de este cliente. Escríbele hoy — el seguimiento a tiempo es el que cierra.",
+        "options": {}
+      },
+      "webhookId": "20f0b62a-1dd6-4061-84b6-e0d961b5cdf7"
+    }
+  ],
+  "connections": {
+    "Mensaje nuevo (WhatsApp / Instagram)": {
+      "main": [
+        [
+          {
+            "node": "Crear / actualizar contacto en HubSpot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear / actualizar contacto en HubSpot": {
+      "main": [
+        [
+          {
+            "node": "Esperar 48 horas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 48 horas": {
+      "main": [
+        [
+          {
+            "node": "Recordatorio de seguimiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "name": "Jane Riveros — Flujo 07 · Publica aunque no tengas tiempo",
+  "nodes": [
+    {
+      "id": "9cd82799-e520-419d-8ad3-eb47bdb2cccd",
+      "name": "CÓMO CONFIGURAR",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [448, 64],
+      "parameters": {
+        "content": "## Flujo 07 · Publica aunque no tengas tiempo\n**Qué hace:** escribes tus posts en una planilla cuando TÚ puedes (domingo en la noche, un rato libre) y el flujo los publica solo, cada día, a la hora programada. Presencia constante sin estar presente.\n\n**Configuración (≈30 min):**\n1. **Planilla de posts** — crea una Google Sheet con columnas: fecha (yyyy-MM-dd), texto, canal, estado. Marca \"listo\" cuando el post esté aprobado.\n2. **Publicar** — reemplaza TU_PAGE_ID y TU_TOKEN_DE_PAGINA con los de tu página (Meta for Developers → Graph API). Para Instagram usa el endpoint /media + /media_publish.\n3. **Registro** — elige una hoja \"publicados\" para el historial.\n4. Activa el workflow.\n\n**Te devuelve:** semanas de presencia constante con 1 hora de trabajo.\n\n— Jane Riveros · janeriveros.com",
+        "width": 460,
+        "height": 480
+      }
+    },
+    {
+      "id": "cea55053-1927-401b-bcef-1d28579fc182",
+      "name": "Cada día 9:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [0, 0],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "bcc9de0f-4ef1-44ca-a724-6cc0caa9b8d1",
+      "name": "Leer planilla de posts",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [224, 0],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ed43bdaa-295d-41d6-a8e0-007e7cb783b8",
+      "name": "Solo posts de hoy listos",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [448, 0],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.fecha }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "={{ $now.toFormat(\"yyyy-MM-dd\") }}"
+            },
+            {
+              "leftValue": "={{ $json.estado }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "rightValue": "listo"
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "ac153da6-4c17-4b48-bf60-cbf8c8470a4b",
+      "name": "Publicar (Meta Graph API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [672, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/TU_PAGE_ID/feed",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ $json.texto }}"
+            },
+            {
+              "name": "access_token",
+              "value": "TU_TOKEN_DE_PAGINA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "0a52fad3-dbcf-4e6b-896c-882c5653ded2",
+      "name": "Registrar qué salió",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [896, 0],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Cada día 9:00": {
+      "main": [
+        [
+          {
+            "node": "Leer planilla de posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer planilla de posts": {
+      "main": [
+        [
+          {
+            "node": "Solo posts de hoy listos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solo posts de hoy listos": {
+      "main": [
+        [
+          {
+            "node": "Publicar (Meta Graph API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publicar (Meta Graph API)": {
+      "main": [
+        [
+          {
+            "node": "Registrar qué salió",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}
