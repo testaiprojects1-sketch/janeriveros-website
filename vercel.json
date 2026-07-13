@@ -2,7 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/n8nflujos", "destination": "/n8nflujos/", "permanent": true }
+    { "source": "/n8nflujos", "destination": "/flywheel", "permanent": false },
+    { "source": "/n8nflujos/:path*", "destination": "/flywheel", "permanent": false }
   ],
   "headers": [
     {
