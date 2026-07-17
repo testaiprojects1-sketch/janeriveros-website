@@ -6,7 +6,15 @@
     <atom:link href="https://janeriveros.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>Field notes from Jane Riveros on building governed AI agents with the discipline of regulated financial-services delivery.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Jul 2026 13:26:47 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2026 15:34:47 GMT</lastBuildDate>
+    <item>
+      <title>Chile's AI ambition needs more than a headline</title>
+      <link>https://janeriveros.com/blog/chile-ai-ambition-needs-governance-20260717</link>
+      <guid isPermaLink="true">https://janeriveros.com/blog/chile-ai-ambition-needs-governance-20260717</guid>
+      <description>Chile wants to become a regional tech hub through AI alliances, but without a governance backbone that is just wishful thinking. I have seen too many countries chase the shiny object without building the ethical and compliance infrastructure to sustain it.</description>
+      <category>Governance</category>
+      <pubDate>Fri, 17 Jul 2026 15:34:47 GMT</pubDate>
+    </item>
     <item>
       <title>Don't Let Agentic AI Hype Outrun Your Governance</title>
       <link>https://janeriveros.com/blog/agentic-ai-governance-supply-chain-20260701</link>
