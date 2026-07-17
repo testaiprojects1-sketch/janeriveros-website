@@ -1,0 +1,5 @@
+---
+import fs from 'node:fs';
+const html = fs.readFileSync('public/blog/chile-ai-ambition-needs-governance-20260717.html', 'utf-8');
+---
+<fragment set:html={html} />
