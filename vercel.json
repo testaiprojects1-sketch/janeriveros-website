@@ -28,6 +28,16 @@
       "permanent": false
     },
     {
+      "source": "/base44",
+      "destination": "https://base44.com",
+      "permanent": false
+    },
+    {
+      "source": "/heroe",
+      "destination": "https://21st.dev",
+      "permanent": false
+    },
+    {
       "source": "/n8nflujos",
       "destination": "/flywheel",
       "permanent": false
