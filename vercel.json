@@ -2,32 +2,71 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "redirects": [
-    { "source": "/openrouter", "destination": "https://openrouter.ai", "permanent": false },
-    { "source": "/auto", "destination": "https://n8n.io", "permanent": false },
-    { "source": "/make", "destination": "https://www.make.com", "permanent": false },
-    { "source": "/zapier", "destination": "https://zapier.com", "permanent": false },
-    { "source": "/n8nflujos", "destination": "/flywheel", "permanent": false },
-    { "source": "/n8nflujos/:path*", "destination": "/flywheel", "permanent": false }
+    {
+      "source": "/openrouter",
+      "destination": "https://openrouter.ai",
+      "permanent": false
+    },
+    {
+      "source": "/auto",
+      "destination": "https://n8n.io",
+      "permanent": false
+    },
+    {
+      "source": "/make",
+      "destination": "https://www.make.com",
+      "permanent": false
+    },
+    {
+      "source": "/zapier",
+      "destination": "https://zapier.com",
+      "permanent": false
+    },
+    {
+      "source": "/n8nflujos",
+      "destination": "/flywheel",
+      "permanent": false
+    },
+    {
+      "source": "/n8nflujos/:path*",
+      "destination": "/flywheel",
+      "permanent": false
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Permissions-Policy", "value": "microphone=*, autoplay=*" }
+        {
+          "key": "Permissions-Policy",
+          "value": "microphone=*, autoplay=*"
+        }
       ]
     },
     {
       "source": "/n8nflujos/(.*)\\.json",
       "headers": [
-        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
-        { "key": "Content-Disposition", "value": "attachment" }
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        }
       ]
     },
     {
       "source": "/n8nflujos/(.*)\\.zip",
       "headers": [
-        { "key": "Content-Type", "value": "application/zip" },
-        { "key": "Content-Disposition", "value": "attachment" }
+        {
+          "key": "Content-Type",
+          "value": "application/zip"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "attachment"
+        }
       ]
     }
   ]
