@@ -3,6 +3,9 @@
   "outputDirectory": "dist",
   "redirects": [
     { "source": "/openrouter", "destination": "https://openrouter.ai", "permanent": false },
+    { "source": "/auto", "destination": "https://n8n.io", "permanent": false },
+    { "source": "/make", "destination": "https://www.make.com", "permanent": false },
+    { "source": "/zapier", "destination": "https://zapier.com", "permanent": false },
     { "source": "/n8nflujos", "destination": "/flywheel", "permanent": false },
     { "source": "/n8nflujos/:path*", "destination": "/flywheel", "permanent": false }
   ],
