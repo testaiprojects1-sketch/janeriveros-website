@@ -23,6 +23,11 @@
       "permanent": false
     },
     {
+      "source": "/google",
+      "destination": "https://google.com",
+      "permanent": false
+    },
+    {
       "source": "/n8nflujos",
       "destination": "/flywheel",
       "permanent": false
