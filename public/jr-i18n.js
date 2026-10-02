@@ -13,10 +13,10 @@
   var SHORT = { en: "EN", es: "ES", fr: "FR", zh: "中文", hi: "हिन्दी" };
   var GAPI = { en: "en", es: "es", fr: "fr", zh: "zh-CN", hi: "hi" };
   var BASE = {
-    es: { "nav.home": "Inicio", "nav.work": "Proyectos", "nav.blog": "Blog", "nav.book": "Agendar llamada", "footer.loc": "Jane Riveros · Santiago, CL" },
-    fr: { "nav.home": "Accueil", "nav.work": "Projets", "nav.blog": "Blog", "nav.book": "Réserver un appel", "footer.loc": "Jane Riveros · Santiago, CL" },
-    zh: { "nav.home": "首页", "nav.work": "项目", "nav.blog": "博客", "nav.book": "预约通话", "footer.loc": "Jane Riveros · 圣地亚哥，智利" },
-    hi: { "nav.home": "होम", "nav.work": "कार्य", "nav.blog": "ब्लॉग", "nav.book": "कॉल बुक करें", "footer.loc": "Jane Riveros · सैंटियागो, चिली" }
+    es: { "nav.home": "Inicio", "nav.work": "Proyectos", "nav.blog": "Blog", "nav.resources": "Recursos", "nav.book": "Agendar llamada", "footer.loc": "Jane Riveros · Santiago, CL" },
+    fr: { "nav.home": "Accueil", "nav.work": "Projets", "nav.blog": "Blog", "nav.resources": "Ressources", "nav.book": "Réserver un appel", "footer.loc": "Jane Riveros · Santiago, CL" },
+    zh: { "nav.home": "首页", "nav.work": "项目", "nav.blog": "博客", "nav.resources": "资源", "nav.book": "预约通话", "footer.loc": "Jane Riveros · 圣地亚哥，智利" },
+    hi: { "nav.home": "होम", "nav.work": "कार्य", "nav.blog": "ब्लॉग", "nav.resources": "संसाधन", "nav.book": "कॉल बुक करें", "footer.loc": "Jane Riveros · सैंटियागो, चिली" }
   };
   function get() { try { return localStorage.getItem("jr-lang") || "en"; } catch (e) { return "en"; } }
   function set(l) { try { localStorage.setItem("jr-lang", l); } catch (e) {} }
